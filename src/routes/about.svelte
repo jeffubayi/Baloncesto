@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
+	<title>About| Shoppa</title>
 </svelte:head>
 
 <div class="content">
