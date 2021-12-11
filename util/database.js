@@ -7,7 +7,7 @@ setPostgresDefaultsOnHeroku();
 
 // Read in the values from the .env file
 // (which should be ignored in Git!)
-require('dotenv-safe').config();
+// require('dotenv-safe').config();
 
 function connectOneTimeToDatabase() {
   let sql;
