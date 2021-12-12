@@ -1,17 +1,18 @@
-import { css } from '@emotion/react';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import Router from 'next/router';
-import { setSearchCookieClientSide } from '../util/cookies';
+import { css } from "@emotion/react";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import Router from "next/router";
+import { setSearchCookieClientSide } from "../util/cookies";
+import styled from 'styled-components';
 
-const ourGray = '#1d2d35';
-const lightGray = '#E9E4E4';
-const ourOrange = '#FFA500';
+const ourGray = "#713C25";
+const lightGray = "#BE6C42";
+const ourOrange = "#FFFFF";
 
-const headerStyles = css`
-  background: ${lightGray};
-  color: ${ourGray};
+const HeaderStyles = styled.div`
+  background: "#FFFFF";
+  color: "#0000";
   padding: 8px;
 
   div {
@@ -24,12 +25,12 @@ const headerStyles = css`
   }
 `;
 
-const headerDiv1 = css`
+const HeaderDiv1 = styled.div`
   padding-right: auto;
   margin-right: auto;
 `;
 
-const headerDiv2 = css`
+const HeaderDiv2 = styled.div`
   margin-top: 10px;
   padding-top: 8px;
   padding-right: 28px;
@@ -49,8 +50,9 @@ const headerDiv2 = css`
     line-height: 1;
     text-transform: uppercase;
     background-color: transparent;
-    border-bottom: 2px solid transparent;
-    font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+    border: 2px solid #BE6C42;
+    border-radius: 10px;
+    font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
 
     :hover {
       border-bottom: 2px solid ${ourOrange};
@@ -58,27 +60,27 @@ const headerDiv2 = css`
   }
 `;
 
-const searchStyles = css`
+const SearchStyles = css`
   border: none;
   border-radius: 10px;
-  font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+  font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
   font-size: 0.6rem;
   padding: 0 15px;
   margin: 10px 30px;
 `;
 
-const navStyles = css`
+const NavStyles = styled.nav`
   display: flex;
   justify-content: space-around;
 `;
 
-const footerStyles = css`
+const FooterStyles = styled.footer`
   border-top: 0.7px solid rgba(255, 255, 255, 0.5);
   padding: 0.6rem 0 0.7rem 0;
-  background: ${ourGray};
+  background: #F7E7CE;
   text-align: center;
-  color: white;
-  font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+  color: #713C25;
+  font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
 
   p {
     opacity: 0.5;
@@ -86,32 +88,32 @@ const footerStyles = css`
   }
   a {
     text-decoration: none;
-    color: ${lightGray};
+    color: "#0000";
   }
 `;
 
-const bodyStyles = css`
-  background: white;
+const BodyStyles = styled.div`
+  background: #F7E7CE;
   margin: 0;
   padding: 30px 0 0 0;
   min-height: 78.3vh;
 
   h1 {
-    font-family: 'Crimson Text Regular', 'PT Sans', 'Helvetica', 'Arial',
+    font-family: "Crimson Text Regular", "PT Sans", "Helvetica", "Arial",
       sans-serif;
   }
 
   p {
-    font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
+    font-family: "Source Sans Pro Regular", "PT Sans", "Helvetica", "Arial",
       sans-serif;
   }
 `;
 
-const loginStyles = css`
+const LoginStyles = styled.div`
   padding-top: 25px;
 
   a {
-    font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
+    font-family: "Source Sans Pro Regular", "PT Sans", "Helvetica", "Arial",
       sans-serif;
     font-size: 0.7rem;
     text-decoration: none;
@@ -128,16 +130,15 @@ const loginStyles = css`
 export default function Layout(props) {
   const userId = props.children.props.userId;
 
-
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header css={headerStyles}>
-        <nav css={navStyles}>
-          <div css={headerDiv1}>
+      <HeaderStyles>
+        <NavStyles>
+          <HeaderDiv1>
             <Link href="/">
               <a>
                 <Image
@@ -148,8 +149,9 @@ export default function Layout(props) {
                 />
               </a>
             </Link>
-          </div>
-          <div css={headerDiv2}>
+          </HeaderDiv1>
+          <HeaderDiv2
+          >
             <Link href="/scores">
               <a data-cy="header-scores">Scores</a>
             </Link>
@@ -159,23 +161,23 @@ export default function Layout(props) {
             <Link href="/teams">
               <a data-cy="header-teams">Teams</a>
             </Link>
-          </div>
-          <div>
+          </HeaderDiv2>
+          {/* <div>
             <input
               css={searchStyles}
               type="search"
               placeholder="Search the news"
               onKeyDown={(event) => {
                 const newSearch = event.target.value;
-                if (event.key === 'Enter') {
+                if (event.key === "Enter") {
                   setSearchCookieClientSide(newSearch);
                   Router.push(`/search/?${newSearch}`);
                 }
               }}
             />
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <div css={loginStyles}>
               {!props.isSessionValid ? (
                 <>
@@ -204,16 +206,16 @@ export default function Layout(props) {
                 </div>
               )}
             </div>
-          </div>
-        </nav>
-      </header>
+          </div> */}
+        </NavStyles>
+      </HeaderStyles>
 
-      <div css={bodyStyles}>{props.children}</div>
-      <footer css={footerStyles}>
+      <BodyStyles>{props.children}</BodyStyles>
+      <FooterStyles>
         <p>
-          © 2021 · <a href="/">NBA News</a> · All rights reserved ·
+          © 2022 · NBA News · All rights reserved ·
         </p>
-      </footer>
+      </FooterStyles>
     </>
   );
 }
