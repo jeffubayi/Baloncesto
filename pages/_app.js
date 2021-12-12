@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
-const ourGray = '#1d2d35';
+const ourGray = '#F7E7CE';
 
 export const globalStyles = (
   <Global
