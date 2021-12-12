@@ -1,17 +1,17 @@
-import { css } from '@emotion/react';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import GetLastNightScores from '../components/yesterdayscores';
-import { setDateCookieClientSide } from '../util/cookies';
+import { css } from "@emotion/react";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import GetLastNightScores from "../components/yesterdayscores";
+import { setDateCookieClientSide } from "../util/cookies";
 
-const axios = require('axios');
+const axios = require("axios");
 
-const ourGray = '#1d2d35';
-const lightGray = '#E9E4E4';
+const ourGray = "#FFFF";
+const lightGray = "#E9E4E4";
 
 const scoresStyles = css`
   color: ${ourGray};
@@ -20,7 +20,7 @@ const scoresStyles = css`
   font-weight: 700;
   letter-spacing: 2px;
   line-height: 1;
-  font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+  font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
   display: flex;
   flex-flow: row wrap;
 
@@ -61,8 +61,8 @@ const paragraphStyles = css`
   padding: 20px;
 
   input {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 `;
 
@@ -73,7 +73,7 @@ export default function Scores(props) {
     .toISOString()
     .slice(0, 10);
 
-  const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
+  const yesterdayWithoutDashes = yesterday.replace(/-/g, "");
 
   const [date, setDate] = useState(yesterdayWithoutDashes);
 
@@ -111,19 +111,27 @@ export default function Scores(props) {
       </Head>
 
       <main>
-        <p css={paragraphStyles} data-cy="scores-page-content-p">
+        <p
+          style={{
+            textAlign: "center",
+            backgroundColor: "#BE6C42",
+            color: "white",
+            padding: "20px",
+          }}
+          data-cy="scores-page-content-p"
+        >
           Game scores on the day:
-          {'  '}
-          {'  '}
+          {"  "}
+          {"  "}
           <input
             type="date"
             onChange={(e) => {
               const newDate = e.target.value;
-              const newDateWithoutDashes = newDate.replace(/-/g, '');
+              const newDateWithoutDashes = newDate.replace(/-/g, "");
               setDate(newDateWithoutDashes);
 
               const options = {
-                method: 'GET',
+                method: "GET",
                 url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
                 params: {},
                 headers: {},
@@ -144,46 +152,74 @@ export default function Scores(props) {
 
         <div css={scoresStyles}>
           <ul>
-            <Carousel responsive={responsive} ssr={true} infinite={false}>
+            <Carousel
+              responsive={responsive}
+              ssr={true}
+              infinite={false}
+              showDots={true}
+            >
               {scores.map((game) => (
                 // Here we use div instead of li tag
                 // because Carousel adds another li tag
                 // by itself. If we set this tag to li,
                 // it would cause the conflict.
-                <div key={game.gameId}>
+                <div
+                  key={game.gameId}
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: "rgba(255,255,255,0.4)",
+                    backdropFilter: "blur(40px)",
+                    border: "2px solid rgba(255,255,255,0.4)",
+                    padding: "0.5rem",
+                    borderRadius: "10px",
+                  }}
+                >
                   <Link href={`/${game.gameId}`}>
-                    <a>
-                      <br />
-                      <Image
-                        src={`/${game.vTeam.triCode}.png`}
-                        alt="Image"
-                        width={25}
-                        height={25}
-                      />
-                      {'  '}
-                      {'  '}
-                      {game.vTeam.triCode}
-                      {'  '}
-                      {'  '}
-                      {'  '}
-                      {game.vTeam.score}
-                      <br />
-                      <br />
-                      <Image
-                        src={`/${game.hTeam.triCode}.png`}
-                        alt="Image"
-                        width={25}
-                        height={25}
-                      />
-                      {'  '}
-                      {'  '}
-                      {'  '}
-                      {game.hTeam.triCode}
-                      {'  '}
-                      {'  '}
-                      {'  '}
-                      {game.hTeam.score}
-                    </a>
+                    <div
+                      style={{
+                        justifyContent: "space-evenly",
+                        display: "grid",
+                        gap: "0.4rem",
+                        gridTemplateColumns: "repeat(2,auto)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateRows: "repeat(3,auto)",
+                        }}
+                      >
+                        <div>
+                          <Image
+                            src={`/${game.vTeam.triCode}.png`}
+                            alt="Image"
+                            width={40}
+                            height={40}
+                          />
+                        </div>
+                        <div>{game.vTeam.triCode}</div>
+                        <div>{game.vTeam.score}</div>
+                      </div>
+                      <div
+                        style={{
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateRows: "repeat(3,auto)",
+                        }}
+                      >
+                        <div>
+                          <Image
+                            src={`/${game.hTeam.triCode}.png`}
+                            alt="Image"
+                            width={40}
+                            height={40}
+                          />
+                        </div>
+                        <div>{game.hTeam.triCode}</div>
+                        <div>{game.hTeam.score}</div>
+                      </div>
+                    </div>
                   </Link>
                 </div>
               ))}
@@ -197,7 +233,7 @@ export default function Scores(props) {
 
 export async function getServerSideProps(context) {
   const { getSessionByToken, getUserByToken } = await import(
-    '../util/database'
+    "../util/database"
   );
 
   const session = await getSessionByToken(context.req.cookies.session);
@@ -206,7 +242,7 @@ export async function getServerSideProps(context) {
   if (
     !session ||
     session.userId !== userByToken.userId ||
-    userByToken === 'undefined'
+    userByToken === "undefined"
   ) {
     const yestScoresArray = await GetLastNightScores();
     return {

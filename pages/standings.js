@@ -56,9 +56,9 @@ export default function Standings(props) {
       <main css={headingStandingsStyles}>
         <h2 data-cy="standings-page-content-h2">NBA Standings 2020/2021</h2>
         <div css={standingsStyles}>
-          <div>
+          <div style={{display: 'flex', flexDirection: 'columns'}}>
             <h3>Eastern Conference</h3>
-
+            <div style={{display: 'flex', flexDirection: 'columns'}}></div>
             <ul>
               {props.standingsArray.league.standard.conference.east.map(
                 (team) => (
@@ -94,6 +94,7 @@ export default function Standings(props) {
               )}
             </ul>
           </div>
+          
           <div>
             <h3>Western Conference</h3>
             <ul>
