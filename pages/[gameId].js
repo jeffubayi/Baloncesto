@@ -2,13 +2,14 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const axios = require('axios');
 const paddBott = '20px';
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
 
-const boxscoreHeadingStyles = css`
+const BoxscoreHeadingStyles = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,12 +19,12 @@ const boxscoreHeadingStyles = css`
   color: ${lightGray};
 `;
 
-const teamsParentStyles = css`
+const TeamsParentStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
 
-const teamsStyles = css`
+const TeamsStyles = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,7 +85,7 @@ export default function BoxScore(props) {
       <Head>
         <title>Box score</title>
       </Head>
-      <div css={boxscoreHeadingStyles}>
+      <BoxscoreHeadingStyles>
         Place:
         {'    '}
         {boxscore.arena.name},{'    '}
@@ -98,9 +99,9 @@ export default function BoxScore(props) {
         {boxscore.homeStartDate.slice(0, 4)}
         <br />
         Attendance: {boxscore.attendance}
-      </div>
-      <div css={teamsParentStyles}>
-        <div css={teamsStyles}>
+      </BoxscoreHeadingStyles>
+      <TeamsParentStyles>
+        <TeamsStyles>
           <Image
             src={`/${boxscore.vTeam.triCode}.png`}
             alt="Image"
@@ -113,8 +114,8 @@ export default function BoxScore(props) {
             {'    '}
             {boxscore.vTeam.score}
           </span>
-        </div>
-        <div css={teamsStyles}>
+        </TeamsStyles>
+        <TeamsStyles>
           <Image
             src={`/${boxscore.hTeam.triCode}.png`}
             alt="Image"
@@ -127,8 +128,8 @@ export default function BoxScore(props) {
             {'    '}
             {boxscore.hTeam.score}
           </span>
-        </div>
-      </div>
+        </TeamsStyles>
+      </TeamsParentStyles>
     </>
   );
 }
