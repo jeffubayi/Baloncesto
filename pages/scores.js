@@ -7,6 +7,12 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import GetLastNightScores from "../components/yesterdayscores";
 import { setDateCookieClientSide } from "../util/cookies";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const axios = require("axios");
 
@@ -163,18 +169,11 @@ export default function Scores(props) {
                 // because Carousel adds another li tag
                 // by itself. If we set this tag to li,
                 // it would cause the conflict.
-                <div
-                  key={game.gameId}
-                  style={{
-                    cursor: "pointer",
-                    backgroundColor: "rgba(255,255,255,0.4)",
-                    backdropFilter: "blur(40px)",
-                    border: "2px solid rgba(255,255,255,0.4)",
-                    padding: "0.5rem",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <Link href={`/${game.gameId}`}>
+                <Link href={`/${game.gameId}`} style={{
+                  padding: "0.4rem",
+                  cursor:"pointer"
+                }}>
+                  <Card key={game.gameId}  >
                     <div
                       style={{
                         justifyContent: "space-evenly",
@@ -183,45 +182,127 @@ export default function Scores(props) {
                         gridTemplateColumns: "repeat(2,auto)",
                       }}
                     >
-                      <div
-                        style={{
-                          display: "grid",
-                          gap: "0.4rem",
-                          gridTemplateRows: "repeat(3,auto)",
-                        }}
-                      >
-                        <div>
-                          <Image
-                            src={`/${game.vTeam.triCode}.png`}
-                            alt="Image"
-                            width={40}
-                            height={40}
-                          />
-                        </div>
-                        <div>{game.vTeam.triCode}</div>
-                        <div>{game.vTeam.score}</div>
-                      </div>
-                      <div
-                        style={{
-                          display: "grid",
-                          gap: "0.4rem",
-                          gridTemplateRows: "repeat(3,auto)",
-                        }}
-                      >
-                        <div>
-                          <Image
-                            src={`/${game.hTeam.triCode}.png`}
-                            alt="Image"
-                            width={40}
-                            height={40}
-                          />
-                        </div>
-                        <div>{game.hTeam.triCode}</div>
-                        <div>{game.hTeam.score}</div>
-                      </div>
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={`/${game.vTeam.triCode}.png`}
+                        alt="green iguana"
+                      />
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={`/${game.hTeam.triCode}.png`}
+                        alt="green iguana"
+                      />
                     </div>
-                  </Link>
-                </div>
+                    <CardContent>
+                      <div
+                        style={{
+                          justifyContent: "space-evenly",
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateColumns: "repeat(3,auto)",
+                        }}
+                      >
+                        <Typography gutterBottom variant="h7" component="div">
+                          {game.vTeam.triCode}
+                        </Typography>
+                        <Typography
+                          gutterBottom
+                          variant="body2"
+                          component="div"
+                        >
+                          vs
+                        </Typography>
+                        <Typography gutterBottom variant="h7" component="div">
+                          {game.hTeam.triCode}
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          justifyContent: "space-between",
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateColumns: "repeat(2,auto)",
+                        }}
+                      >
+                        <Typography variant="body2" color="text.secondary">
+                          {game.vTeam.score}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {game.hTeam.score}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                    <CardActions
+                      style={{
+                        justifyContent: "center",
+                        display: "grid",
+                      }}
+                    >
+                      <Button size="small">See More</Button>
+                    </CardActions>
+                  </Card>
+                </Link>
+                // <div
+                //   key={game.gameId}
+                //   style={{
+                //     cursor: "pointer",
+                //     backgroundColor: "rgba(255,255,255,0.4)",
+                //     backdropFilter: "blur(40px)",
+                //     border: "2px solid rgba(255,255,255,0.4)",
+                //     padding: "0.5rem",
+                //     borderRadius: "10px",
+                //   }}
+                // >
+                //   <Link href={`/${game.gameId}`}>
+                //     <div
+                //       style={{
+                //         justifyContent: "space-evenly",
+                //         display: "grid",
+                //         gap: "0.4rem",
+                //         gridTemplateColumns: "repeat(2,auto)",
+                //       }}
+                //     >
+                //       <div
+                //         style={{
+                //           display: "grid",
+                //           gap: "0.4rem",
+                //           gridTemplateRows: "repeat(3,auto)",
+                //         }}
+                //       >
+                //         <div>
+                //           <Image
+                //             src={`/${game.vTeam.triCode}.png`}
+                //             alt="Image"
+                //             width={40}
+                //             height={40}
+                //           />
+                //         </div>
+                //         <div>{game.vTeam.triCode}</div>
+                //         <div>{game.vTeam.score}</div>
+                //       </div>
+                //       <div
+                //         style={{
+                //           display: "grid",
+                //           gap: "0.4rem",
+                //           gridTemplateRows: "repeat(3,auto)",
+                //         }}
+                //       >
+                //         <div>
+                //           <Image
+                //             src={`/${game.hTeam.triCode}.png`}
+                //             alt="Image"
+                //             width={40}
+                //             height={40}
+                //           />
+                //         </div>
+                //         <div>{game.hTeam.triCode}</div>
+                //         <div>{game.hTeam.score}</div>
+                //       </div>
+                //     </div>
+                //   </Link>
+                // </div>
               ))}
             </Carousel>
           </ul>
