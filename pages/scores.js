@@ -13,9 +13,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {DatePicker,LocalizationProvider } from "@mui/lab";
-import DateAdapter from '@mui/lab/AdapterMoment';
-import TextField from '@mui/material/TextField';
+import { DatePicker, LocalizationProvider } from "@mui/lab";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import TextField from "@mui/material/TextField";
 
 const axios = require("axios");
 
@@ -79,11 +79,11 @@ export default function Scores(props) {
   const [scores, setScores] = useState(props.yestScoresArray);
   const [value, setValue] = useState(null);
   let today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   const yyyy = today.getFullYear();
-  
-  today = mm + '/' + dd + '/' + yyyy;
+
+  today = mm + "/" + dd + "/" + yyyy;
 
   const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
     .toISOString()
@@ -127,80 +127,48 @@ export default function Scores(props) {
       </Head>
 
       <main>
-        <p
+        <div
           style={{
-            textAlign: "center",
             backgroundColor: "#BE6C42",
+            display:"grid",
+            justifyContent: "center",
             color: "white",
             padding: "20px",
           }}
-          data-cy="scores-page-content-p"
         >
-          Game scores on the day:
-          {"  "}
-          {"  "}
           <TextField
-        id="date"
-        label="Select Game Night"
-        onChange={(e) => {
-          const newDate = e.target.value;
-          const newDateWithoutDashes = newDate.replace(/-/g, "");
-          setDate(newDateWithoutDashes);
+            id="date"
+            label="Game scores on day:"
+            onChange={(e) => {
+              const newDate = e.target.value;
+              const newDateWithoutDashes = newDate.replace(/-/g, "");
+              setDate(newDateWithoutDashes);
 
-          const options = {
-            method: "GET",
-            url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
-            params: {},
-            headers: {},
-          };
-          axios
-            .request(options)
-            .then(function (response) {
-              const scoresArray = response.data.games;
+              const options = {
+                method: "GET",
+                url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
+                params: {},
+                headers: {},
+              };
+              axios
+                .request(options)
+                .then(function (response) {
+                  const scoresArray = response.data.games;
 
-              return setScores(scoresArray);
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-        }}
-        type="date"
-        defaultValue={today}
-        sx={{ width: 220 }}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-          {/* <LocalizationProvider dateAdapter={DateAdapter}>
-            <DatePicker
-              label="Select Game Night"
-              value={value}
-              onChange={(value) => {
-                const newDate = value;
-                const newDateWithoutDashes = newDate;
-                setDate(newDateWithoutDashes);
-  
-                const options = {
-                  method: "GET",
-                  url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
-                  params: {},
-                  headers: {},
-                };
-                axios
-                  .request(options)
-                  .then(function (response) {
-                    const scoresArray = response.data.games;
-  
-                    return setScores(scoresArray);
-                  })
-                  .catch(function (error) {
-                    console.error(error);
-                  });
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-           </LocalizationProvider> */}
-        </p>
+                  return setScores(scoresArray);
+                })
+                .catch(function (error) {
+                  console.error(error);
+                });
+            }}
+            type="date"
+            defaultValue={today}
+            sx={{ width: 350 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
 
         <div css={scoresStyles}>
           <ul>
