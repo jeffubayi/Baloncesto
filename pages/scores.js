@@ -122,7 +122,7 @@ export default function Scores(props) {
   return (
     <>
       <Head>
-        <title>NBA News Next App</title>
+        <title>NBA Game Results</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -175,6 +175,9 @@ export default function Scores(props) {
             <Carousel
               responsive={responsive}
               ssr={true}
+              style={{
+                margin: "1rem",
+              }}
               infinite={false}
               showDots={true}
             >
@@ -187,6 +190,7 @@ export default function Scores(props) {
                   href={`/${game.gameId}`}
                   style={{
                     padding: "0.4rem",
+                    margin: "1rem",
                     cursor: "pointer",
                   }}
                 >
@@ -237,28 +241,27 @@ export default function Scores(props) {
                       </div>
                       <div
                         style={{
-                          justifyContent: "space-between",
+                          justifyContent: "space-evenly",
                           display: "grid",
                           gap: "0.4rem",
-                          gridTemplateColumns: "repeat(2,auto)",
+                          gridTemplateColumns: "repeat(3,auto)",
                         }}
                       >
                         <Typography variant="body2" color="text.secondary">
                           {game.vTeam.score}
+                        </Typography>
+                        <Typography
+                          gutterBottom
+                          variant="caption"
+                          component="div"
+                        >
+                          -
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                           {game.hTeam.score}
                         </Typography>
                       </div>
                     </CardContent>
-                    <CardActions
-                      style={{
-                        justifyContent: "center",
-                        display: "grid",
-                      }}
-                    >
-                      <Button size="small">See More</Button>
-                    </CardActions>
                   </Card>
                 </Link>
                 // <div
