@@ -116,10 +116,10 @@ export default function Standings(props) {
                   {props.standingsArray.league.standard.conference.east.map(
                     (team) => (
                       <StyledTableRow key={team.teamId}>
-                        <StyledTableCell
-                          component="th"
-                          scope="row"
-                        ></StyledTableCell>
+                        <StyledTableCell component="th" scope="row">
+                          {" "}
+                          {team.confRank}
+                        </StyledTableCell>
                         <StyledTableCell
                           style={{
                             display: "grid",
@@ -165,7 +165,7 @@ export default function Standings(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell></StyledTableCell>
-                    <StyledTableCell >Team</StyledTableCell>
+                    <StyledTableCell>Team</StyledTableCell>
                     <StyledTableCell align="right">Wins</StyledTableCell>
                     <StyledTableCell align="right">Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
@@ -181,7 +181,7 @@ export default function Standings(props) {
                         <StyledTableCell
                           component="th"
                           scope="row"
-                        ></StyledTableCell>
+                        >{team.confRank}</StyledTableCell>
                         <StyledTableCell
                           style={{
                             display: "grid",
