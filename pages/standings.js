@@ -1,49 +1,78 @@
-import { css } from '@emotion/react';
-import Head from 'next/head';
-import Image from 'next/image';
-import getStandings from '../components/standings';
+import { css } from "@emotion/react";
+import Head from "next/head";
+import Image from "next/image";
+import getStandings from "../components/standings";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Avatar, Paper } from "@mui/material";
 
-const ourGray = '#1d2d35';
-const lightGray = '#E9E4E4';
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
-const standingsStyles = css`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
-  h3 {
-    background-color: ${lightGray};
-    color: ${ourGray};
-    text-align: center;
-    padding: 20px;
-  }
+const ourGray = "#1d2d35";
+const lightGray = "#E9E4E4";
 
-  li {
-    background-color: ${ourGray};
-    color: ${lightGray};
-    text-align: center;
-    padding: 5px;
-    font-size: 0.8rem;
-  }
+// const StandingsStyles = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
 
-  ul {
-    list-style-type: none;
-  }
+//   h3 {
+//     background-color: ${lightGray};
+//     color: ${ourGray};
+//     text-align: center;
+//     padding: 20px;
+//   }
 
-  span {
-    padding-left: 15px;
-  }
-`;
+//   li {
+//     background-color: ${ourGray};
+//     color: ${lightGray};
+//     text-align: center;
+//     padding: 5px;
+//     font-size: 0.8rem;
+//   }
 
-const headingStandingsStyles = css`
-  background-color: ${lightGray};
-  color: ${ourGray};
-  h2 {
-    background-color: ${ourGray};
-    color: ${lightGray};
-    text-align: center;
-    padding: 20px;
-  }
-`;
+//   ul {
+//     list-style-type: none;
+//   }
+
+//   span {
+//     padding-left: 15px;
+//   }
+// `;
+
+// const HeadingStandingsStyles = styled.div`
+//   background-color: ${lightGray};
+//   color: ${ourGray};
+//   h2 {
+//     background-color: ${ourGray};
+//     color: ${lightGray};
+//     text-align: center;
+//     padding: 20px;
+//   }
+// `;
 
 export default function Standings(props) {
   getStandings();
@@ -53,92 +82,158 @@ export default function Standings(props) {
         <title>NBA Standings</title>
       </Head>
 
-      <main css={headingStandingsStyles}>
-        <h2 data-cy="standings-page-content-h2">NBA Standings 2020/2021</h2>
-        <div css={standingsStyles}>
-          <div style={{display: 'flex', flexDirection: 'columns'}}>
-            <h3>Eastern Conference</h3>
-            <div style={{display: 'flex', flexDirection: 'columns'}}></div>
-            <ul>
-              {props.standingsArray.league.standard.conference.east.map(
-                (team) => (
-                  <li key={team.teamId}>
-                    <Image
-                      src={`/${team.teamSitesOnly.teamTricode}.png`}
-                      alt="Image"
-                      width={30}
-                      height={30}
-                    />
-
-                    <span>
-                      {team.teamSitesOnly.teamKey}
-                      {'  '}
-                      {team.teamSitesOnly.teamNickname}
-                    </span>
-
-                    <span>
-                      {team.win}-{team.loss}
-                    </span>
-
-                    <span>{team.gamesBehind}</span>
-
-                    <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
-                    {/* {'  '}
-                      {'  '}
-                      {team.lastTenWin}/{team.lastTenLoss}
-                      {'  '}
-                      {'  '}
-                      {team.streak} */}
-                  </li>
-                ),
-              )}
-            </ul>
-          </div>
-          
+      <div>
+        <h2
+          data-cy="standings-page-content-h2"
+          style={{ display: "grid", justifyContent: "center" }}
+        >
+          NBA Standings 2020/2021
+        </h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2,auto)",
+            gap: "3rem",
+            margin: "3rem",
+          }}
+        >
           <div>
-            <h3>Western Conference</h3>
-            <ul>
-              {props.standingsArray.league.standard.conference.west.map(
-                (team) => (
-                  <li key={team.teamId}>
-                    <Image
-                      src={`/${team.teamSitesOnly.teamTricode}.png`}
-                      alt="Image"
-                      width={30}
-                      height={30}
-                    />
-                    <span>
-                      {team.teamSitesOnly.teamKey}
-                      {'  '}
-                      {team.teamSitesOnly.teamNickname}
-                    </span>
-                    <span>
-                      {team.win}-{team.loss}
-                    </span>
-                    {/* {team.gamesBehind}
-                      {'  '}
-                      {'  '} */}
-                    <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
-                    {/* {'  '}
-                      {'  '}
-                      {team.lastTenWin}/{team.lastTenLoss}
-                      {'  '}
-                      {'  '}
-                      {team.streak} */}
-                  </li>
-                ),
-              )}
-            </ul>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell></StyledTableCell>
+                    <StyledTableCell>Team</StyledTableCell>
+                    <StyledTableCell>Wins</StyledTableCell>
+                    <StyledTableCell>Loses</StyledTableCell>
+                    <StyledTableCell align="right">GB</StyledTableCell>
+                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
+                    <StyledTableCell align="right">L10</StyledTableCell>
+                    <StyledTableCell align="right">Streak</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {props.standingsArray.league.standard.conference.east.map(
+                    (team) => (
+                      <StyledTableRow key={team.teamId}>
+                        <StyledTableCell
+                          component="th"
+                          scope="row"
+                        ></StyledTableCell>
+                        <StyledTableCell
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2,auto)",
+                          }}
+                        >
+                          <Avatar
+                            src={`/${team.teamSitesOnly.teamTricode}.png`}
+                            alt="Image"
+                            width={30}
+                            height={30}
+                          />{" "}
+                          {team.teamSitesOnly.teamKey}
+                          <br></br>
+                          {team.teamSitesOnly.teamNickname}
+                        </StyledTableCell>
+                        <StyledTableCell>{team.win}</StyledTableCell>
+                        <StyledTableCell>{team.loss}</StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.gamesBehind}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {(Number(team.winPct) * 100).toFixed(1)}%
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.lastTenWin}-{team.lastTenLoss}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.streak}{" "}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+
+          <div>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell></StyledTableCell>
+                    <StyledTableCell >Team</StyledTableCell>
+                    <StyledTableCell align="right">Wins</StyledTableCell>
+                    <StyledTableCell align="right">Loses</StyledTableCell>
+                    <StyledTableCell align="right">GB</StyledTableCell>
+                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
+                    <StyledTableCell align="right">L10</StyledTableCell>
+                    <StyledTableCell align="right">Streak</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {props.standingsArray.league.standard.conference.west.map(
+                    (team) => (
+                      <StyledTableRow key={team.teamId}>
+                        <StyledTableCell
+                          component="th"
+                          scope="row"
+                        ></StyledTableCell>
+                        <StyledTableCell
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2,auto)",
+                            gap: "0.5rem",
+                          }}
+                        >
+                          <Avatar
+                            src={`/${team.teamSitesOnly.teamTricode}.png`}
+                            alt="Image"
+                            width={30}
+                            height={30}
+                          />
+                          {team.teamSitesOnly.teamKey}
+                          <br></br>
+                          {team.teamSitesOnly.teamNickname}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.win}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.loss}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.gamesBehind}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {(Number(team.winPct) * 100).toFixed(1)}%
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.lastTenWin}-{team.lastTenLoss}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.streak}{" "}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
   const { getSessionByToken, getUserByToken } = await import(
-    '../util/database'
+    "../util/database"
   );
 
   const session = await getSessionByToken(context.req.cookies.session);
@@ -147,7 +242,7 @@ export async function getServerSideProps(context) {
   if (
     !session ||
     session.userId !== userByToken.userId ||
-    userByToken === 'undefined'
+    userByToken === "undefined"
   ) {
     const standingsArray = await getStandings();
     return {
