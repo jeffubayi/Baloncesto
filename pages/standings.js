@@ -94,12 +94,12 @@ export default function Standings(props) {
             display: "grid",
             gridTemplateColumns: "repeat(2,auto)",
             gap: "3rem",
-            margin: "3rem",
+            padding: "3rem",
           }}
         >
           <div>
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
                     <StyledTableCell></StyledTableCell>
@@ -129,8 +129,7 @@ export default function Standings(props) {
                           <Avatar
                             src={`/${team.teamSitesOnly.teamTricode}.png`}
                             alt="Image"
-                            width={30}
-                            height={30}
+                            style={{width:"1.5rem",height:"1.5rem"}}
                           />{" "}
                           {team.teamSitesOnly.teamKey}
                           <br></br>
