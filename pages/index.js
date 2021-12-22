@@ -8,6 +8,15 @@ import getGeneralNewsFromLastTwoDays from '../components/news';
 import getSpecialNewsFromLastTwoDays from '../components/personalizednews';
 import getLastNightScores from '../components/yesterdayscores';
 import { setDateCookieClientSide } from '../util/cookies';
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { DatePicker, LocalizationProvider } from "@mui/lab";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import TextField from "@mui/material/TextField";
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -168,44 +177,84 @@ export default function Home(props) {
                   // because Carousel adds another li tag
                   // by itself. If we set this tag to li,
                   // it would cause the conflict.
-                  <div key={scores.gameId}>
-                    <Link href={`/${scores.gameId}`}>
-                      <a>
-                        <br />
-                        <Image
-                          src={`/${scores.vTeam.triCode}.png`}
-                          alt="Image"
-                          width={25}
-                          height={25}
-                        />
-                        {'  '}
-                        {'  '}
-                        <div style={{color:"yellow"}}>
-                        {scores.vTeam.triCode}
-                        </div>
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.vTeam.score}
-                        <br />
-                        <br />
-                        <Image
-                          src={`/${scores.hTeam.triCode}.png`}
-                          alt="Image"
-                          width={25}
-                          height={25}
-                        />
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.hTeam.triCode}
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.hTeam.score}
-                      </a>
-                    </Link>
-                  </div>
+                    <Link
+                  href={`/${scores.gameId}`}
+                  style={{
+                    padding: "0.4rem",
+                    margin: "1rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Card key={scores.gameId}>
+                    <div
+                      style={{
+                        justifyContent: "space-evenly",
+                        display: "grid",
+                        gap: "0.4rem",
+                        gridTemplateColumns: "repeat(2,auto)",
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={`/${scores.vTeam.triCode}.png`}
+                        alt="green iguana"
+                      />
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={`/${scores.hTeam.triCode}.png`}
+                        alt="green iguana"
+                      />
+                    </div>
+                    <CardContent>
+                      <div
+                        style={{
+                          justifyContent: "space-evenly",
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateColumns: "repeat(3,auto)",
+                        }}
+                      >
+                        <Typography gutterBottom variant="h7" component="div">
+                          {scores.vTeam.triCode}
+                        </Typography>
+                        <Typography
+                          gutterBottom
+                          variant="body2"
+                          component="div"
+                        >
+                          vs
+                        </Typography>
+                        <Typography gutterBottom variant="h7" component="div">
+                          {scores.hTeam.triCode}
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          justifyContent: "space-evenly",
+                          display: "grid",
+                          gap: "0.4rem",
+                          gridTemplateColumns: "repeat(3,auto)",
+                        }}
+                      >
+                        <Typography variant="body2" color="text.secondary">
+                          {scores.vTeam.score}
+                        </Typography>
+                        <Typography
+                          gutterBottom
+                          variant="caption"
+                          component="div"
+                        >
+                          -
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {scores.hTeam.score}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
                 ))}
               </Carousel>
             </ul>
