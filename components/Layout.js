@@ -6,6 +6,7 @@ import Router from "next/router";
 import { setSearchCookieClientSide } from "../util/cookies";
 import styled from "styled-components";
 
+
 const ourGray = "#713C25";
 const lightGray = "#BE6C42";
 const ourOrange = "#FFFFF";
