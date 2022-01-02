@@ -119,7 +119,7 @@ export default function Layout(props) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <BodyStyles>{props.children}</BodyStyles>
+      
 
       <HeaderStyles>
         <NavStyles>
@@ -163,6 +163,7 @@ export default function Layout(props) {
           </HeaderDiv2>
         </NavStyles>
       </HeaderStyles>
+      <BodyStyles>{props.children}</BodyStyles>
 
       <FooterStyles>
         <p>© 2022 · NBA News · All rights reserved ·</p>
