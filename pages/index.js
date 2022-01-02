@@ -242,9 +242,7 @@ export default function Home(props) {
           <Box gridColumn="span 4">
             <TrendingNews />
           </Box>
-          <Box gridColumn="span 4">
-            <StandingList />
-          </Box>
+          
           <Box gridColumn="span 8">
             <div
               style={{
@@ -285,6 +283,9 @@ export default function Home(props) {
                 </Link>
               ))}
             </div>
+          </Box>
+          <Box gridColumn="span 4">
+            <StandingList />
           </Box>
         </Box>
       </Box>
