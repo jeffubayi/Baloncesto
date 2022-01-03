@@ -20,7 +20,8 @@ export default function StandingList(props) {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          maxHeight: 400,
+          height: 400,
+          borderRadius:"0.5rem"
           "& ul": { padding: 0 },
         }}
         subheader={<li />}

@@ -60,10 +60,11 @@ function TrendingSlider() {
               <Box
                 component="img"
                 sx={{
-                  height: 405,
+                  height: 400,
                   display: 'block',
                   overflow: 'hidden',
                   width: '100%',
+                  borderRadius:"0.5rem"
                 }}
                 src={step.imgPath}
                 alt={step.label}
