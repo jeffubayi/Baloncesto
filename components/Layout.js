@@ -78,7 +78,7 @@ const NavStyles = styled.nav`
 const FooterStyles = styled.footer`
   border-top: 0.7px solid rgba(255, 255, 255, 0.5);
   padding: 0.6rem 0 0.7rem 0;
-  background: #f7e7ce;
+  background: #051c2d;
   text-align: center;
   color: #713c25;
   font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
@@ -94,7 +94,7 @@ const FooterStyles = styled.footer`
 `;
 
 const BodyStyles = styled.div`
-  background: #f7e7ce;
+  background: #FAFAFA;
   margin: 0;
   padding: 30px 0 0 0;
   min-height: 78.3vh;
