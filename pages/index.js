@@ -142,12 +142,14 @@ export default function Home(props) {
               cursor: "pointer",
             }}
           >
-            <Card key={scores.gameId}>
+            <Card style={{
+                  borderRadius: "1rem",
+                }} key={scores.gameId}>
               <div
                 style={{
                   justifyContent: "space-evenly",
                   display: "grid",
-                  gap: "0.4rem",
+                  gap: "0.1rem",
                   gridTemplateColumns: "repeat(2,auto)",
                 }}
               >
@@ -206,12 +208,12 @@ export default function Home(props) {
           </Link>
         ))}
       </Carousel>
-      <Box style={{ width: "auto", margin: "3rem 1rem 2rem" }}>
+      <Box style={{ width: "auto", margin: "3rem 2rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
-          <Box gridColumn="span 8">
+          <Box gridColumn="span 8"  >
             <TrendingSlider />
           </Box>
-          <Box gridColumn="span 4">
+          <Box gridColumn="span 4" >
             <TrendingNews />
           </Box>
           
