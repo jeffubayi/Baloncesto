@@ -1,6 +1,4 @@
 import { css } from "@emotion/react";
-import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -9,43 +7,17 @@ import getSpecialNewsFromLastTwoDays from "../components/personalizednews";
 import getLastNightScores from "../components/yesterdayscores";
 import { setDateCookieClientSide } from "../util/cookies";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import DateAdapter from "@mui/lab/AdapterMoment";
-import TextField from "@mui/material/TextField";
 import styled from "styled-components";
-import standingList from "../components/StandingList";
 import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import { FixedSizeList } from "react-window";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import TabPanel from "@mui/lab/TabPanel";
-import { useEffect, useState } from "react";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
+import {  useState } from "react";
 import TrendingSlider from "./TrendingSlider";
 import Paper from "@mui/material/Paper";
 import StandingList from "./StandingList";
 import TrendingNews from "./TrendingNews";
 
-function renderRow(props) {
-  const { index, style } = props;
-
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        <ListItemText primary={`Item ${index + 1}`} />
-      </ListItemButton>
-    </ListItem>
-  );
-}
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
