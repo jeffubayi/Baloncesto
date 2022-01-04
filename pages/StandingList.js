@@ -21,7 +21,7 @@ export default function StandingList(props) {
           position: "relative",
           overflow: "auto",
           height: 400,
-          borderRadius:"0.5rem"
+          borderRadius:"0.5rem",
           "& ul": { padding: 0 },
         }}
         subheader={<li />}
