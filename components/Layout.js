@@ -129,6 +129,7 @@ export default function Layout(props) {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" style={{backgroundColor: "#051c2d"}}>
             <Toolbar>
+            <Link href="/">
                 <Box sx={{ flexGrow: 1 }}>
                   <a style={{ padding: "0.4rem" }}>
                     <svg
@@ -154,7 +155,7 @@ export default function Layout(props) {
                     </svg>
                   </a>
                 </Box>
-
+                </Link>
               <Link href="/scores">
                 <Button color="inherit">Scores</Button>
               </Link>
