@@ -100,10 +100,7 @@ const FooterStyles = styled.footer`
 `;
 
 const BodyStyles = styled.div`
-  background: #fafafa;
-  margin: 0;
-  padding: 30px 0 0 0;
-  min-height: 78.3vh;
+  background: #e3e3e3;
 
   h1 {
     font-family: "Crimson Text Regular", "PT Sans", "Helvetica", "Arial",
@@ -127,9 +124,9 @@ export default function Layout(props) {
 
       <HeaderStyles>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" style={{backgroundColor: "#051c2d"}}>
+          <AppBar position="static" style={{ backgroundColor: "#051c2d" }}>
             <Toolbar>
-            <Link href="/">
+              <Link href="/">
                 <Box sx={{ flexGrow: 1 }}>
                   <a style={{ padding: "0.4rem" }}>
                     <svg
@@ -155,16 +152,25 @@ export default function Layout(props) {
                     </svg>
                   </a>
                 </Box>
-                </Link>
-              <Link href="/scores">
-                <Button color="inherit">Scores</Button>
               </Link>
-              <Link href="/standings">
-                <Button color="inherit">Standings</Button>
-              </Link>
-              <Link href="/teams">
-                <Button color="inherit">Teams</Button>
-              </Link>
+              <Button
+                color="inherit"
+                onClick={() => window.location.assign("/scores")}
+              >
+                Scores
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => window.location.assign("/standings")}
+              >
+                Standings
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => window.location.assign("/teams")}
+              >
+                Teams
+              </Button>
             </Toolbar>
           </AppBar>
         </Box>
