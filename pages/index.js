@@ -17,6 +17,8 @@ import TrendingSlider from "./TrendingSlider";
 import Paper from "@mui/material/Paper";
 import StandingList from "./StandingList";
 import TrendingNews from "./TrendingNews";
+import Badge from '@mui/material/Badge';
+import Avatar from "@mui/material/Avatar";
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
@@ -105,7 +107,7 @@ export default function Home(props) {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 4,
       slidesToSlide: 5,
     },
     desktop: {
@@ -154,26 +156,24 @@ export default function Home(props) {
                   padding: "1rem  0.1rem",
                 }}
               >
-                <CardMedia
-                  component="img"
-                  height="50"
-                  image={`/${scores.vTeam.triCode}.png`}
-                  alt="green iguana"
-                />
-                <CardMedia
-                  component="img"
-                  height="50"
-                  image={`/${scores.hTeam.triCode}.png`}
-                  alt="green iguana"
-                />
+                <Avatar
+                            src={`/${scores.vTeam.triCode}.png`}
+                            alt="Image"
+                            style={{width:"2rem",height:"2rem"}}
+                          />
+                 <Avatar
+                            src={`/${scores.hTeam.triCode}.png`}
+                            alt="Image"
+                            style={{width:"2rem",height:"2rem"}}
+                          />
               </div>
               <CardContent>
                 <div
                   style={{
                     justifyContent: "space-between",
                     display: "grid",
-                    gap: "0.4rem",
-                    gridTemplateColumns: "repeat(2,2fr 2fr)",
+                    gap: "0.7rem",
+                    gridTemplateColumns: "repeat(2,2fr 2fr 2fr)",
                     padding: "1rem 0 0.1rem",
                   }}
                 >
@@ -181,6 +181,7 @@ export default function Home(props) {
                     style={{
                       display: "grid",
                       gap: "0.6rem",
+                      
                     }}
                   >
                     <Typography gutterBottom variant="h7" component="div">
@@ -194,6 +195,7 @@ export default function Home(props) {
                     style={{
                       display: "grid",
                       gap: "0.6rem",
+                      paddingRight:"0.5rem"
                     }}
                   >
                     <Typography variant="body2" color="text.secondary">
@@ -201,6 +203,19 @@ export default function Home(props) {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       {scores.hTeam.score}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gap: "0.6rem",
+                    }}
+                  >
+                    <div>
+                     <Badge badgeContent={"win"} color="success" />
+                     </div>
+                    <Typography variant="body2" color="text.secondary">
+                    <Badge badgeContent={"loss"} color="warning" />
                     </Typography>
                   </div>
                 </div>
