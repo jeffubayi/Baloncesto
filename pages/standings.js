@@ -14,7 +14,7 @@ import { Avatar, Paper } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#051c2d",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -103,7 +103,7 @@ export default function Standings(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell></StyledTableCell>
-                    <StyledTableCell>Team</StyledTableCell>
+                    <StyledTableCell align="right">Eastern Conference</StyledTableCell>
                     <StyledTableCell>Wins</StyledTableCell>
                     <StyledTableCell>Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
@@ -164,7 +164,7 @@ export default function Standings(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell></StyledTableCell>
-                    <StyledTableCell>Team</StyledTableCell>
+                    <StyledTableCell align="left">Western Conference</StyledTableCell>
                     <StyledTableCell align="right">Wins</StyledTableCell>
                     <StyledTableCell align="right">Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
