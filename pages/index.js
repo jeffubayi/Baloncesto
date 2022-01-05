@@ -12,12 +12,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import {  useState } from "react";
+import { useState } from "react";
 import TrendingSlider from "./TrendingSlider";
 import Paper from "@mui/material/Paper";
 import StandingList from "./StandingList";
 import TrendingNews from "./TrendingNews";
-
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
@@ -111,8 +110,8 @@ export default function Home(props) {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-      slidesToSlide: 4,
+      items: 6,
+      slidesToSlide: 6,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -121,8 +120,8 @@ export default function Home(props) {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
+      items: 2,
+      slidesToSlide: 2,
     },
   };
 
@@ -134,34 +133,36 @@ export default function Home(props) {
           // because Carousel adds another li tag
           // by itself. If we set this tag to li,
           // it would cause the conflict.
-          <Link
-            href={`/${scores.gameId}`}
-            style={{
-              padding: "0.4rem",
-              margin: "1rem",
-              cursor: "pointer",
-            }}
-          >
-            <Card style={{
-                  borderRadius: "1rem",
-                }} key={scores.gameId}>
+          <Link href={`/${scores.gameId}`}>
+            <Card
+              style={{
+                borderRadius: "0.2rem",
+                display: "grid",
+                gap: "0.5rem",
+                gridTemplateColumns: "repeat(2,auto)",
+                cursor: "pointer",
+                padding: "0.2rem",
+              }}
+              key={scores.gameId}
+            >
               <div
                 style={{
-                  justifyContent: "space-evenly",
+                  justifyContent: "flex-start",
                   display: "grid",
                   gap: "0.1rem",
-                  gridTemplateColumns: "repeat(2,auto)",
+                  gridTemplateRows: "repeat(2,auto)",
+                  padding: "1rem  0.1rem",
                 }}
               >
                 <CardMedia
                   component="img"
-                  height="70"
+                  height="50"
                   image={`/${scores.vTeam.triCode}.png`}
                   alt="green iguana"
                 />
                 <CardMedia
                   component="img"
-                  height="70"
+                  height="50"
                   image={`/${scores.hTeam.triCode}.png`}
                   alt="green iguana"
                 />
@@ -169,39 +170,39 @@ export default function Home(props) {
               <CardContent>
                 <div
                   style={{
-                    justifyContent: "space-evenly",
+                    justifyContent: "space-between",
                     display: "grid",
                     gap: "0.4rem",
-                    gridTemplateColumns: "repeat(3,auto)",
+                    gridTemplateColumns: "repeat(2,2fr 2fr)",
+                    padding: "1rem 0 0.1rem",
                   }}
                 >
-                  <Typography gutterBottom variant="h7" component="div">
-                    {scores.vTeam.triCode}
-                  </Typography>
-                  <Typography gutterBottom variant="body2" component="div">
-                    vs
-                  </Typography>
-                  <Typography gutterBottom variant="h7" component="div">
-                    {scores.hTeam.triCode}
-                  </Typography>
-                </div>
-                <div
-                  style={{
-                    justifyContent: "space-evenly",
-                    display: "grid",
-                    gap: "0.4rem",
-                    gridTemplateColumns: "repeat(3,auto)",
-                  }}
-                >
-                  <Typography variant="body2" color="text.secondary">
-                    {scores.vTeam.score}
-                  </Typography>
-                  <Typography gutterBottom variant="caption" component="div">
-                    -
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {scores.hTeam.score}
-                  </Typography>
+                  <div
+                    style={{
+                      display: "grid",
+                      gap: "0.6rem",
+                    }}
+                  >
+                    <Typography gutterBottom variant="h7" component="div">
+                      {scores.vTeam.triCode}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      {scores.hTeam.triCode}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gap: "0.6rem",
+                    }}
+                  >
+                    <Typography variant="body2" color="text.secondary">
+                      {scores.vTeam.score}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {scores.hTeam.score}
+                    </Typography>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -210,13 +211,13 @@ export default function Home(props) {
       </Carousel>
       <Box style={{ width: "auto", margin: "3rem 2rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
-          <Box gridColumn="span 8"  >
+          <Box gridColumn="span 8">
             <TrendingSlider />
           </Box>
-          <Box gridColumn="span 4" >
+          <Box gridColumn="span 4">
             <TrendingNews />
           </Box>
-          
+
           <Box gridColumn="span 8">
             <div
               style={{
