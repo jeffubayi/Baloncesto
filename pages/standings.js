@@ -83,18 +83,17 @@ export default function Standings(props) {
       </Head>
 
       <div>
-        <h2
-          data-cy="standings-page-content-h2"
-          style={{ display: "grid", justifyContent: "center" }}
+        <Paper elevation={4}
+          style={{ display: "grid", padding:"0.3rem",width:"auto" ,justifyContent: "center" }}
         >
-          NBA Standings 2020/2021
-        </h2>
+          <h4> Season Standings 2020/2021</h4>
+        </Paper>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2,auto)",
             gap: "3rem",
-            padding: "3rem",
+            padding: "2rem",
           }}
         >
           <div>
