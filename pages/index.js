@@ -212,10 +212,15 @@ export default function Home(props) {
                     }}
                   >
                     <div>
+                    {scores.vTeam.score > scores.hTeam.score ? (
                      <Badge badgeContent={"win"} color="success" />
+                    ) :null }
                      </div>
+
                     <Typography variant="body2" color="text.secondary">
-                    <Badge badgeContent={"loss"} color="warning" />
+                    {scores.vTeam.score < scores.hTeam.score ? (
+                     <Badge badgeContent={"win"} color="success" />
+                     ) :null }
                     </Typography>
                   </div>
                 </div>
