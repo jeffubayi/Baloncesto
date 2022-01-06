@@ -144,6 +144,7 @@ export default function Home(props) {
                 gridTemplateColumns: "repeat(2,auto)",
                 cursor: "pointer",
                 padding: "0.2rem",
+                backgroundColor:"rgba(255, 255, 255, 0.72)"
               }}
               key={scores.gameId}
             >
@@ -229,7 +230,7 @@ export default function Home(props) {
           </Link>
         ))}
       </Carousel>
-      <Box style={{ width: "auto", margin: "3rem 2rem 5rem" }}>
+      <Box style={{ width: "auto", margin: "3rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
           <Box gridColumn="span 8">
             <TrendingSlider />
@@ -242,10 +243,9 @@ export default function Home(props) {
             <div
               style={{
                 padding: "0.4rem",
-                margin: "1rem",
                 cursor: "pointer",
                 display: "grid",
-                gridTemplateColumns: "repeat(2,auto)",
+                gridTemplateColumns: "repeat(1,auto)",
                 gap: "3rem",
               }}
             >
