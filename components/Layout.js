@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import Footer from "./Footer"
 
 const ourGray = "#713C25";
 const lightGray = "#BE6C42";
@@ -177,9 +178,7 @@ export default function Layout(props) {
       </HeaderStyles>
       <BodyStyles>{props.children}</BodyStyles>
 
-      <FooterStyles>
-        <p>© 2022 · NBA News · All rights reserved ·</p>
-      </FooterStyles>
+      <Footer/>
     </>
   );
 }
