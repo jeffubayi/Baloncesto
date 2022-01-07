@@ -168,6 +168,12 @@ export default function Layout(props) {
               </Button>
               <Button
                 color="inherit"
+                onClick={() => window.location.assign("/stats")}
+              >
+                Stats
+              </Button>
+              <Button
+                color="inherit"
                 onClick={() => window.location.assign("/teams")}
               >
                 Teams
