@@ -127,6 +127,15 @@ export default function Home(props) {
     },
   };
 
+  const findGameWinner = () => {
+    if ( props.scoresArray.scores.vTeam.triCode >  props.scoresArray.scores.hTeam.triCode){
+      return true
+    }else (
+      false
+    )
+       
+  }
+
   return (
     <>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
@@ -158,12 +167,12 @@ export default function Home(props) {
                 }}
               >
                 <Avatar
-                            src={`/${scores.vTeam.triCode}.png`}
+                            src={`/${scores.hTeam.triCode}.png`}
                             alt="Image"
                             style={{width:"2rem",height:"2rem"}}
                           />
                  <Avatar
-                            src={`/${scores.hTeam.triCode}.png`}
+                            src={`/${scores.vTeam.triCode}.png`}
                             alt="Image"
                             style={{width:"2rem",height:"2rem"}}
                           />
@@ -186,10 +195,10 @@ export default function Home(props) {
                     }}
                   >
                     <Typography gutterBottom variant="h7" component="div">
-                      {scores.vTeam.triCode}
+                      {scores.hTeam.triCode}
                     </Typography>
                     <Typography gutterBottom variant="h7" component="div">
-                      {scores.hTeam.triCode}
+                      {scores.vTeam.triCode}
                     </Typography>
                   </div>
                   <div
@@ -200,10 +209,10 @@ export default function Home(props) {
                     }}
                   >
                     <Typography variant="body2" color="text.secondary">
-                      {scores.vTeam.score}
+                      {scores.hTeam.score}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {scores.hTeam.score}
+                      {scores.vTeam.score}
                     </Typography>
                   </div>
                   <div
@@ -212,17 +221,15 @@ export default function Home(props) {
                       gap: "0.6rem",
                     }}
                   >
+                    {findGameWinner ?(
                     <div>
-                    {scores.vTeam.score > scores.hTeam.score ? (
-                     <Badge badgeContent={"win"} color="success" />
-                    ) :null }
+                     <Badge badgeContent={"win"} color="success" /> 
                      </div>
-
-                    <Typography variant="body2" color="text.secondary">
-                    {scores.vTeam.score < scores.hTeam.score ? (
-                     <Badge badgeContent={"win"} color="success" />
-                     ) :null }
-                    </Typography>
+                      ):(
+                     <div>
+                     <Badge badgeContent={"win"} color="success" /> 
+                     </div>
+                      )}
                   </div>
                 </div>
               </CardContent>
@@ -262,14 +269,14 @@ export default function Home(props) {
           {news.title}
           </Typography>
           <Typography variant="caption" color="text.secondary" component="div">
-          {news.summary}
+          {news.summary.substring(0,230)}...
           </Typography>
         </CardContent>
       </Box>
       <CardMedia
         component="img"
         sx={{ width: 151 }}
-        image="https://sportshub.cbsistatic.com/i/r/2022/01/06/d5ed03a5-f1c4-41d2-859b-5250804b67b0/thumbnail/770x433/5a0d98012f5a11fcb228f7ef31642007/010522-lancestephenson.jpg"
+        image="https://blog.logomyway.com/wp-content/uploads/2017/01/nba-logo-1.jpg"
       />
     </Card>
                 </Link>
