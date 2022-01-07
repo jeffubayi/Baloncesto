@@ -60,7 +60,7 @@ function TrendingSlider() {
               <Box
                 component="img"
                 sx={{
-                  height: 450,
+                  height: "auto",
                   display: 'block',
                   overflow: 'hidden',
                   width: '100%',
@@ -73,11 +73,6 @@ function TrendingSlider() {
           </div>
         ))}
       </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-      />
     </Box>
   );
 }
