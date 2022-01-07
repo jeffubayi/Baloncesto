@@ -60,7 +60,7 @@ function TrendingSlider() {
               <Box
                 component="img"
                 sx={{
-                  height: 400,
+                  height: 450,
                   display: 'block',
                   overflow: 'hidden',
                   width: '100%',

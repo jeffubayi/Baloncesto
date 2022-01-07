@@ -14,7 +14,7 @@ export default function TrendingNews() {
     <List
       sx={{
         width: "100%",
-        height: 400,
+        height: 450,
         bgcolor: "background.paper",
         borderRadius:"0.5rem"
       }}
