@@ -12,11 +12,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Footer from "./Footer"
+import Footer from "./Footer";
+import UnstyledButtonCustom from "./UnstyledButtonCustom";
 
 const ourGray = "#713C25";
 const lightGray = "#BE6C42";
 const ourOrange = "#FFFFF";
+
+const HeaderCTA = styled(Button)`
+  &:hover {
+    border-bottom: 2px solid ${ourOrange};
+  }
+`;
 
 const HeaderStyles = styled.div`
   background: "#FFFFF";
@@ -154,37 +161,19 @@ export default function Layout(props) {
                   </a>
                 </Box>
               </Link>
-              <Button
-                color="inherit"
-                onClick={() => window.location.assign("/scores")}
-              >
-                Scores
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => window.location.assign("/standings")}
-              >
-                Standings
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => window.location.assign("/stats")}
-              >
-                Stats
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => window.location.assign("/teams")}
-              >
-                Teams
-              </Button>
+              <div style={{display:"grid",gridTemplateColumns: "repeat(4,auto)",gap:"0.4rem"}}>
+              <UnstyledButtonCustom item="Scores" urlPath="/scores" />
+              <UnstyledButtonCustom item="Standings" urlPath="/standings" />
+              <UnstyledButtonCustom item="Stats" urlPath="/stats" />
+              <UnstyledButtonCustom item="Teams" urlPath="/team" />
+              </div>
             </Toolbar>
           </AppBar>
         </Box>
       </HeaderStyles>
       <BodyStyles>{props.children}</BodyStyles>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
