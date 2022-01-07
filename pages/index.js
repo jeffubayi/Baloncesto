@@ -17,8 +17,13 @@ import TrendingSlider from "./TrendingSlider";
 import Paper from "@mui/material/Paper";
 import StandingList from "./StandingList";
 import TrendingNews from "./TrendingNews";
-import Badge from '@mui/material/Badge';
+import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Button from "@mui/material/Button";
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
@@ -128,17 +133,33 @@ export default function Home(props) {
   };
 
   const findGameWinner = () => {
-    if ( props.scoresArray.scores.vTeam.triCode >  props.scoresArray.scores.hTeam.triCode){
-      return true
-    }else (
-      false
-    )
-       
-  }
+    if (
+      props.scoresArray.scores.vTeam.triCode >
+      props.scoresArray.scores.hTeam.triCode
+    ) {
+      return true;
+    } else false;
+  };
 
   return (
     <>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
+        <Paper
+          elevation={3}
+          style={{
+            padding: "0.2rem 0.5rem 0",
+            backgroundColor: "rgba(255, 255, 255, 0.72)",
+          }}
+        >
+          <h6 style={{ textAlign: "center" }}>
+            Yesterday's Game Scores <br></br>
+            {yesterday}
+            <br></br>
+            <Button variant="outlined" size="small" style={{textTransform: "capitalize",margin:"0.15rem"}}>
+              view scores
+            </Button>
+          </h6>
+        </Paper>
         {props.scoresArray.map((scores) => (
           // Here we use div instead of li tag
           // because Carousel adds another li tag
@@ -153,7 +174,8 @@ export default function Home(props) {
                 gridTemplateColumns: "repeat(2,auto)",
                 cursor: "pointer",
                 padding: "0.2rem",
-                backgroundColor:"rgba(255, 255, 255, 0.72)"
+                backgroundColor: "rgba(255, 255, 255, 0.72)",
+                height: 120,
               }}
               key={scores.gameId}
             >
@@ -163,35 +185,32 @@ export default function Home(props) {
                   display: "grid",
                   gap: "0.1rem",
                   gridTemplateRows: "repeat(2,auto)",
-                  padding: "1rem  0.1rem",
                 }}
               >
                 <Avatar
-                            src={`/${scores.hTeam.triCode}.png`}
-                            alt="Image"
-                            style={{width:"2rem",height:"2rem"}}
-                          />
-                 <Avatar
-                            src={`/${scores.vTeam.triCode}.png`}
-                            alt="Image"
-                            style={{width:"2rem",height:"2rem"}}
-                          />
+                  src={`/${scores.hTeam.triCode}.png`}
+                  alt="Image"
+                  style={{ width: "2rem", height: "2rem" }}
+                />
+                <Avatar
+                  src={`/${scores.vTeam.triCode}.png`}
+                  alt="Image"
+                  style={{ width: "2rem", height: "2rem" }}
+                />
               </div>
               <CardContent>
                 <div
                   style={{
                     justifyContent: "space-between",
                     display: "grid",
-                    gap: "0.7rem",
+                    gap: "0.4rem",
                     gridTemplateColumns: "repeat(2,2fr 2fr 2fr)",
-                    padding: "1rem 0 0.1rem",
                   }}
                 >
                   <div
                     style={{
                       display: "grid",
                       gap: "0.6rem",
-                      
                     }}
                   >
                     <Typography gutterBottom variant="h7" component="div">
@@ -205,7 +224,7 @@ export default function Home(props) {
                     style={{
                       display: "grid",
                       gap: "0.6rem",
-                      paddingRight:"0.5rem"
+                      paddingRight: "0.5rem",
                     }}
                   >
                     <Typography variant="body2" color="text.secondary">
@@ -219,17 +238,22 @@ export default function Home(props) {
                     style={{
                       display: "grid",
                       gap: "0.6rem",
+                      paddingRight: "0.5rem",
                     }}
                   >
-                    {findGameWinner ?(
-                    <div>
-                     <Badge badgeContent={"win"} color="success" /> 
-                     </div>
-                      ):(
-                     <div>
-                     <Badge badgeContent={"win"} color="success" /> 
-                     </div>
-                      )}
+                    {findGameWinner ? (
+                      <div>
+                        <Badge badgeContent={"win"} color="success" />
+                        <Badge badgeContent={"win"} color="success" />
+                        <Badge badgeContent={"win"} color="success" />
+                      </div>
+                    ) : (
+                      <div>
+                        <Badge badgeContent={"win"} color="success" />
+                        <Badge badgeContent={"win"} color="success" />
+                        <Badge badgeContent={"win"} color="success" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -237,16 +261,36 @@ export default function Home(props) {
           </Link>
         ))}
       </Carousel>
-      <Box style={{ width: "auto", margin: "3rem 8rem 5rem" }}>
+      <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
           <Box gridColumn="span 8">
+            <h6 style={{ color: "grey" }}>NBA Highlights</h6>
             <TrendingSlider />
           </Box>
-          <Box gridColumn="span 4">
-            <TrendingNews />
+          <Box gridColumn="span 4" gap={5}>
+            <h6 style={{ color: "grey" }}>Trending News</h6>
+            <List
+              sx={{
+                width: "100%",
+                height: "auto",
+                bgcolor: "background.paper",
+                borderRadius: "0.5rem",
+                cursor: "pointer",
+              }}
+            >
+              {newsArray.map((news) => (
+                <Link href={news.link}>
+                  <ListItem key={news._id}>
+                    <ListItemIcon>.</ListItemIcon>
+                    <ListItemText secondary={news.title} />
+                  </ListItem>
+                </Link>
+              ))}
+            </List>
           </Box>
 
           <Box gridColumn="span 8">
+            <h6 style={{ color: "grey" }}>Headlines</h6>
             <div
               style={{
                 padding: "0.4rem",
@@ -262,28 +306,36 @@ export default function Home(props) {
                 // character. Hence we used _id prop,
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
-                  <Card sx={{ display: 'flex',borderRadius:"0.4rem" }} key={news._id}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="subtitle1">
-          {news.title}
-          </Typography>
-          <Typography variant="caption" color="text.secondary" component="div">
-          {news.summary.substring(0,230)}...
-          </Typography>
-        </CardContent>
-      </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="https://blog.logomyway.com/wp-content/uploads/2017/01/nba-logo-1.jpg"
-      />
-    </Card>
+                  <Card
+                    sx={{ display: "flex", borderRadius: "0.4rem" }}
+                    key={news._id}
+                  >
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <CardContent sx={{ flex: "1 0 auto" }}>
+                        <Typography component="div" variant="subtitle1">
+                          {news.title}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          component="div"
+                        >
+                          {news.summary.substring(0, 230)}...
+                        </Typography>
+                      </CardContent>
+                    </Box>
+                    <CardMedia
+                      component="img"
+                      sx={{ width: 151 }}
+                      image="https://blog.logomyway.com/wp-content/uploads/2017/01/nba-logo-1.jpg"
+                    />
+                  </Card>
                 </Link>
               ))}
             </div>
           </Box>
           <Box gridColumn="span 4">
+            <h6 style={{ color: "grey" }}>Conference Standings</h6>
             <StandingList />
           </Box>
         </Box>
