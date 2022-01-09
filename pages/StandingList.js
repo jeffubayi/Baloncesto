@@ -1,19 +1,46 @@
 import * as React from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import getStandings from "../components/standings";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ImageIcon from "@mui/icons-material/Image";
+import WorkIcon from "@mui/icons-material/Work";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import ListItem from "@mui/material/ListItem";
 
 export default function StandingList(props) {
-  getStandings();
+  const [value, setValue] = React.useState("1");
+  const [standings, setStandings] = React.useState([]);
+  const axios = require("axios");
+
+  async function getStandings() {
+    axios
+      .get("https://data.nba.net/10s/prod/v1/current/standings_conference.json")
+      .then((response) => {
+        const standArray = response.data.league.standard.conference;
+        console.log(`standArray==`, standArray);
+        setStandings(standArray);
+      });
+  }
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  React.useEffect(() => getStandings(), []);
+
   return (
     <div
       style={{
         margin: "1rem",
       }}
     >
-
       <List
         sx={{
           width: "100%",
@@ -21,27 +48,67 @@ export default function StandingList(props) {
           position: "relative",
           overflow: "auto",
           height: 400,
-          borderRadius:"0.5rem",
+          borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
         subheader={<li />}
       >
-        {[0, 1].map((sectionId) => (
-          <li key={`section-${sectionId}`}>
-            <ul>
-              {sectionId === 0 ? (
-                <ListSubheader>Eastern Conference</ListSubheader>
-              ) : (
-                <ListSubheader>Western Conference</ListSubheader>
-              )}
-            </ul>
-          </li>
-        ))}
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+                style={{ textAlign: "center" }}
+              >
+                <Tab
+                  label="Eastern Conf"
+                  value="1"
+                  style={{ textTransform: "capitalize" }}
+                />
+                <Tab
+                  label="Western Conf"
+                  value="2"
+                  style={{ textTransform: "capitalize" }}
+                />
+              </TabList>
+            </Box>
+
+            <TabPanel value="1">
+              {standings.east.map((team) => (
+                <ListItem key={team.teamId}>
+                  <ListItemAvatar>
+                    <Avatar
+                      src={`/${team.teamSitesOnly.teamTricode}.png`}
+                      alt="Image"
+                      style={{ width: "1.5rem", height: "1.5rem" }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary={team.teamSitesOnly.teamName.concat(team.teamSitesOnly.teamCode)} />
+                </ListItem>
+              ))}
+            </TabPanel>
+
+            <TabPanel value="2">
+              {standings.west.map((team) => (
+                <ListItem key={team.teamId}>
+                  <ListItemAvatar>
+                    <Avatar
+                      src={`/${team.teamSitesOnly.teamTricode}.png`}
+                      alt="Image"
+                      style={{ width: "1.5rem", height: "1.5rem" }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary={team.teamSitesOnly.teamName.concat(team.teamSitesOnly.teamCode)} />
+                </ListItem>
+              ))}
+            </TabPanel>
+          </TabContext>
+        </Box>
       </List>
     </div>
   );
 }
-
 
 export async function getServerSideProps(context) {
   const { getSessionByToken, getUserByToken } = await import(
