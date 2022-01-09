@@ -24,74 +24,26 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Button from "@mui/material/Button";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import CardActions from '@mui/material/CardActions';
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: "transform 2s"
+}));
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
 
-const StyledCard = styled(Card)`
-  padding: 1rem;
-`;
-
-const Item = styled(Paper)`
-  padding: 1;
-  textalign: center;
-  color: #0000;
-`;
-
-const scoresStyles = css`
-  color: ${ourGray};
-  text-decoration: none;
-
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  line-height: 1;
-  font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
-  display: flex;
-  flex-flow: row wrap;
-  width: 100%;
-
-  ul {
-    display: flex;
-    justify-content: space-evenly;
-    text-decoration: none;
-    padding: 20px 40px;
-    background-color: #f7e7ce;
-    width: 95%;
-  }
-
-  a {
-    text-decoration: none;
-    color: ${ourGray};
-    text-align: center;
-  }
-
-  li {
-    padding: 2px;
-    align-self: stretch;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    min-width: 140px;
-  }
-
-  li + li {
-    margin-left: 20px;
-  }
-
-  div + div {
-    padding-left: 10 px;
-  }
-`;
-
-const NewsFieldStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 8fr;
-`;
-
-const NewsTextStyles = styled.div`
-  padding-left: 20 px;
-`;
 
 export default function Home(props) {
   const newsArray = props.newsArray;
@@ -102,6 +54,12 @@ export default function Home(props) {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   const yesterdayWithoutDashes = yesterday.replace(/-/g, "");
@@ -181,27 +139,25 @@ export default function Home(props) {
             >
               <div
                 style={{
-                  justifyContent: "flex-start",
                   display: "grid",
-                  gap: "0.1rem",
+                  gap: "0.4rem",
                   gridTemplateRows: "repeat(2,auto)",
                 }}
               >
                 <Avatar
                   src={`/${scores.hTeam.triCode}.png`}
                   alt="Image"
-                  style={{ width: "2rem", height: "2rem" }}
+                  style={{ width: "1.5rem", height: "1.5rem",marginTop:"0.5rem" }}
                 />
                 <Avatar
                   src={`/${scores.vTeam.triCode}.png`}
                   alt="Image"
-                  style={{ width: "2rem", height: "2rem" }}
+                  style={{ width: "1.5rem", height: "1.5rem",marginBottom:"0.7rem" }}
                 />
               </div>
               <CardContent>
                 <div
                   style={{
-                    justifyContent: "space-between",
                     display: "grid",
                     gap: "0.4rem",
                     gridTemplateColumns: "repeat(2,2fr 2fr 2fr)",
@@ -213,10 +169,10 @@ export default function Home(props) {
                       gap: "0.6rem",
                     }}
                   >
-                    <Typography gutterBottom variant="h7" component="div">
+                    <Typography gutterBottom variant="subtitle2" component="p">
                       {scores.hTeam.triCode}
                     </Typography>
-                    <Typography gutterBottom variant="h7" component="div">
+                    <Typography gutterBottom variant="subtitle2" component="p">
                       {scores.vTeam.triCode}
                     </Typography>
                   </div>
@@ -238,32 +194,29 @@ export default function Home(props) {
                     style={{
                       display: "grid",
                       gap: "0.6rem",
-                      paddingRight: "0.5rem",
+                      marginRight: "0.5rem",
                     }}
                   >
                     {findGameWinner ? (
                       <div>
                         <Badge badgeContent={"win"} color="success" />
-                        <Badge badgeContent={"win"} color="success" />
-                        <Badge badgeContent={"win"} color="success" />
                       </div>
                     ) : (
                       <div>
-                        <Badge badgeContent={"win"} color="success" />
-                        <Badge badgeContent={"win"} color="success" />
                         <Badge badgeContent={"win"} color="success" />
                       </div>
                     )}
                   </div>
                 </div>
               </CardContent>
+              <p>final</p>
             </Card>
           </Link>
         ))}
       </Carousel>
       <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
-          <Box gridColumn="span 8">
+          <Box  style={{ width: "100%" }} gridColumn="span 8">
             <h6 style={{ color: "grey" }}>NBA Highlights</h6>
             <TrendingSlider />
           </Box>
@@ -278,58 +231,47 @@ export default function Home(props) {
                 cursor: "pointer",
               }}
             >
-              {newsArray.map((news) => (
-                <Link href={news.link}>
-                  <ListItem key={news._id}>
-                    <ListItemIcon>.</ListItemIcon>
-                    <ListItemText secondary={news.title} />
-                  </ListItem>
-                </Link>
-              ))}
+              <TrendingNews/>
             </List>
           </Box>
 
           <Box gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>Headlines</h6>
+            <h6 style={{ color: "grey" }}>Headlined Stories</h6>
             <div
               style={{
                 padding: "0.4rem",
                 cursor: "pointer",
                 display: "grid",
-                gridTemplateColumns: "repeat(1,auto)",
-                gap: "3rem",
+                gridTemplateColumns: "repeat(3,auto)",
+                gap: "1rem",
               }}
             >
-              {newsArray.map((news) => (
+              {newsArray.slice(0, 9).map((news) => (
                 // It is better to use as key one of the
                 // object properties that has unique
                 // character. Hence we used _id prop,
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
-                  <Card
-                    sx={{ display: "flex", borderRadius: "0.4rem" }}
-                    key={news._id}
-                  >
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <CardContent sx={{ flex: "1 0 auto" }}>
-                        <Typography component="div" variant="subtitle1">
-                          {news.title}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          color="text.secondary"
-                          component="div"
-                        >
-                          {news.summary.substring(0, 230)}...
-                        </Typography>
-                      </CardContent>
-                    </Box>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: 151 }}
-                      image="https://blog.logomyway.com/wp-content/uploads/2017/01/nba-logo-1.jpg"
-                    />
-                  </Card>
+                  <Card sx={{ maxWidth: 345,borderRadius: "0.5rem"}}>
+      <CardMedia
+        component="img"
+        height="194"
+        image={news.media}
+        alt="Paella dish"
+      />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+        {news.title}
+        </Typography>
+      </CardContent>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>
+          {news.summary.substring(0, 230)}...
+          </Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
                 </Link>
               ))}
             </div>
