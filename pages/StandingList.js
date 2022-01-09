@@ -75,7 +75,7 @@ export default function StandingList(props) {
             </Box>
 
             <TabPanel value="1">
-              {standings.east.map((team) => (
+              {standings.east? standings.east.map((team) => (
                 <ListItem key={team.teamId} secondaryAction={
                   team.win
                 }>
@@ -93,11 +93,11 @@ export default function StandingList(props) {
                     </>
                   }/>
                 </ListItem>
-              ))}
+               )): <p>Not Available</p>}
             </TabPanel>
 
             <TabPanel value="2">
-              {standings.west.map((team) => (
+              {standings.west? standings.west.map((team) => (
                 <ListItem key={team.teamId}  secondaryAction={
                   team.win
                 }>
@@ -115,7 +115,7 @@ export default function StandingList(props) {
                     </>
                   } />
                 </ListItem>
-              ))}
+              )): <p>Not Available</p>}
             </TabPanel>
           </TabContext>
         </Box>
