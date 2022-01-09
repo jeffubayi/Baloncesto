@@ -222,17 +222,7 @@ export default function Home(props) {
           </Box>
           <Box gridColumn="span 4" gap={5}>
             <h6 style={{ color: "grey" }}>Trending News</h6>
-            <List
-              sx={{
-                width: "100%",
-                height: "auto",
-                bgcolor: "background.paper",
-                borderRadius: "0.5rem",
-                cursor: "pointer",
-              }}
-            >
               <TrendingNews/>
-            </List>
           </Box>
 
           <Box gridColumn="span 8">
