@@ -47,7 +47,7 @@ export default function StandingList(props) {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          height: 400,
+          height: 430,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
@@ -76,7 +76,9 @@ export default function StandingList(props) {
 
             <TabPanel value="1">
               {standings.east.map((team) => (
-                <ListItem key={team.teamId}>
+                <ListItem key={team.teamId} secondaryAction={
+                  team.win
+                }>
                   <ListItemAvatar>
                     <Avatar
                       src={`/${team.teamSitesOnly.teamTricode}.png`}
@@ -84,14 +86,21 @@ export default function StandingList(props) {
                       style={{ width: "1.5rem", height: "1.5rem" }}
                     />
                   </ListItemAvatar>
-                  <ListItemText primary={team.teamSitesOnly.teamName.concat(team.teamSitesOnly.teamCode)} />
+                  <ListItemText primary={
+                    <>
+                    <p>{team.teamSitesOnly.teamKey.split(" ")}{""}
+                     {team.teamSitesOnly.teamNickname}</p> 
+                    </>
+                  }/>
                 </ListItem>
               ))}
             </TabPanel>
 
             <TabPanel value="2">
               {standings.west.map((team) => (
-                <ListItem key={team.teamId}>
+                <ListItem key={team.teamId}  secondaryAction={
+                  team.win
+                }>
                   <ListItemAvatar>
                     <Avatar
                       src={`/${team.teamSitesOnly.teamTricode}.png`}
@@ -99,7 +108,12 @@ export default function StandingList(props) {
                       style={{ width: "1.5rem", height: "1.5rem" }}
                     />
                   </ListItemAvatar>
-                  <ListItemText primary={team.teamSitesOnly.teamName.concat(team.teamSitesOnly.teamCode)} />
+                  <ListItemText primary={
+                    <>
+                    <p>{team.teamSitesOnly.teamKey.split(" ")}{""}
+                     {team.teamSitesOnly.teamNickname}</p> 
+                    </>
+                  } />
                 </ListItem>
               ))}
             </TabPanel>
