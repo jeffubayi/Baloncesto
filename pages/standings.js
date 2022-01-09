@@ -35,44 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
 
-// const StandingsStyles = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-
-//   h3 {
-//     background-color: ${lightGray};
-//     color: ${ourGray};
-//     text-align: center;
-//     padding: 20px;
-//   }
-
-//   li {
-//     background-color: ${ourGray};
-//     color: ${lightGray};
-//     text-align: center;
-//     padding: 5px;
-//     font-size: 0.8rem;
-//   }
-
-//   ul {
-//     list-style-type: none;
-//   }
-
-//   span {
-//     padding-left: 15px;
-//   }
-// `;
-
-// const HeadingStandingsStyles = styled.div`
-//   background-color: ${lightGray};
-//   color: ${ourGray};
-//   h2 {
-//     background-color: ${ourGray};
-//     color: ${lightGray};
-//     text-align: center;
-//     padding: 20px;
-//   }
-// `;
 
 export default function Standings(props) {
   getStandings();
@@ -86,7 +48,7 @@ export default function Standings(props) {
         <Paper elevation={4}
           style={{ display: "grid", padding:"0.3rem",width:"auto" ,justifyContent: "center" }}
         >
-          <h4> Season Standings 2020/2021</h4>
+          <h4>NBA  Season  2020/2021</h4>
         </Paper>
         <div
           style={{
@@ -101,8 +63,13 @@ export default function Standings(props) {
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell></StyledTableCell>
-                    <StyledTableCell align="right">Eastern Conference</StyledTableCell>
+                  <StyledTableCell > <Avatar
+                            src="https://i.pinimg.com/originals/01/41/16/0141166a90aa673e552a1472badcd8cb.gif"
+                            alt="Image"
+                            width={30}
+                            height={30}
+                          /></StyledTableCell>
+                    <StyledTableCell >Eastern Conference</StyledTableCell>
                     <StyledTableCell>Wins</StyledTableCell>
                     <StyledTableCell>Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
@@ -162,14 +129,20 @@ export default function Standings(props) {
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell></StyledTableCell>
-                    <StyledTableCell align="left">Western Conference</StyledTableCell>
+                    <StyledTableCell> <Avatar
+                            src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                            alt="Image"
+                            width={30}
+                            height={30}
+                          /></StyledTableCell>
+                    <StyledTableCell>Western Conference</StyledTableCell>
                     <StyledTableCell align="right">Wins</StyledTableCell>
                     <StyledTableCell align="right">Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
                     <StyledTableCell align="right">Pct(%)</StyledTableCell>
                     <StyledTableCell align="right">L10</StyledTableCell>
                     <StyledTableCell align="right">Streak</StyledTableCell>
+                    
                   </TableRow>
                 </TableHead>
                 <TableBody>
