@@ -47,7 +47,7 @@ export default function StandingList(props) {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          height: 430,
+          height: 450,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
@@ -110,7 +110,7 @@ export default function StandingList(props) {
                   </ListItemAvatar>
                   <ListItemText primary={
                     <>
-                    <p>{team.teamSitesOnly.teamKey.split(" ")}{""}
+                    <p>{team.teamSitesOnly.teamKey}_
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   } />
