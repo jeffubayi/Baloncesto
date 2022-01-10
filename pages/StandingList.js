@@ -47,7 +47,7 @@ export default function StandingList(props) {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          height: 450,
+          height: 500,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
@@ -76,7 +76,7 @@ export default function StandingList(props) {
 
             <TabPanel value="1">
               {standings.east? standings.east.map((team) => (
-                <ListItem key={team.teamId} secondaryAction={
+                <ListItem key={team.teamId} style={{color:"#3c4444"}}  secondaryAction={
                   team.win
                 }>
                   <ListItemAvatar>
@@ -88,7 +88,7 @@ export default function StandingList(props) {
                   </ListItemAvatar>
                   <ListItemText primary={
                     <>
-                    <p>{team.teamSitesOnly.teamKey}_
+                    <p>{team.teamSitesOnly.teamTricode}-
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   }/>
@@ -98,7 +98,7 @@ export default function StandingList(props) {
 
             <TabPanel value="2">
               {standings.west? standings.west.map((team) => (
-                <ListItem key={team.teamId}  secondaryAction={
+                <ListItem key={team.teamId} style={{color:"#3c4444"}} secondaryAction={
                   team.win
                 }>
                   <ListItemAvatar>
@@ -108,9 +108,9 @@ export default function StandingList(props) {
                       style={{ width: "1.5rem", height: "1.5rem" }}
                     />
                   </ListItemAvatar>
-                  <ListItemText primary={
+                  <ListItemText  primary={
                     <>
-                    <p>{team.teamSitesOnly.teamKey}_
+                    <p>{team.teamSitesOnly.teamTricode}-
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   } />
