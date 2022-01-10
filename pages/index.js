@@ -220,9 +220,9 @@ export default function Home(props) {
             <h6 style={{ color: "grey" }}>NBA Highlights</h6>
             <TrendingSlider />
           </Box>
-          <Box gridColumn="span 4" gap={5}>
-            <h6 style={{ color: "grey" }}>Trending News</h6>
-              <TrendingNews/>
+          <Box gridColumn="span 4">
+            <h6 style={{ color: "grey" }}>Conference Standings</h6>
+            <StandingList />
           </Box>
 
           <Box gridColumn="span 8">
@@ -266,9 +266,9 @@ export default function Home(props) {
               ))}
             </div>
           </Box>
-          <Box gridColumn="span 4">
-            <h6 style={{ color: "grey" }}>Conference Standings</h6>
-            <StandingList />
+          <Box gridColumn="span 4" gap={5}>
+            <h6 style={{ color: "grey" }}>Trending News</h6>
+              <TrendingNews/>
           </Box>
         </Box>
       </Box>
