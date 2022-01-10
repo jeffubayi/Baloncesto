@@ -9,9 +9,6 @@ import TabPanel from "@mui/lab/TabPanel";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import ListItem from "@mui/material/ListItem";
 
 export default function StandingList(props) {
