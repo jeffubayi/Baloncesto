@@ -62,12 +62,12 @@ export default function StandingList(props) {
                 style={{ textAlign: "center" }}
               >
                 <Tab
-                  label="Eastern Conf"
+                  label="Eastern"
                   value="1"
                   style={{ textTransform: "capitalize" }}
                 />
                 <Tab
-                  label="Western Conf"
+                  label="Western"
                   value="2"
                   style={{ textTransform: "capitalize" }}
                 />
@@ -88,7 +88,7 @@ export default function StandingList(props) {
                   </ListItemAvatar>
                   <ListItemText primary={
                     <>
-                    <p>{team.teamSitesOnly.teamKey.split(" ")}{""}
+                    <p>{team.teamSitesOnly.teamKey}_
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   }/>
