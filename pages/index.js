@@ -217,7 +217,7 @@ export default function Home(props) {
       <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
           <Box  style={{ width: "100%" }} gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>NBA Highlights</h6>
+            <h6 style={{ color: "grey" }}>Trending Highlights</h6>
             <TrendingSlider />
           </Box>
           <Box gridColumn="span 4">
@@ -266,8 +266,8 @@ export default function Home(props) {
               ))}
             </div>
           </Box>
-          <Box gridColumn="span 4" gap={5}>
-            <h6 style={{ color: "grey" }}>Trending News</h6>
+          <Box gridColumn="span 4" style={{margin:"0 1rem 0"}}>
+            <h6 style={{color:"grey"}}>Players  Statistics</h6>
               <TrendingNews/>
           </Box>
         </Box>
