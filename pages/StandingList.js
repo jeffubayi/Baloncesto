@@ -85,7 +85,7 @@ export default function StandingList(props) {
                   </ListItemAvatar>
                   <ListItemText primary={
                     <>
-                    <p>{team.teamSitesOnly.teamTricode}-
+                    <p>
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   }/>
@@ -107,7 +107,7 @@ export default function StandingList(props) {
                   </ListItemAvatar>
                   <ListItemText  primary={
                     <>
-                    <p>{team.teamSitesOnly.teamTricode}-
+                    <p>
                      {team.teamSitesOnly.teamNickname}</p> 
                     </>
                   } />
