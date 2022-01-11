@@ -126,17 +126,22 @@ export default function Scores(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main style={{
+            height: "100%",
+          }}>
         <div
           style={{
-            backgroundColor: "#BE6C42",
-            display:"grid",
+            backgroundColor: "#FFFF",
+            display: "grid",
             justifyContent: "center",
             color: "white",
             padding: "20px",
           }}
         >
           <TextField
+           style={{
+            borderRadius: "1rem",
+          }}
             id="date"
             label="Game scores on day:"
             onChange={(e) => {
@@ -170,162 +175,92 @@ export default function Scores(props) {
           />
         </div>
 
-        <div css={scoresStyles}>
-          <ul>
-            <Carousel
-              responsive={responsive}
-              ssr={true}
-              style={{
-                margin: "1rem",
-              }}
-              infinite={false}
-              showDots={true}
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(4,auto)",
+            marginTop:"0.5rem"
+          }}
+        >
+          {scores.map((game) => (
+            // Here we use div instead of li tag
+            // because Carousel adds another li tag
+            // by itself. If we set this tag to li,
+            // it would cause the conflict.
+            <Link
+              href={`/${game.gameId}`}
             >
-              {scores.map((game) => (
-                // Here we use div instead of li tag
-                // because Carousel adds another li tag
-                // by itself. If we set this tag to li,
-                // it would cause the conflict.
-                <Link
-                  href={`/${game.gameId}`}
+              <Card
+                style={{
+                  margin: "1rem",
+                  borderRadius: "0.5rem",
+                  cursor: "pointer",
+                }}
+                key={game.gameId}
+              >
+                <div
                   style={{
-                    padding: "0.4rem",
-                    margin: "1rem",
-                    cursor: "pointer",
+                    justifyContent: "space-evenly",
+                    display: "grid",
+                    gap: "0.4rem",
+                    gridTemplateColumns: "repeat(2,auto)",
                   }}
                 >
-                  <Card key={game.gameId}>
-                    <div
-                      style={{
-                        justifyContent: "space-evenly",
-                        display: "grid",
-                        gap: "0.4rem",
-                        gridTemplateColumns: "repeat(2,auto)",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={`/${game.vTeam.triCode}.png`}
-                        alt="green iguana"
-                      />
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={`/${game.hTeam.triCode}.png`}
-                        alt="green iguana"
-                      />
-                    </div>
-                    <CardContent>
-                      <div
-                        style={{
-                          justifyContent: "space-evenly",
-                          display: "grid",
-                          gap: "0.4rem",
-                          gridTemplateColumns: "repeat(3,auto)",
-                        }}
-                      >
-                        <Typography gutterBottom variant="h7" component="div">
-                          {game.vTeam.triCode}
-                        </Typography>
-                        <Typography
-                          gutterBottom
-                          variant="body2"
-                          component="div"
-                        >
-                          vs
-                        </Typography>
-                        <Typography gutterBottom variant="h7" component="div">
-                          {game.hTeam.triCode}
-                        </Typography>
-                      </div>
-                      <div
-                        style={{
-                          justifyContent: "space-evenly",
-                          display: "grid",
-                          gap: "0.4rem",
-                          gridTemplateColumns: "repeat(3,auto)",
-                        }}
-                      >
-                        <Typography variant="body2" color="text.secondary">
-                          {game.vTeam.score}
-                        </Typography>
-                        <Typography
-                          gutterBottom
-                          variant="caption"
-                          component="div"
-                        >
-                          -
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {game.hTeam.score}
-                        </Typography>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-                // <div
-                //   key={game.gameId}
-                //   style={{
-                //     cursor: "pointer",
-                //     backgroundColor: "rgba(255,255,255,0.4)",
-                //     backdropFilter: "blur(40px)",
-                //     border: "2px solid rgba(255,255,255,0.4)",
-                //     padding: "0.5rem",
-                //     borderRadius: "10px",
-                //   }}
-                // >
-                //   <Link href={`/${game.gameId}`}>
-                //     <div
-                //       style={{
-                //         justifyContent: "space-evenly",
-                //         display: "grid",
-                //         gap: "0.4rem",
-                //         gridTemplateColumns: "repeat(2,auto)",
-                //       }}
-                //     >
-                //       <div
-                //         style={{
-                //           display: "grid",
-                //           gap: "0.4rem",
-                //           gridTemplateRows: "repeat(3,auto)",
-                //         }}
-                //       >
-                //         <div>
-                //           <Image
-                //             src={`/${game.vTeam.triCode}.png`}
-                //             alt="Image"
-                //             width={40}
-                //             height={40}
-                //           />
-                //         </div>
-                //         <div>{game.vTeam.triCode}</div>
-                //         <div>{game.vTeam.score}</div>
-                //       </div>
-                //       <div
-                //         style={{
-                //           display: "grid",
-                //           gap: "0.4rem",
-                //           gridTemplateRows: "repeat(3,auto)",
-                //         }}
-                //       >
-                //         <div>
-                //           <Image
-                //             src={`/${game.hTeam.triCode}.png`}
-                //             alt="Image"
-                //             width={40}
-                //             height={40}
-                //           />
-                //         </div>
-                //         <div>{game.hTeam.triCode}</div>
-                //         <div>{game.hTeam.score}</div>
-                //       </div>
-                //     </div>
-                //   </Link>
-                // </div>
-              ))}
-            </Carousel>
-          </ul>
+                  <CardMedia
+                    component="img"
+                    height="130"
+                    image={`/${game.vTeam.triCode}.png`}
+                    alt="team"
+                  />
+                  <CardMedia
+                    component="img"
+                    height="130"
+                    image={`/${game.hTeam.triCode}.png`}
+                    alt="team"
+                  />
+                </div>
+                <CardContent>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gap: "0.4rem",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography gutterBottom variant="h7" component="div">
+                      {game.vTeam.triCode}
+                    </Typography>
+                    <Typography gutterBottom variant="body2" component="div">
+                      vs
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      {game.hTeam.triCode}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gap: "0.4rem",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography variant="body2" color="text.secondary">
+                      {game.vTeam.score}
+                    </Typography>
+                    <Typography gutterBottom variant="caption" component="div">
+                      -
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {game.hTeam.score}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </main>
     </>
