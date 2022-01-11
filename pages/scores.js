@@ -1,79 +1,21 @@
 import { css } from "@emotion/react";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import GetLastNightScores from "../components/yesterdayscores";
 import { setDateCookieClientSide } from "../util/cookies";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import DateAdapter from "@mui/lab/AdapterMoment";
 import TextField from "@mui/material/TextField";
+import Avatar from "@mui/material/Avatar";
 
 const axios = require("axios");
 
 const ourGray = "#FFFF";
 const lightGray = "#E9E4E4";
 
-const scoresStyles = css`
-  color: ${ourGray};
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  line-height: 1;
-  font-family: "PT Sans", "Helvetica", "Arial", sans-serif;
-  display: flex;
-  flex-flow: row wrap;
-
-  ul {
-    display: flex;
-    justify-content: space-evenly;
-    list-style-type: none;
-    padding: 40px;
-    background-color: ${lightGray};
-    width: 100%;
-  }
-
-  a {
-    text-decoration: none;
-    color: ${ourGray};
-    text-align: center;
-  }
-
-  li {
-    padding: 2px;
-    align-self: stretch;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    min-width: 140px;
-    align-content: center;
-  }
-
-  li + li {
-    margin-left: 20px;
-  }
-`;
-
-const paragraphStyles = css`
-  text-align: center;
-  background-color: ${ourGray};
-  color: ${lightGray};
-  padding: 20px;
-
-  input {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  }
-`;
 
 export default function Scores(props) {
   const [scores, setScores] = useState(props.yestScoresArray);
@@ -207,18 +149,16 @@ export default function Scores(props) {
                     gridTemplateColumns: "repeat(2,auto)",
                   }}
                 >
-                  <CardMedia
-                    component="img"
-                    height="130"
-                    image={`/${game.vTeam.triCode}.png`}
-                    alt="team"
-                  />
-                  <CardMedia
-                    component="img"
-                    height="130"
-                    image={`/${game.hTeam.triCode}.png`}
-                    alt="team"
-                  />
+                   <Avatar
+                      src={`/${game.vTeam.triCode}.png`}
+                      alt="Image"
+                      style={{ width: "3.5rem", height: "3.5rem" }}
+                    />
+                     <Avatar
+                      src={`/${game.hTeam.triCode}.png`}
+                      alt="Image"
+                      style={{ width: "3.5rem", height: "3.5rem" }}
+                    />
                 </div>
                 <CardContent>
                   <div
