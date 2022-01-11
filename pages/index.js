@@ -113,7 +113,7 @@ export default function Home(props) {
             Yesterday's Game Scores <br></br>
             {yesterday}
             <br></br>
-            <Button variant="outlined" size="small" style={{textTransform: "capitalize",margin:"0.15rem"}}>
+            <Button variant="outlined" size="small" onClick={() => window.location.assign("/scores")} style={{textTransform: "capitalize",margin:"0.15rem"}}>
               view scores
             </Button>
           </h6>
