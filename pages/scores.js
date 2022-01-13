@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
-
+import Badge from "@mui/material/Badge";
 const axios = require("axios");
 
 const ourGray = "#FFFF";
@@ -197,6 +197,11 @@ export default function Scores(props) {
                       {game.hTeam.score}
                     </Typography>
                   </div>
+                  {game.isRecapArticleAvail ? 
+                      <div style={{textAlign: "center" }}>
+                        <Badge badgeContent={"FINAL"} />
+                      </div>
+                      : null }
                 </CardContent>
               </Card>
             </Link>
