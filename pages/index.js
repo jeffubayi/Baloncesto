@@ -192,24 +192,17 @@ export default function Home(props) {
                   </div>
                   <div
                     style={{
-                      display: "grid",
-                      gap: "0.6rem",
-                      marginRight: "0.5rem",
+                      display: "flex",
+                      justifyContent: "flex-end"
                     }}
-                  >
-                    {findGameWinner ? (
-                      <div>
-                        <Badge badgeContent={"win"} color="success" />
+                  >{scores.isRecapArticleAvail ? 
+                      <div style={{margin:"1rem",textAlign: "center" }}>
+                        <Badge badgeContent={"FINAL"} />
                       </div>
-                    ) : (
-                      <div>
-                        <Badge badgeContent={"win"} color="success" />
-                      </div>
-                    )}
+                      : null }
                   </div>
                 </div>
               </CardContent>
-              <p>final</p>
             </Card>
           </Link>
         ))}
@@ -217,7 +210,7 @@ export default function Home(props) {
       <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
           <Box  style={{ width: "100%" }} gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>Trending Highlights</h6>
+            <h6 style={{ color: "grey" }}>Game Highlights</h6>
             <TrendingSlider />
           </Box>
           <Box gridColumn="span 4">
@@ -226,7 +219,7 @@ export default function Home(props) {
           </Box>
 
           <Box gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>Headlined Stories</h6>
+            <h6 style={{ color: "grey" }}>Trending News</h6>
             <div
               style={{
                 padding: "0.4rem",
