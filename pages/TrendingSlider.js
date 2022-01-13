@@ -1,102 +1,83 @@
-// import * as React from 'react';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
-// import ImageListItemBar from '@mui/material/ImageListItemBar';
 
-// export default function TitlebarImageList() { const [value, setValue] = React.useState("1");
-//   const [standings, setStandings] = React.useState([]);
-//   const axios = require("axios");
-//   const today = new Date()
-//     .toISOString()
-//     .slice(0, 10);
-
-//   const newDateWithoutDashes = today.replace(/-/g, '');
-
-//   async function getStandings() {
-
-//     axios
-//       .get(`https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`)
-//       .then((response) => {
-//         const standArray = response.data.games;
-//         console.log(`standScores==`, standArray);
-//         setStandings(standArray);
-//       });
-//   }
-
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
-
-//   React.useEffect(() => getStandings(), []);
-
-//   return (
-//     <ImageList sx={{ width: "auto", height: 500 ,gridTemplateColumns: "repeat(1, 1fr)",borderRadius:"0.5rem"}}>
-//       {standings?.slice(0, 1).map((item) => (
-//         <ImageListItem key={item.gameId}>
-//           <img
-//             src={`/${item.vTeam.triCode}.png`}
-//             srcSet={`/${item.vTeam.triCode}.png`}
-//             alt={item.vTeam.triCode}
-//             loading="lazy"
-//           />
-//           <ImageListItemBar
-//           sx={{ width: "auto", height: "auto" ,gridTemplateColumns: "repeat(1, 1fr)",borderRadius:"0.5rem",whiteSpace:"wrap"}}
-//             title={item.vTeam.triCode}
-//           />
-//         </ImageListItem>
-//       ))}
-//       {standings?.slice(0, 1).map((item) => (
-//         <ImageListItem key={item.gameId}>
-//           <img
-//             src={`/${item.hTeam.triCode}.png`}
-//             srcSet={`/${item.hTeam.triCode}.png`}
-//             alt={item.vTeam.triCode}
-//             loading="lazy"
-//           />
-//           <ImageListItemBar
-//           sx={{ width: "auto", height: "auto" ,gridTemplateColumns: "repeat(1, 1fr)",borderRadius:"0.5rem",whiteSpace:"wrap"}}
-//             title={item.hTeam.triCode}
-//           />
-//         </ImageListItem>
-//       ))}
-//     </ImageList>
-//   );
-// }
-
-// const itemData = [
-//   {
-//     img: 'https://www.nbcsports.com/sites/rsnunited/files/article/hero/DeMar%20DeRozan%20Happy%20USAT.jpg',
-//     title: 'Demar derozen with a consecutive buzzer beater',
-//     rows: 1,
-//     cols: 1,
-//     featured: true,
-//   },
-//   {
-//     img: 'https://images.daznservices.com/di/library/sporting_news/ef/7e/stephen-curry-ftr_dszr3571jsi41japmvd1mx6gm.jpeg?t=856218702&quality=100&w=1280&h=720',
-//     title: 'Steph curry breaks the record to become best in 3 pointers',
-//     rows: 1,
-//     cols: 1,
-//     featured: true,
-//   },
-
-// ];
-
-import React from "react";
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MobileStepper from '@mui/material/MobileStepper';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 import YouTube from "react-youtube";
 
-const opts = {
-  height: "500",
-  width: "900",
-  playerVars: {
-    // https://developers.google.com/youtube/player_parameters
-    autoplay: 1,
-  },
-};
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-export default function TrendingSlider() {
+const opts = {
+    height: "500",
+    width: "900",
+  };
+
+const videos = [
+  {
+    id: '1',
+    videoUrl:"jFME4dl84fA",
+  },
+  {
+    id: '2',
+    videoUrl:"w4mMF2UVXmY",
+  },
+  {
+    id: '3',
+    videoUrl:"KLbYAxQdjC8",
+  },
+  {
+    id: '4',
+    videoUrl:"bI41jWKPAmU",
+  },
+  {
+    id: '5',
+    videoUrl:"U40hJkNTNbM",
+  },
+  
+];
+
+function TrendingSlider() {
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = videos.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+
   return (
-    <div>
-      <YouTube videoId="bI41jWKPAmU" opts={opts} />
-    </div>
+    <Box style={{ flexGrow: 1,borderRadius:"0.5rem" }}>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {videos.map((step) => (
+          <div key={step.id}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <YouTube videoId={step.videoUrl} opts={opts}/>
+            ) : null}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
+    </Box>
   );
 }
+
+export default TrendingSlider;
