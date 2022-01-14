@@ -68,7 +68,7 @@ function TrendingSlider() {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {videos.map((step) => (
+        {videos.map((step,index) => (
           <div key={step.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <YouTube videoId={step.videoUrl} opts={opts}/>
