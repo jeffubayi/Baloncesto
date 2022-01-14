@@ -2,91 +2,56 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import ListItem from "@mui/material/ListItem";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
 
-export default function StandingList(props) {
-  const [value, setValue] = React.useState("1");
-  const [standings, setStandings] = React.useState([]);
+export default function TitlebarImageList() {
+  const [teams, setTeams] = React.useState([]);
   const axios = require("axios");
 
-  async function getStandings() {
+  async function getTeams() {
     axios
       .get("https://data.nba.net/prod/v1/2021/teams.json")
       .then((response) => {
-        const standArray = response.data.league;
-        console.log(`teams ==`, standArray);
-        setStandings(standArray);
+        const teamArray = response.data.league;
+        console.log(`teams ==`, teamArray);
+        setTeams(teamArray);
       });
   }
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  React.useEffect(() => getStandings(), []);
+  
+  React.useEffect(() => getTeams(), []);
 
   return (
-    <div
-      style={{
-        margin: "1rem",
-      }}
-    >
-      <List
-        sx={{
-          width: "100%",
-          bgcolor: "background.paper",
-          position: "relative",
-          overflow: "auto",
-          height: 700,
-          borderRadius: "0.5rem",
-          "& ul": { padding: 0 },
-        }}
-        subheader={<li />}
-      >
-        <Box sx={{ width: "100%", typography: "body1" }}>
-          <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-                style={{ textAlign: "center" }}
+    <ImageList sx={{ width:"auto", height: "auto",padding:"1rem 8rem 1rem" }}>
+      <ImageListItem key="Subheader" cols={2}>
+        <ListSubheader component="p" sx={{ textAlign:"center",color:"black" }}>All NBA Franchise Teams</ListSubheader>
+      </ImageListItem>
+      {teams.sacramento ? teams.sacramento.map((item) => (
+        <ImageListItem key={item.teamId}>
+          <img
+            src={`/${item.tricode}.png`}
+            srcSet={`/${item.tricode}.png`}
+            alt={item.fullName}
+            loading="lazy"
+          />
+          <ImageListItemBar
+            title={item.fullName}
+            subtitle={item.confName}
+            actionIcon={
+              <IconButton
+                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                aria-label={`info about ${item.fullName}`}
               >
-                <Tab
-                  label="Sacramento"
-                  value="1"
-                  style={{ textTransform: "capitalize" }}
-                />
-              </TabList>
-            </Box>
-
-            <TabPanel value="1">
-              {standings.sacramento ? standings.sacramento.map((team) => (
-                <ListItem key={team.teamId} style={{color:"#3c4444"}}  secondaryAction={
-                  team.confName
-                }>
-                  <ListItemAvatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={
-                    <>
-                    <p>
-                     {team.fullName}</p> 
-                    </>
-                  }/>
-                </ListItem>
-               )): <p>Not Available</p>}
-            </TabPanel>
-
-            
-          </TabContext>
-        </Box>
-      </List>
-    </div>
+                <InfoIcon />
+              </IconButton>
+            }
+          />
+        </ImageListItem>
+     )): <p>Not Available</p>}
+    </ImageList>
   );
 }
