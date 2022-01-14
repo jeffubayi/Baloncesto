@@ -210,7 +210,7 @@ export default function Home(props) {
       <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
           <Box  style={{ width: "100%" }} gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>Game Highlights</h6>
+            <h6 style={{ color: "grey" }}>Game Recap</h6>
             <TrendingSlider />
           </Box>
           <Box gridColumn="span 4">
@@ -229,7 +229,7 @@ export default function Home(props) {
                 gap: "1rem",
               }}
             >
-              {newsArray.slice(0, 9).map((news) => (
+              {newsArray.slice(3, 9).map((news) => (
                 // It is better to use as key one of the
                 // object properties that has unique
                 // character. Hence we used _id prop,
@@ -244,7 +244,7 @@ export default function Home(props) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-        {news.title}
+        {news.title.substring(0, 80)}
         </Typography>
       </CardContent>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -260,7 +260,7 @@ export default function Home(props) {
             </div>
           </Box>
           <Box gridColumn="span 4" style={{margin:"0 1rem 0"}}>
-            <h6 style={{color:"grey"}}>Players  Statistics</h6>
+            <h6 style={{color:"grey"}}>Season Leaders</h6>
               <TrendingNews/>
           </Box>
         </Box>
