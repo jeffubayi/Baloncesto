@@ -59,12 +59,12 @@ export default function StandingList(props) {
                 style={{ textAlign: "center" }}
               >
                 <Tab
-                  label="Eastern"
+                  label="East Conference"
                   value="1"
                   style={{ textTransform: "capitalize" }}
                 />
                 <Tab
-                  label="Western"
+                  label="West Conference"
                   value="2"
                   style={{ textTransform: "capitalize" }}
                 />
