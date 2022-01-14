@@ -26,8 +26,8 @@ export default function TitlebarImageList() {
   React.useEffect(() => getTeams(), []);
 
   return (
-    <ImageList sx={{ width:"auto", height: "auto",padding:"1rem 8rem 1rem" }}>
-      <ImageListItem key="Subheader" cols={2}>
+    <ImageList sx={{ width:"auto", height: 800 }}>
+      <ImageListItem key="Subheader" cols={6}>
         <ListSubheader component="p" sx={{ textAlign:"center",color:"black" }}>All NBA Franchise Teams</ListSubheader>
       </ImageListItem>
       {teams.sacramento ? teams.sacramento.map((item) => (
