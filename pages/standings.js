@@ -237,6 +237,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
           </TabPanel>
+
           <TabPanel value="3">
             <Box sx={{ width: "100%" }}>
               <Grid
@@ -272,7 +273,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
@@ -345,7 +346,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
@@ -418,7 +419,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
@@ -491,7 +492,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
@@ -564,7 +565,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
@@ -637,7 +638,7 @@ export default function Standings(props) {
                     (team) => (
                       <StyledTableRow key={team.teamId}>
                         <StyledTableCell component="th" scope="row">
-                          {team.confRank}
+                          {team.divRank}
                         </StyledTableCell>
                         <StyledTableCell
                           style={{
