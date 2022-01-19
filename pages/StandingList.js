@@ -38,6 +38,7 @@ export default function StandingList(props) {
         margin: "1rem",
       }}
     >
+    <h6 style={{ color: "grey",marginLeft:"0.7rem" }}>Conference Standings</h6>
       <List
         sx={{
           width: "100%",
