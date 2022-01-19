@@ -83,6 +83,8 @@ export default function PinnedSubheaderList() {
   console.log(`playerStats`, playersStats);
 
   return (
+    <>
+    <h6 style={{ color: "grey",marginLeft:"0.7rem" }}>Season Leaders</h6>
     <List
       sx={{
         width: "100%",
@@ -111,5 +113,6 @@ export default function PinnedSubheaderList() {
           ))
         : null}
     </List>
+    </>
   );
 }
