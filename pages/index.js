@@ -24,26 +24,38 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Button from "@mui/material/Button";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import CardActions from '@mui/material/CardActions';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import CardActions from "@mui/material/CardActions";
+import Grid from "@mui/material/Grid";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: "transform 2s"
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: "transform 2s",
 }));
+
+const StyledBox = styled.div`
+  width: "auto";
+  margin: " 1rem 8rem 5rem";
+  @media (min-width: 600px) {
+     margin: " 1rem 1rem 1rem";
+  }
+
+  @media (min-width: 1300px) {
+    margin: " 1rem 1rem 1rem";
+  }
+`;
 
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
-
 
 export default function Home(props) {
   const newsArray = props.newsArray;
@@ -113,7 +125,12 @@ export default function Home(props) {
             Yesterday's Game Scores <br></br>
             {yesterday}
             <br></br>
-            <Button variant="outlined" size="small" onClick={() => window.location.assign("/scores")} style={{textTransform: "capitalize",margin:"0.15rem"}}>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => window.location.assign("/scores")}
+              style={{ textTransform: "capitalize", margin: "0.15rem" }}
+            >
               view scores
             </Button>
           </h6>
@@ -147,12 +164,20 @@ export default function Home(props) {
                 <Avatar
                   src={`/${scores.hTeam.triCode}.png`}
                   alt="Image"
-                  style={{ width: "1.5rem", height: "1.5rem",marginTop:"0.5rem" }}
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginTop: "0.5rem",
+                  }}
                 />
                 <Avatar
                   src={`/${scores.vTeam.triCode}.png`}
                   alt="Image"
-                  style={{ width: "1.5rem", height: "1.5rem",marginBottom:"0.7rem" }}
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginBottom: "0.7rem",
+                  }}
                 />
               </div>
               <CardContent>
@@ -193,13 +218,14 @@ export default function Home(props) {
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "flex-end"
+                      justifyContent: "flex-end",
                     }}
-                  >{scores.isRecapArticleAvail ? 
-                      <div style={{margin:"1rem",textAlign: "center" }}>
+                  >
+                    {scores.isRecapArticleAvail ? (
+                      <div style={{ margin: "1rem", textAlign: "center" }}>
                         <Badge badgeContent={"FINAL"} />
                       </div>
-                      : null }
+                    ) : null}
                   </div>
                 </div>
               </CardContent>
@@ -207,18 +233,21 @@ export default function Home(props) {
           </Link>
         ))}
       </Carousel>
-      <Box style={{ width: "auto", margin: " 1rem 8rem 5rem" }}>
-        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={5}>
-          <Box  style={{ width: "100%" }} gridColumn="span 8">
-            <h6 style={{ color: "grey" }}>Game Recap</h6>
+      <StyledBox>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8} lg={8}>
+            <h6 style={{ color: "grey" }}>Headlines</h6>
             <TrendingSlider />
-          </Box>
-          <Box gridColumn="span 4">
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
             <h6 style={{ color: "grey" }}>Conference Standings</h6>
             <StandingList />
-          </Box>
-
-          <Box gridColumn="span 8">
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <h6 style={{ color: "grey" }}>Season Leaders</h6>
+            <TrendingNews />
+          </Grid>
+          <Grid item xs={12} md={8} lg={8}>
             <h6 style={{ color: "grey" }}>Trending News</h6>
             <div
               style={{
@@ -235,36 +264,32 @@ export default function Home(props) {
                 // character. Hence we used _id prop,
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
-                  <Card sx={{ maxWidth: 345,borderRadius: "0.5rem"}}>
-      <CardMedia
-        component="img"
-        height="194"
-        image={news.media}
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-        {news.title.substring(0, 80)}
-        </Typography>
-      </CardContent>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-          {news.summary.substring(0, 230)}...
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+                  <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image={news.media}
+                      alt="Paella dish"
+                    />
+                    <CardContent>
+                      <Typography variant="body2" color="text.secondary">
+                        {news.title.substring(0, 80)}
+                      </Typography>
+                    </CardContent>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        <Typography paragraph>
+                          {news.summary.substring(0, 230)}...
+                        </Typography>
+                      </CardContent>
+                    </Collapse>
+                  </Card>
                 </Link>
               ))}
             </div>
-          </Box>
-          <Box gridColumn="span 4" style={{margin:"0 1rem 0"}}>
-            <h6 style={{color:"grey"}}>Season Leaders</h6>
-              <TrendingNews/>
-          </Box>
-        </Box>
-      </Box>
+          </Grid>
+        </Grid>
+      </StyledBox>
     </>
   );
 }
