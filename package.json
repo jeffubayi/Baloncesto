@@ -18,6 +18,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/lab": "^5.0.0-alpha.60",
     "@mui/material": "^5.2.4",
+    "@mui/system": "^5.2.8",
     "@mui/utils": "^5.2.3",
     "argon2": "^0.27.2",
     "axios": "^0.21.1",
