@@ -42,16 +42,9 @@ const ExpandMore = styled((props) => {
   transition: "transform 2s",
 }));
 
-const StyledBox = styled.div`
+const StyledBox = styled(Box)`
   width: "auto";
-  margin: " 1rem 8rem 5rem";
-  @media (min-width: 600px) {
-     margin: " 1rem 1rem 1rem";
-  }
-
-  @media (min-width: 1300px) {
-    margin: " 1rem 1rem 1rem";
-  }
+  margin: " 1rem 18rem 1rem";
 `;
 
 const ourGray = "#1d2d35";
@@ -243,11 +236,11 @@ export default function Home(props) {
             <h6 style={{ color: "grey" }}>Conference Standings</h6>
             <StandingList />
           </Grid>
-          <Grid item xs={12} md={4} lg={4}>
+          <Grid item xs={12} md={4} lg={3}>
             <h6 style={{ color: "grey" }}>Season Leaders</h6>
             <TrendingNews />
           </Grid>
-          <Grid item xs={12} md={8} lg={8}>
+          <Grid item xs={12} md={8} lg={9}>
             <h6 style={{ color: "grey" }}>Trending News</h6>
             <div
               style={{

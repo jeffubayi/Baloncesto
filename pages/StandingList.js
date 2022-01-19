@@ -42,6 +42,7 @@ export default function StandingList(props) {
         sx={{
           width: "100%",
           bgcolor: "background.paper",
+          margin:"0.6rem",
           position: "relative",
           overflow: "auto",
           height: 500,

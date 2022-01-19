@@ -16,7 +16,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const opts = {
     height: "500",
-    width: "900",
+    width: "100%",
   };
 
 const videos = [
@@ -61,7 +61,7 @@ function TrendingSlider() {
   };
 
   return (
-    <Box style={{ flexGrow: 1,borderRadius:"0.5rem" }}>
+    <Box style={{ flexGrow: 1,borderRadius:"0.5rem",margin:"0.6rem" }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

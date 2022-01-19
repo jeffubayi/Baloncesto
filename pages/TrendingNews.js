@@ -86,6 +86,7 @@ export default function PinnedSubheaderList() {
     <List
       sx={{
         width: "100%",
+        margin:"0.6rem",
         bgcolor: "background.paper",
         position: "relative",
         overflow: "auto",
