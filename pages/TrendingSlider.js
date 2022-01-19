@@ -62,6 +62,7 @@ function TrendingSlider() {
 
   return (
     <Box style={{ flexGrow: 1,borderRadius:"0.5rem",margin:"0.6rem" }}>
+<h6 style={{ color: "grey" }}>Headlines</h6>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}

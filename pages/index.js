@@ -43,8 +43,31 @@ const ExpandMore = styled((props) => {
 }));
 
 const StyledBox = styled(Box)`
-  width: "auto";
-  margin: " 1rem 18rem 1rem";
+  width: auto;
+  margin:  0.5rem 2rem 1rem;
+
+  @media (min-width: 600px) {
+    width: "auto";
+    margin:  0.5rem 2rem 1rem;
+  }
+
+  @media (min-width: 1300px) {
+    margin:  0.5rem 8rem 1rem;
+  }
+`;
+
+const StyledDiv = styled.div`
+  padding: 0.4rem;
+  cursor: pointer;
+  display: grid;
+  gridTemplateColumns: repeat(1,auto);
+  gap: 1rem;
+
+   @media (min-width: 600px) {
+    display: grid;
+    gridTemplateColumns: repeat(3,auto);
+    gap: 1rem;
+  }
 `;
 
 const ourGray = "#1d2d35";
@@ -229,19 +252,16 @@ export default function Home(props) {
       <StyledBox>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} lg={8}>
-            <h6 style={{ color: "grey" }}>Headlines</h6>
             <TrendingSlider />
           </Grid>
           <Grid item xs={12} md={4} lg={4}>
-            <h6 style={{ color: "grey" }}>Conference Standings</h6>
             <StandingList />
           </Grid>
           <Grid item xs={12} md={4} lg={3}>
-            <h6 style={{ color: "grey" }}>Season Leaders</h6>
             <TrendingNews />
           </Grid>
           <Grid item xs={12} md={8} lg={9}>
-            <h6 style={{ color: "grey" }}>Trending News</h6>
+            <h6 style={{ color: "grey",marginLeft:"0.7rem" }}>Trending News</h6>
             <div
               style={{
                 padding: "0.4rem",
@@ -251,13 +271,15 @@ export default function Home(props) {
                 gap: "1rem",
               }}
             >
+              <Grid container spacing={3}>
               {newsArray.slice(3, 9).map((news) => (
                 // It is better to use as key one of the
                 // object properties that has unique
                 // character. Hence we used _id prop,
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
-                  <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
+          <Grid item xs={8} md={6} lg={4}>
+                  <Card sx={{ maxHeight: 345, borderRadius: "0.5rem" }}>
                     <CardMedia
                       component="img"
                       height="194"
@@ -277,8 +299,12 @@ export default function Home(props) {
                       </CardContent>
                     </Collapse>
                   </Card>
+                  </Grid>
                 </Link>
+
+         
               ))}
+              </Grid>
             </div>
           </Grid>
         </Grid>
