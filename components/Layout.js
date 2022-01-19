@@ -41,8 +41,7 @@ const HeaderStyles = styled.div`
 `;
 
 const HeaderDiv1 = styled.div`
-  padding-right: auto;
-  margin-right: auto;
+  background-color: "#0000";
 `;
 
 const HeaderDiv2 = styled.div`
@@ -125,12 +124,12 @@ export default function Layout(props) {
   const userId = props.children.props.userId;
 
   return (
-    <>
+    <div style={{ display:"flex",width:"100%",height:"100%"}}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeaderStyles>
+      <div>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" style={{ backgroundColor: "#051c2d" }}>
             <Toolbar>
@@ -170,10 +169,11 @@ export default function Layout(props) {
             </Toolbar>
           </AppBar>
         </Box>
-      </HeaderStyles>
+       
       <BodyStyles>{props.children}</BodyStyles>
 
       <Footer />
-    </>
+      </div>
+    </div>
   );
 }

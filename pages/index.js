@@ -279,7 +279,7 @@ export default function Home(props) {
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
           <Grid item xs={8} md={6} lg={4}>
-                  <Card sx={{ maxHeight: 345, borderRadius: "0.5rem" }}>
+                  <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
                     <CardMedia
                       component="img"
                       height="194"
