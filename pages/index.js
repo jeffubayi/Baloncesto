@@ -278,7 +278,7 @@ export default function Home(props) {
                 // character. Hence we used _id prop,
                 // which was pre-defined by API provider.
                 <Link href={news.link}>
-          <Grid item xs={8} md={6} lg={4}>
+          <Grid item xs={6} md={6} lg={4}>
                   <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
                     <CardMedia
                       component="img"
