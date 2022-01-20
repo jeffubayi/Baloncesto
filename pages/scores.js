@@ -21,11 +21,11 @@ const lightGray = "#E9E4E4";
 const StyledDiv = styled.div`
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(1, auto);
   margin: 0.5rem;
 
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(1, auto);
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(3, auto);
   }
 `;
 
