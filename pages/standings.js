@@ -70,7 +70,7 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
             backgroundColor: "#051c2d"
           }}
         >
-          <h4 style={{color:"#FFF"}}>NBA Season 2020/2021</h4>
+          <h4 style={{color:"#FFF"}}>NBA Season 2021/2022</h4>
 
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList

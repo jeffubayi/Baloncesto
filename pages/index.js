@@ -46,15 +46,15 @@ const ExpandMore = styled((props) => {
 
 const StyledBox = styled(Box)`
   width: auto;
-  margin: 0.5rem 2rem 1rem;
+  margin: 0 2rem 1rem;
 
   @media (min-width: 600px) {
     width: "auto";
-    margin: 0.5rem 2rem 1rem;
+    margin: 0 2rem 1rem;
   }
 
   @media (min-width: 1300px) {
-    margin: 0.5rem 8rem 1rem;
+    margin: 0 8rem 1rem;
   }
 `;
 
@@ -131,28 +131,19 @@ export default function Home(props) {
 
   return (
     <>
-    <div style={{width:"100vw"}}>
+    <div style={{width:"100vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
-        <Paper
-          elevation={3}
-          style={{
-            padding: "0.2rem 0.5rem 0",
-            backgroundColor: "rgba(255, 255, 255, 0.72)",
-          }}
-        >
-          <h6 style={{ textAlign: "center" }}>
-            {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
-            <br></br>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => window.location.assign("/scores")}
-              style={{ textTransform: "capitalize", margin: "0.3rem" }}
-            >
-              view scores
-            </Button>
-          </h6>
-        </Paper>
+      <Card sx={{ minWidth: 275,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
+      <CardContent>
+        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+        {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
+        </Typography>
+      </CardContent>
+      <CardActions style={{justifyContent:"center"}}>
+        <Button  style={{textTransform:"capitalize"}} variant="outlined" onClick={() => window.location.assign("/scores")} size="small">view scores</Button>
+      </CardActions>
+    </Card>
+
         {props.scoresArray.map((scores) => (
           // Here we use div instead of li tag
           // because Carousel adds another li tag
@@ -163,13 +154,12 @@ export default function Home(props) {
             
             <Card
               style={{
-                borderRadius: "0.2rem",
+                borderRadius: "0.6rem",
                 display: "grid",
                 gap: "0.5rem",
                 gridTemplateColumns: "repeat(2,auto)",
                 cursor: "pointer",
                 padding: "0.2rem",
-                backgroundColor: "rgba(255, 255, 255, 0.72)",
                 height: 120,
                 width:260
               }}

@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Head from "next/head";
+import Paper from "@mui/material/Paper";
 
 export default function TitlebarImageList() {
   const [teams, setTeams] = React.useState([]);
@@ -32,16 +33,20 @@ export default function TitlebarImageList() {
     <Head>
         <title>NBA Teams</title>
       </Head>
+      <Paper
+          elevation={4}
+          style={{
+            display: "grid",
+            width: "auto",
+            justifyContent: "center",
+            textAlign: "center",
+            backgroundColor: "#051c2d"
+          }}
+        >
+          <h4 style={{color:"#FFF"}}>NBA Franchise Teams</h4>
+        </Paper>
       {isSmallWindow ? (
         <ImageList sx={{ width: "100%", height: "auto" }}>
-          <ImageListItem key="Subheader" cols={2}>
-            <ListSubheader
-              component="p"
-              sx={{ textAlign: "center", color: "black" }}
-            >
-              All NBA Franchise Teams
-            </ListSubheader>
-          </ImageListItem>
           {teams.sacramento ? (
             teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
               <ImageListItem key={item.teamId}>
