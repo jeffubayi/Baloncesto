@@ -3,6 +3,16 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const axios = require('axios');
 const paddBott = '20px';
@@ -19,7 +29,7 @@ const BoxscoreHeadingStyles = styled.div`
   color: ${lightGray};
 `;
 
-const TeamsParentStyles = styled.div`
+const TeamsParentStyles = styled(Paper)`
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
@@ -62,8 +72,9 @@ export default function BoxScore(props) {
       .request(options)
       .then(function (response) {
         const boxscoreObject = response.data.basicGameData;
-
+        console.log(`boxx`,boxscoreObject);
         return setBoxscore(boxscoreObject);
+        
       })
       .catch(function (error) {
         console.error(error);
@@ -79,57 +90,130 @@ export default function BoxScore(props) {
         <p>Searching for the stats...</p>
       </div>
     );
+    
+    function createData(name, calories, fat, carbs, protein) {
+      return { name, calories, fat, carbs, protein };
+    }
+    
+    const rows = [
+      createData('Lakers', 20, 16, 24, 18),
+      createData('Pacers', 23, 9, 27, 18),
+    ];
 
   return (
     <>
       <Head>
         <title>Box score</title>
       </Head>
-      <BoxscoreHeadingStyles>
-        Place:
-        {'    '}
-        {boxscore.arena.name},{'    '}
-        {boxscore.arena.city}
-        <br />
-        Local time and date: {'    '}
-        {boxscore.homeStartTime.slice(0, 2)}:
-        {boxscore.homeStartTime.slice(2, 4)},{'    '}
-        {boxscore.homeStartDate.slice(6, 8)}.
-        {boxscore.homeStartDate.slice(4, 6)}.
-        {boxscore.homeStartDate.slice(0, 4)}
-        <br />
-        Attendance: {boxscore.attendance}
-      </BoxscoreHeadingStyles>
-      <TeamsParentStyles>
+      <TeamsParentStyles elevation={5}>
         <TeamsStyles>
+        <Stack direction="row" spacing={2}>
+          <div>
           <Image
             src={`/${boxscore.vTeam.triCode}.png`}
             alt="Image"
             width={100}
             height={100}
           />
-          <br />
-          <span>
-            {boxscore.vTeam.triCode}
-            {'    '}
+          </div>
+          <div style={{margin:"1rem 0.5rem 0"}}>
+            <Typography variant="h6" display="block" gutterBottom>
             {boxscore.vTeam.score}
-          </span>
+      </Typography>
+      </div>
+      </Stack>
+          <br />
+            <span>
+            {boxscore.vTeam.triCode}
+      </span>
+          <br />
+          <Typography variant="caption" display="block" gutterBottom>
+            ({boxscore.vTeam.win}
+            -
+            {boxscore.vTeam.loss})
+          </Typography>
         </TeamsStyles>
         <TeamsStyles>
+        <Stack direction="row" spacing={2}>
+        <div style={{margin:"1rem 0.5rem 0"}}>
+            <Typography variant="h6" display="block" gutterBottom>
+            {boxscore.hTeam.score}
+      </Typography>
+      </div>
+     
+      <div>
           <Image
             src={`/${boxscore.hTeam.triCode}.png`}
             alt="Image"
             width={100}
             height={100}
           />
+          </div>
+          </Stack>
           <br />
           <span>
-            {boxscore.hTeam.triCode}
-            {'    '}
             {boxscore.hTeam.score}
           </span>
+          <br />
+          <Typography variant="caption" display="block" gutterBottom>
+           ({boxscore.hTeam.win}
+            -
+            {boxscore.hTeam.loss}
+           )
+          </Typography>
         </TeamsStyles>
       </TeamsParentStyles>
+      <Paper style={{marginTop:"2rem"}}>
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Teams</TableCell>
+            <TableCell align="right">1st</TableCell>
+            <TableCell align="right">2nd</TableCell>
+            <TableCell align="right">3rd</TableCell>
+            <TableCell align="right">4th</TableCell>
+            <TableCell align="right">Total</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {[boxscore].map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.hTeam.triCode}
+              </TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">  {boxscore.hTeam.score}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableBody>
+          {[boxscore].map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.vTeam.triCode}
+              </TableCell>
+              <TableCell align="right">  - </TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">-</TableCell>
+              <TableCell align="right">  {boxscore.vTeam.score}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+      </Paper>
     </>
   );
 }
