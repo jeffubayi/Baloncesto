@@ -32,6 +32,8 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import CardActions from "@mui/material/CardActions";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -44,15 +46,15 @@ const ExpandMore = styled((props) => {
 
 const StyledBox = styled(Box)`
   width: auto;
-  margin:  0.5rem 2rem 1rem;
+  margin: 0.5rem 2rem 1rem;
 
   @media (min-width: 600px) {
     width: "auto";
-    margin:  0.5rem 2rem 1rem;
+    margin: 0.5rem 2rem 1rem;
   }
 
   @media (min-width: 1300px) {
-    margin:  0.5rem 8rem 1rem;
+    margin: 0.5rem 8rem 1rem;
   }
 `;
 
@@ -60,12 +62,12 @@ const StyledDiv = styled.div`
   padding: 0.4rem;
   cursor: pointer;
   display: grid;
-  gridTemplateColumns: repeat(1,auto);
+  gridtemplatecolumns: repeat(1, auto);
   gap: 1rem;
 
-   @media (min-width: 600px) {
+  @media (min-width: 600px) {
     display: grid;
-    gridTemplateColumns: repeat(3,auto);
+    gridtemplatecolumns: repeat(3, auto);
     gap: 1rem;
   }
 `;
@@ -113,8 +115,8 @@ export default function Home(props) {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 4,
+      slidesToSlide: 4,
     },
   };
 
@@ -129,6 +131,7 @@ export default function Home(props) {
 
   return (
     <>
+    <div style={{width:"100vw"}}>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
         <Paper
           elevation={3}
@@ -138,14 +141,13 @@ export default function Home(props) {
           }}
         >
           <h6 style={{ textAlign: "center" }}>
-            Yesterday's Game Scores <br></br>
-            {yesterday}
+            {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
             <br></br>
             <Button
               variant="outlined"
               size="small"
               onClick={() => window.location.assign("/scores")}
-              style={{ textTransform: "capitalize", margin: "0.15rem" }}
+              style={{ textTransform: "capitalize", margin: "0.3rem" }}
             >
               view scores
             </Button>
@@ -156,7 +158,9 @@ export default function Home(props) {
           // because Carousel adds another li tag
           // by itself. If we set this tag to li,
           // it would cause the conflict.
+   
           <Link href={`/${scores.gameId}`}>
+            
             <Card
               style={{
                 borderRadius: "0.2rem",
@@ -167,6 +171,7 @@ export default function Home(props) {
                 padding: "0.2rem",
                 backgroundColor: "rgba(255, 255, 255, 0.72)",
                 height: 120,
+                width:260
               }}
               key={scores.gameId}
             >
@@ -175,6 +180,7 @@ export default function Home(props) {
                   display: "grid",
                   gap: "0.4rem",
                   gridTemplateRows: "repeat(2,auto)",
+                  marginRight: "0.5rem",
                 }}
               >
                 <Avatar
@@ -239,7 +245,7 @@ export default function Home(props) {
                   >
                     {scores.isRecapArticleAvail ? (
                       <div style={{ margin: "1rem", textAlign: "center" }}>
-                        <Badge badgeContent={"FINAL"} />
+                        <Badge badgeContent={"FINAL"} style={{color:"grey"}}/>
                       </div>
                     ) : null}
                   </div>
@@ -248,7 +254,8 @@ export default function Home(props) {
             </Card>
           </Link>
         ))}
-      </Stack>
+      </Carousel>
+      </div>
       <StyledBox>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} lg={8}>
@@ -261,7 +268,9 @@ export default function Home(props) {
             <TrendingNews />
           </Grid>
           <Grid item xs={12} md={8} lg={9}>
-            <h6 style={{ color: "grey",marginLeft:"0.7rem" }}>Trending News</h6>
+            <h6 style={{ color: "grey", marginLeft: "0.7rem" }}>
+              Trending News
+            </h6>
             <div
               style={{
                 padding: "0.4rem",
@@ -272,38 +281,36 @@ export default function Home(props) {
               }}
             >
               <Grid container spacing={3}>
-              {newsArray.slice(3, 9).map((news) => (
-                // It is better to use as key one of the
-                // object properties that has unique
-                // character. Hence we used _id prop,
-                // which was pre-defined by API provider.
-                <Link href={news.link}>
-          <Grid item xs={6} md={6} lg={4}>
-                  <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
-                    <CardMedia
-                      component="img"
-                      height="194"
-                      image={news.media}
-                      alt="Paella dish"
-                    />
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {news.title.substring(0, 80)}
-                      </Typography>
-                    </CardContent>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                      <CardContent>
-                        <Typography paragraph>
-                          {news.summary.substring(0, 230)}...
-                        </Typography>
-                      </CardContent>
-                    </Collapse>
-                  </Card>
-                  </Grid>
-                </Link>
-
-         
-              ))}
+                {newsArray.slice(3, 9).map((news) => (
+                  // It is better to use as key one of the
+                  // object properties that has unique
+                  // character. Hence we used _id prop,
+                  // which was pre-defined by API provider.
+                  <Link href={news.link}>
+                    <Grid item xs={6} md={6} lg={4}>
+                      <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
+                        <CardMedia
+                          component="img"
+                          height="194"
+                          image={news.media}
+                          alt="Paella dish"
+                        />
+                        <CardContent>
+                          <Typography variant="body2" color="text.secondary">
+                            {news.title.substring(0, 80)}
+                          </Typography>
+                        </CardContent>
+                        <Collapse in={expanded} timeout="auto" unmountOnExit>
+                          <CardContent>
+                            <Typography paragraph>
+                              {news.summary.substring(0, 230)}...
+                            </Typography>
+                          </CardContent>
+                        </Collapse>
+                      </Card>
+                    </Grid>
+                  </Link>
+                ))}
               </Grid>
             </div>
           </Grid>

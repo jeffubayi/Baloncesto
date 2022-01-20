@@ -67,30 +67,32 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
             width: "auto",
             justifyContent: "center",
             textAlign: "center",
+            backgroundColor: "#051c2d"
           }}
         >
-          <h4>NBA Season 2020/2021</h4>
+          <h4 style={{color:"#FFF"}}>NBA Season 2020/2021</h4>
 
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
               onChange={handleChange}
               aria-label="lab API tabs example"
               style={{ textAlign: "center" }}
+              indicatorColor="primary"
             >
               <Tab
                 label="East Conference"
                 value="1"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize",color:"white" }}
               />
               <Tab
                 label="West Conference"
                 value="2"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize",color:"white" }}
               />
               <Tab
                 label="Divisions"
                 value="3"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize" ,color:"white"}}
               />
             </TabList>
           </Box>

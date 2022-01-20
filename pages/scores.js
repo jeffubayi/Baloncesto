@@ -92,12 +92,10 @@ export default function Scores(props) {
             justifyContent: "center",
             color: "white",
             padding: "20px",
+            backgroundColor: "#051c2d"
           }}
         >
           <TextField
-            style={{
-              borderRadius: "1rem",
-            }}
             id="date"
             label="Game scores on day:"
             onChange={(e) => {
@@ -124,10 +122,12 @@ export default function Scores(props) {
             }}
             type="date"
             defaultValue={today}
-            sx={{ width: 350 }}
+            sx={{ width: 350 ,borderRadius: "1rem",
+            color:"white"}}
             InputLabelProps={{
               shrink: true,
             }}
+            focused
           />
         </div>
 

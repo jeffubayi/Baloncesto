@@ -16,7 +16,7 @@ import TableRow from '@mui/material/TableRow';
 
 const axios = require('axios');
 const paddBott = '20px';
-const ourGray = '#1d2d35';
+const ourGray =  "#051c2d";
 const lightGray = '#E9E4E4';
 
 const BoxscoreHeadingStyles = styled.div`
@@ -60,7 +60,6 @@ export default function BoxScore(props) {
   const gameDate = props.gameDate;
 
   const gameId = props.gameId;
-
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -72,9 +71,8 @@ export default function BoxScore(props) {
       .request(options)
       .then(function (response) {
         const boxscoreObject = response.data.basicGameData;
-        console.log(`boxx`,boxscoreObject);
+
         return setBoxscore(boxscoreObject);
-        
       })
       .catch(function (error) {
         console.error(error);
@@ -105,6 +103,21 @@ export default function BoxScore(props) {
       <Head>
         <title>Box score</title>
       </Head>
+      <BoxscoreHeadingStyles>
+        Place:
+        {'    '}
+        {boxscore.arena.name},{'    '}
+        {boxscore.arena.city}
+        <br />
+        Local time and date: {'    '}
+        {boxscore.homeStartTime.slice(0, 2)}:
+        {boxscore.homeStartTime.slice(2, 4)},{'    '}
+        {boxscore.homeStartDate.slice(6, 8)}.
+        {boxscore.homeStartDate.slice(4, 6)}.
+        {boxscore.homeStartDate.slice(0, 4)}
+        <br />
+        Attendance: {boxscore.attendance}
+      </BoxscoreHeadingStyles>
       <TeamsParentStyles elevation={5}>
         <TeamsStyles>
         <Stack direction="row" spacing={2}>

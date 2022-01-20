@@ -124,12 +124,8 @@ export default function Layout(props) {
   const userId = props.children.props.userId;
 
   return (
-    <div style={{ display:"flex",width:"100%",height:"100%"}}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <div>
+    <div style={{ display:"grid",gridTemplateColumns:"repeat(1,auto)",width:"100%",height:"100%"}}>
+      <div >
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" style={{ backgroundColor: "#051c2d" }}>
             <Toolbar>
@@ -163,17 +159,21 @@ export default function Layout(props) {
               <div style={{display:"grid",gridTemplateColumns: "repeat(4,auto)",gap:"0.4rem"}}>
               <UnstyledButtonCustom item="Scores" urlPath="/scores" />
               <UnstyledButtonCustom item="Standings" urlPath="/standings" />
-              <UnstyledButtonCustom item="Stats" urlPath="/stats" />
               <UnstyledButtonCustom item="Teams" urlPath="/team" />
               </div>
             </Toolbar>
           </AppBar>
         </Box>
-       
-      <BodyStyles>{props.children}</BodyStyles>
+      </div>
 
+      <BodyStyles>
+      {props.children}
+      </BodyStyles>
+
+      <div>
       <Footer />
       </div>
+
     </div>
   );
 }
