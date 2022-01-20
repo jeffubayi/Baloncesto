@@ -9,6 +9,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Head from "next/head";
 
 export default function TitlebarImageList() {
   const [teams, setTeams] = React.useState([]);
@@ -28,6 +29,9 @@ export default function TitlebarImageList() {
 
   return (
     <>
+    <Head>
+        <title>NBA Teams</title>
+      </Head>
       {isSmallWindow ? (
         <ImageList sx={{ width: "100%", height: "auto" }}>
           <ImageListItem key="Subheader" cols={2}>
@@ -66,18 +70,10 @@ export default function TitlebarImageList() {
           )}
         </ImageList>
       ) : (
-        <ImageList sx={{ width: "100%", height: 1000 }}>
-          <ImageListItem key="Subheader" cols={6}>
-            <ListSubheader
-              component="p"
-              sx={{ textAlign: "center", color: "black" }}
-            >
-              All NBA Franchise Teams
-            </ListSubheader>
-          </ImageListItem>
+        <ImageList style={{ width: "100%", height:"auto" ,display:"grid",gridTemplateColumns:"repeat(6,auto)",}}>
           {teams.sacramento ? (
-            teams.sacramento.map((item) => (
-              <ImageListItem key={item.teamId}>
+            teams.sacramento.filter(sac => !sac.tricode.includes("UTW")).map((item) => (
+              <ImageListItem  key={item.teamId}>
                 <img
                   src={`/${item.tricode}.png`}
                   srcSet={`/${item.tricode}.png`}
