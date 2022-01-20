@@ -16,8 +16,10 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
-import Grid from '@mui/material/Grid';
-import {StyledDiv} from "./scores";
+import Grid from "@mui/material/Grid";
+import { StyledDiv } from "./scores";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,6 +49,8 @@ export default function Standings(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+const isSmallWindow = useMediaQuery(`(max-width:768px)`);
   getStandings();
   return (
     <>
@@ -97,75 +101,163 @@ export default function Standings(props) {
           }}
         >
           <TabPanel value="1">
-            <TableContainer component={Paper}>
-              <Table aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://i.pinimg.com/originals/01/41/16/0141166a90aa673e552a1472badcd8cb.gif"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell>Eastern Conference</StyledTableCell>
-                    <StyledTableCell>Wins</StyledTableCell>
-                    <StyledTableCell>Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.east.map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {" "}
-                          {team.confRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            style={{ width: "1.5rem", height: "1.5rem" }}
-                          />{" "}
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell>{team.win}</StyledTableCell>
-                        <StyledTableCell>{team.loss}</StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            {isSmallWindow ? (
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>
+                        {" "}
+                        <Avatar
+                          src="https://i.pinimg.com/originals/01/41/16/0141166a90aa673e552a1472badcd8cb.gif"
+                          alt="Image"
+                          width={30}
+                          height={30}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell>Eastern Conference</StyledTableCell>
+                      <StyledTableCell>Wins</StyledTableCell>
+                      <StyledTableCell>Loses</StyledTableCell>
+                      <StyledTableCell align="right">GB</StyledTableCell>
+                      <StyledTableCell align="right">Pct(%)</StyledTableCell>
+                      <StyledTableCell align="right">L10</StyledTableCell>
+                      <StyledTableCell align="right">Streak</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {props.standingsArray.league.standard.conference.east.map(
+                      (team) => (
+                        <StyledTableRow key={team.teamId}>
+                          <StyledTableCell component="th" scope="row">
+                            {" "}
+                            {team.confRank}
+                          </StyledTableCell>
+                          <StyledTableCell
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(2,auto)",
+                            }}
+                          >
+                            <Avatar
+                              src={`/${team.teamSitesOnly.teamTricode}.png`}
+                              alt="Image"
+                              style={{ width: "1.5rem", height: "1.5rem" }}
+                            />
+                            {team.teamSitesOnly.teamNickname}
+                          </StyledTableCell>
+                          <StyledTableCell>{team.win}</StyledTableCell>
+                          <StyledTableCell>{team.loss}</StyledTableCell>
+                          <StyledTableCell align="right">
+                            {team.gamesBehind}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {(Number(team.winPct) * 100).toFixed(1)}%
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {team.lastTenWin}-{team.lastTenLoss}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.streak}{" "}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      )
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ) : (
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>
+                        {" "}
+                        <Avatar
+                          src="https://i.pinimg.com/originals/01/41/16/0141166a90aa673e552a1472badcd8cb.gif"
+                          alt="Image"
+                          width={30}
+                          height={30}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell>Eastern Conference</StyledTableCell>
+                      <StyledTableCell>Wins</StyledTableCell>
+                      <StyledTableCell>Loses</StyledTableCell>
+                      <StyledTableCell align="right">GB</StyledTableCell>
+                      <StyledTableCell align="right">Pct(%)</StyledTableCell>
+                      <StyledTableCell align="right">L10</StyledTableCell>
+                      <StyledTableCell align="right">Home win</StyledTableCell>
+                      <StyledTableCell align="right">Home loss</StyledTableCell>
+                      <StyledTableCell align="right">Away win</StyledTableCell>
+                      <StyledTableCell align="right">Away loss</StyledTableCell>
+                      <StyledTableCell align="right">Streak</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {props.standingsArray.league.standard.conference.east.map(
+                      (team) => (
+                        <StyledTableRow key={team.teamId}>
+                          <StyledTableCell component="th" scope="row">
+                            {" "}
+                            {team.confRank}
+                          </StyledTableCell>
+                          <StyledTableCell
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(2,auto)",
+                            }}
+                          >
+                            <Avatar
+                              src={`/${team.teamSitesOnly.teamTricode}.png`}
+                              alt="Image"
+                              style={{ width: "1.5rem", height: "1.5rem" }}
+                            />{" "}
+                            {team.teamSitesOnly.teamKey.concat(" ",
+                            `${team.teamSitesOnly.teamNickname}`)}
+
+                          </StyledTableCell>
+                          <StyledTableCell>{team.win}</StyledTableCell>
+                          <StyledTableCell>{team.loss}</StyledTableCell>
+                          <StyledTableCell align="right">
+                            {team.gamesBehind}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {(Number(team.winPct) * 100).toFixed(1)}%
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {team.lastTenWin}-{team.lastTenLoss}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.homeWin}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.homeLoss}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.awayWin}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.awayLoss}{" "}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            {" "}
+                            {team.streak}{" "}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      )
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
           </TabPanel>
 
           <TabPanel value="2">
+            {isSmallWindow ? (
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -208,8 +300,6 @@ export default function Standings(props) {
                             width={30}
                             height={30}
                           />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
                           {team.teamSitesOnly.teamNickname}
                         </StyledTableCell>
                         <StyledTableCell align="right">
@@ -237,6 +327,94 @@ export default function Standings(props) {
                 </TableBody>
               </Table>
             </TableContainer>
+            ):(
+              <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>
+                      {" "}
+                      <Avatar
+                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                        alt="Image"
+                        width={30}
+                        height={30}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell>Western Conference</StyledTableCell>
+                    <StyledTableCell>Wins</StyledTableCell>
+                    <StyledTableCell>Loses</StyledTableCell>
+                    <StyledTableCell align="right">GB</StyledTableCell>
+                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
+                    <StyledTableCell align="right">L10</StyledTableCell>
+                    <StyledTableCell align="right">Home win</StyledTableCell>
+                    <StyledTableCell align="right">Home loss</StyledTableCell>
+                    <StyledTableCell align="right">Away win</StyledTableCell>
+                    <StyledTableCell align="right">Away loss</StyledTableCell>
+                    <StyledTableCell align="right">Streak</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {props.standingsArray.league.standard.conference.west.map(
+                    (team) => (
+                      <StyledTableRow key={team.teamId}>
+                        <StyledTableCell component="th" scope="row">
+                          {" "}
+                          {team.confRank}
+                        </StyledTableCell>
+                        <StyledTableCell
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2,auto)",
+                          }}
+                        >
+                          <Avatar
+                            src={`/${team.teamSitesOnly.teamTricode}.png`}
+                            alt="Image"
+                            style={{ width: "1.5rem", height: "1.5rem" }}
+                          />{" "}
+                          {team.teamSitesOnly.teamKey.concat(" ",
+                          `${team.teamSitesOnly.teamNickname}`)}
+
+                        </StyledTableCell>
+                        <StyledTableCell>{team.win}</StyledTableCell>
+                        <StyledTableCell>{team.loss}</StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.gamesBehind}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {(Number(team.winPct) * 100).toFixed(1)}%
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {team.lastTenWin}-{team.lastTenLoss}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.homeWin}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.homeLoss}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.awayWin}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.awayLoss}{" "}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {" "}
+                          {team.streak}{" "}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            )}
           </TabPanel>
 
           <TabPanel value="3">
@@ -244,445 +422,469 @@ export default function Standings(props) {
               <Grid
                 container
                 rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                columnSpacing={{ xs: 2, sm: 2, lg: 3 }}
               >
                 <Grid item xs={12} lg={6}>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> South West</StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.west.slice(0, 5).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> South West</StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.west
+                          .slice(0, 5)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> South East</StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.east.slice(0, 5).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> South East</StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.east
+                          .slice(0, 5)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> Central Western </StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.west.slice(5, 10).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> Central Western </StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.west
+                          .slice(5, 10)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> Central Eastern</StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.east.slice(5, 10).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> Central Eastern</StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.east
+                          .slice(5, 10)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> Atlantic Western </StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.west.slice(11, 15).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> Atlantic Western </StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.west
+                          .slice(11, 15)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 200 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>
-                      {" "}
-                      <Avatar
-                        src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell> Atlantic Eastern</StyledTableCell>
-                    <StyledTableCell align="right">Wins</StyledTableCell>
-                    <StyledTableCell align="right">Loses</StyledTableCell>
-                    <StyledTableCell align="right">GB</StyledTableCell>
-                    <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                    <StyledTableCell align="right">L10</StyledTableCell>
-                    <StyledTableCell align="right">Streak</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.standingsArray.league.standard.conference.east.slice(11, 15).map(
-                    (team) => (
-                      <StyledTableRow key={team.teamId}>
-                        <StyledTableCell component="th" scope="row">
-                          {team.divRank}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2,auto)",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <Avatar
-                            src={`/${team.teamSitesOnly.teamTricode}.png`}
-                            alt="Image"
-                            width={30}
-                            height={30}
-                          />
-                          {team.teamSitesOnly.teamKey}
-                          <br></br>
-                          {team.teamSitesOnly.teamNickname}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.win}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.loss}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.gamesBehind}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {(Number(team.winPct) * 100).toFixed(1)}%
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {team.lastTenWin}-{team.lastTenLoss}{" "}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {" "}
-                          {team.streak}{" "}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>
+                            {" "}
+                            <Avatar
+                              src="https://seeklogo.com/images/N/nba-western-conference-logo-CD123BABD3-seeklogo.com.png"
+                              alt="Image"
+                              width={30}
+                              height={30}
+                            />
+                          </StyledTableCell>
+                          <StyledTableCell> Atlantic Eastern</StyledTableCell>
+                          <StyledTableCell align="right">Wins</StyledTableCell>
+                          <StyledTableCell align="right">Loses</StyledTableCell>
+                          <StyledTableCell align="right">GB</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Pct(%)
+                          </StyledTableCell>
+                          <StyledTableCell align="right">L10</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Streak
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.standingsArray.league.standard.conference.east
+                          .slice(11, 15)
+                          .map((team) => (
+                            <StyledTableRow key={team.teamId}>
+                              <StyledTableCell component="th" scope="row">
+                                {team.divRank}
+                              </StyledTableCell>
+                              <StyledTableCell
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2,auto)",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                <Avatar
+                                  src={`/${team.teamSitesOnly.teamTricode}.png`}
+                                  alt="Image"
+                                  width={30}
+                                  height={30}
+                                />
+                                {team.teamSitesOnly.teamKey}
+                                <br></br>
+                                {team.teamSitesOnly.teamNickname}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.win}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.loss}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.gamesBehind}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(Number(team.winPct) * 100).toFixed(1)}%
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {team.lastTenWin}-{team.lastTenLoss}{" "}
+                              </StyledTableCell>
+                              <StyledTableCell align="right">
+                                {" "}
+                                {team.streak}{" "}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Grid>
               </Grid>
             </Box>
