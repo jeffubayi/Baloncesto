@@ -11,11 +11,23 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
+import styled from "styled-components";
+
 const axios = require("axios");
 
 const ourGray = "#FFFF";
 const lightGray = "#E9E4E4";
 
+const StyledDiv = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, auto);
+  margin: 0.5rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, auto);
+  }
+`;
 
 export default function Scores(props) {
   const [scores, setScores] = useState(props.yestScoresArray);
@@ -68,9 +80,11 @@ export default function Scores(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{
-            height: "100%",
-          }}>
+      <main
+        style={{
+          height: "100%",
+        }}
+      >
         <div
           style={{
             backgroundColor: "#FFFF",
@@ -81,9 +95,9 @@ export default function Scores(props) {
           }}
         >
           <TextField
-           style={{
-            borderRadius: "1rem",
-          }}
+            style={{
+              borderRadius: "1rem",
+            }}
             id="date"
             label="Game scores on day:"
             onChange={(e) => {
@@ -117,22 +131,13 @@ export default function Scores(props) {
           />
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "repeat(4,auto)",
-            marginTop:"0.5rem"
-          }}
-        >
+        <StyledDiv>
           {scores.map((game) => (
             // Here we use div instead of li tag
             // because Carousel adds another li tag
             // by itself. If we set this tag to li,
             // it would cause the conflict.
-            <Link
-              href={`/${game.gameId}`}
-            >
+            <Link href={`/${game.gameId}`}>
               <Card
                 style={{
                   margin: "1rem",
@@ -149,16 +154,16 @@ export default function Scores(props) {
                     gridTemplateColumns: "repeat(2,auto)",
                   }}
                 >
-                   <Avatar
-                      src={`/${game.vTeam.triCode}.png`}
-                      alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
-                    />
-                     <Avatar
-                      src={`/${game.hTeam.triCode}.png`}
-                      alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
-                    />
+                  <Avatar
+                    src={`/${game.vTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "3.5rem", height: "3.5rem" }}
+                  />
+                  <Avatar
+                    src={`/${game.hTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "3.5rem", height: "3.5rem" }}
+                  />
                 </div>
                 <CardContent>
                   <div
@@ -197,16 +202,16 @@ export default function Scores(props) {
                       {game.hTeam.score}
                     </Typography>
                   </div>
-                  {game.isRecapArticleAvail ? 
-                      <div style={{textAlign: "center" }}>
-                        <Badge badgeContent={"FINAL"} />
-                      </div>
-                      : null }
+                  {game.isRecapArticleAvail ? (
+                    <div style={{ textAlign: "center" }}>
+                      <Badge badgeContent={"FINAL"} />
+                    </div>
+                  ) : null}
                 </CardContent>
               </Card>
             </Link>
           ))}
-        </div>
+        </StyledDiv>
       </main>
     </>
   );
