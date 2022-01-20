@@ -43,7 +43,7 @@ export default function TitlebarImageList() {
             </ListSubheader>
           </ImageListItem>
           {teams.sacramento ? (
-            teams.sacramento.filter(sac => !sac.tricode.includes("UTW")).map((item) => (
+            teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
               <ImageListItem key={item.teamId}>
                 <img
                   src={`/${item.tricode}.png`}
@@ -72,7 +72,7 @@ export default function TitlebarImageList() {
       ) : (
         <ImageList style={{ width: "100%", height:"auto" ,display:"grid",gridTemplateColumns:"repeat(6,auto)",}}>
           {teams.sacramento ? (
-            teams.sacramento.filter(sac => !sac.tricode.includes("UTW")).map((item) => (
+            teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
               <ImageListItem  key={item.teamId}>
                 <img
                   src={`/${item.tricode}.png`}
