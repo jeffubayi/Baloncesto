@@ -17,6 +17,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
+import {StyledDiv} from "./scores";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -245,7 +246,7 @@ export default function Standings(props) {
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -318,7 +319,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                 <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -391,7 +392,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                 <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -464,7 +465,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                 <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -537,7 +538,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                 <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
@@ -610,7 +611,7 @@ export default function Standings(props) {
               </Table>
             </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                 <TableContainer component={Paper}>
               <Table sx={{ minWidth: 200 }} aria-label="customized table">
                 <TableHead>
