@@ -117,7 +117,7 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
                           height={30}
                         />
                       </StyledTableCell>
-                      <StyledTableCell>Eastern Conference</StyledTableCell>
+                      <StyledTableCell>East</StyledTableCell>
                       <StyledTableCell>Wins</StyledTableCell>
                       <StyledTableCell>Loses</StyledTableCell>
                       <StyledTableCell align="right">GB</StyledTableCell>
@@ -182,7 +182,7 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
                           height={30}
                         />
                       </StyledTableCell>
-                      <StyledTableCell>Eastern Conference</StyledTableCell>
+                      <StyledTableCell>Eastern</StyledTableCell>
                       <StyledTableCell>Wins</StyledTableCell>
                       <StyledTableCell>Loses</StyledTableCell>
                       <StyledTableCell align="right">GB</StyledTableCell>
@@ -273,7 +273,7 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
                         height={30}
                       />
                     </StyledTableCell>
-                    <StyledTableCell>Western Conference</StyledTableCell>
+                    <StyledTableCell>West</StyledTableCell>
                     <StyledTableCell align="right">Wins</StyledTableCell>
                     <StyledTableCell align="right">Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
@@ -343,7 +343,7 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
                         height={30}
                       />
                     </StyledTableCell>
-                    <StyledTableCell>Western Conference</StyledTableCell>
+                    <StyledTableCell>Western </StyledTableCell>
                     <StyledTableCell>Wins</StyledTableCell>
                     <StyledTableCell>Loses</StyledTableCell>
                     <StyledTableCell align="right">GB</StyledTableCell>
