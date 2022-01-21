@@ -50,7 +50,6 @@ const StyledBox = styled(Box)`
   margin: 0 2rem 1rem;
 
   @media (min-width: 600px) {
-    width: "auto";
     margin: 0 2rem 1rem;
   }
 
@@ -61,14 +60,15 @@ const StyledBox = styled(Box)`
 
 const StyledDiv = styled.div`
   padding: 0.4rem;
+  width: "100%",
   cursor: pointer;
   display: grid;
-  gridtemplatecolumns: repeat(1, auto);
+  grid-template-columns: repeat(1, auto);
   gap: 1rem;
 
   @media (min-width: 600px) {
     display: grid;
-    gridtemplatecolumns: repeat(3, auto);
+    grid-template-columns: repeat(3, auto);
     gap: 1rem;
   }
 `;
@@ -263,27 +263,18 @@ export default function Home(props) {
             <h6 style={{ color: "grey", marginLeft: "0.7rem" }}>
               Trending News
             </h6>
-            <div
-              style={{
-                padding: "0.4rem",
-                cursor: "pointer",
-                display: "grid",
-                gridTemplateColumns: "repeat(3,auto)",
-                gap: "1rem",
-              }}
+            <StyledDiv 
             >
-              <Grid container spacing={3}>
-                {newsArray.slice(3, 9).map((news) => (
+                {newsArray.slice(0, 9).map((news) => (
                   // It is better to use as key one of the
                   // object properties that has unique
                   // character. Hence we used _id prop,
                   // which was pre-defined by API provider.
                   <Link href={news.link}>
-                    <Grid item xs={6} md={6} lg={4}>
-                      <Card sx={{ maxWidth: 345, borderRadius: "0.5rem" }}>
+                      <Card style={{  borderRadius: "0.5rem" }}>
                         <CardMedia
                           component="img"
-                          height="194"
+                          height="auto"
                           image={news.media}
                           alt="Paella dish"
                         />
@@ -300,11 +291,9 @@ export default function Home(props) {
                           </CardContent>
                         </Collapse>
                       </Card>
-                    </Grid>
                   </Link>
                 ))}
-              </Grid>
-            </div>
+            </StyledDiv>
           </Grid>
         </Grid>
       </StyledBox>
