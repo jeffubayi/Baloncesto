@@ -165,7 +165,7 @@ export default function BoxScore(props) {
           </Stack>
           <br />
           <span>
-            {boxscore.hTeam.score}
+          {boxscore.hTeam.triCode}
           </span>
           <br />
           <Typography variant="caption" display="block" gutterBottom>

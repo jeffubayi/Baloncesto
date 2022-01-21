@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import * as React from "react";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -77,6 +78,7 @@ const lightGray = "#E9E4E4";
 
 export default function Home(props) {
   const newsArray = props.newsArray;
+  React.useEffect((newsArray ) =>  [newsArray ]);
   const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
     .toISOString()
     .slice(0, 10);
@@ -110,13 +112,13 @@ export default function Home(props) {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3,
-      slidesToSlide: 3,
+      items: 1,
+      slidesToSlide: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 4,
-      slidesToSlide: 4,
+      items: 1,
+      slidesToSlide: 1,
     },
   };
 
@@ -133,7 +135,7 @@ export default function Home(props) {
     <>
     <div style={{width:"100vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
-      <Card sx={{ minWidth: 275,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
+      <Card sx={{ width: 260,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
       <CardContent>
         <Typography variant="subtitle2" color="text.secondary" gutterBottom>
         {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
