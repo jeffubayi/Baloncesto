@@ -35,6 +35,7 @@ import CardActions from "@mui/material/CardActions";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -73,12 +74,15 @@ const StyledDiv = styled.div`
   }
 `;
 
+
+
 const ourGray = "#1d2d35";
 const lightGray = "#E9E4E4";
 
 export default function Home(props) {
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
   const newsArray = props.newsArray;
-  React.useEffect((newsArray ) =>  [newsArray ]);
+  React.useEffect((newsArray ) =>  [newsArray]);
   const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
     .toISOString()
     .slice(0, 10);
@@ -112,8 +116,8 @@ export default function Home(props) {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1,
-      slidesToSlide: 1,
+      items: 2,
+      slidesToSlide: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -133,19 +137,19 @@ export default function Home(props) {
 
   return (
     <>
-    <div style={{width:"100vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
+    {isSmallWindow ? (
+    <div style={{width:"170vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
       <Card sx={{ width: 260,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
       <CardContent>
         <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-        {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
+        {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Game Night
         </Typography>
       </CardContent>
       <CardActions style={{justifyContent:"center"}}>
-        <Button  style={{textTransform:"capitalize"}} variant="outlined" onClick={() => window.location.assign("/scores")} size="small">view scores</Button>
+        <Button  style={{textTransform:"capitalize"}} variant="outlined" onClick={() => window.location.assign("/scores")} size="small">view all scores</Button>
       </CardActions>
     </Card>
-
         {props.scoresArray.map((scores) => (
           // Here we use div instead of li tag
           // because Carousel adds another li tag
@@ -248,6 +252,123 @@ export default function Home(props) {
         ))}
       </Carousel>
       </div>
+      ):(
+        <div style={{width:"100vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
+        <Carousel responsive={responsive} ssr={true} infinite={false}>
+        <Card sx={{ width: 260,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
+        <CardContent>
+          <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+          {new Date(yesterday).toLocaleString('en-us', {  weekday: 'long' })} Night
+          </Typography>
+        </CardContent>
+        <CardActions style={{justifyContent:"center"}}>
+          <Button  style={{textTransform:"capitalize"}} variant="outlined" onClick={() => window.location.assign("/scores")} size="small">view scores</Button>
+        </CardActions>
+      </Card>
+  
+          {props.scoresArray.map((scores) => (
+            // Here we use div instead of li tag
+            // because Carousel adds another li tag
+            // by itself. If we set this tag to li,
+            // it would cause the conflict.
+     
+            <Link href={`/${scores.gameId}`}>
+              
+              <Card
+                style={{
+                  borderRadius: "0.6rem",
+                  display: "grid",
+                  gap: "0.5rem",
+                  gridTemplateColumns: "repeat(2,auto)",
+                  cursor: "pointer",
+                  padding: "0.2rem",
+                  height: 120,
+                  width:260
+                }}
+                key={scores.gameId}
+              >
+                <div
+                  style={{
+                    display: "grid",
+                    gap: "0.4rem",
+                    gridTemplateRows: "repeat(2,auto)",
+                    marginRight: "0.5rem",
+                  }}
+                >
+                  <Avatar
+                    src={`/${scores.hTeam.triCode}.png`}
+                    alt="Image"
+                    style={{
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      marginTop: "0.5rem",
+                    }}
+                  />
+                  <Avatar
+                    src={`/${scores.vTeam.triCode}.png`}
+                    alt="Image"
+                    style={{
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      marginBottom: "0.7rem",
+                    }}
+                  />
+                </div>
+                <CardContent>
+                  <div
+                    style={{
+                      display: "grid",
+                      gap: "0.4rem",
+                      gridTemplateColumns: "repeat(2,2fr 2fr 2fr)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "grid",
+                        gap: "0.6rem",
+                      }}
+                    >
+                      <Typography gutterBottom variant="subtitle2" component="p">
+                        {scores.hTeam.triCode}
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle2" component="p">
+                        {scores.vTeam.triCode}
+                      </Typography>
+                    </div>
+                    <div
+                      style={{
+                        display: "grid",
+                        gap: "0.6rem",
+                        paddingRight: "0.5rem",
+                      }}
+                    >
+                      <Typography variant="body2" color="text.secondary">
+                        {scores.hTeam.score}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {scores.vTeam.score}
+                      </Typography>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      {scores.isRecapArticleAvail ? (
+                        <div style={{ margin: "1rem", textAlign: "center" }}>
+                          <Badge badgeContent={"FINAL"} style={{color:"grey"}}/>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </Carousel>
+        </div>
+      )}
       <StyledBox>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} lg={8}>
@@ -265,7 +386,7 @@ export default function Home(props) {
             </h6>
             <StyledDiv 
             >
-                {newsArray.slice(0, 9).map((news) => (
+                {newsArray.slice(0, 12).map((news) => (
                   // It is better to use as key one of the
                   // object properties that has unique
                   // character. Hence we used _id prop,
@@ -280,7 +401,7 @@ export default function Home(props) {
                         />
                         <CardContent>
                           <Typography variant="body2" color="text.secondary">
-                            {news.title.substring(0, 80)}
+                            {news.title}
                           </Typography>
                         </CardContent>
                         <Collapse in={expanded} timeout="auto" unmountOnExit>
