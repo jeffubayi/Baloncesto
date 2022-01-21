@@ -7,8 +7,8 @@ import Link from '@mui/material/Link';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
+    <Typography variant="body2" color="text.secondary" style={{textAlign:"center"}}>
+      {'made by © '}
       <Link color="inherit" href="https://jeffubayi.xyz">
        Ubeezy
       </Link>{' '}
@@ -30,7 +30,7 @@ export default function StickyFooter() {
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="body1">
+          <Typography variant="body1" style={{textAlign:"center"}}>
            National Basketball Association
           </Typography>
           <Copyright />

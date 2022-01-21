@@ -80,12 +80,12 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
               indicatorColor="primary"
             >
               <Tab
-                label="East Conference"
+                label="Eastern Conference"
                 value="1"
                 style={{ textTransform: "capitalize",color:"white" }}
               />
               <Tab
-                label="West Conference"
+                label="Western Conference"
                 value="2"
                 style={{ textTransform: "capitalize",color:"white" }}
               />
