@@ -98,9 +98,6 @@ const isSmallWindow = useMediaQuery(`(max-width:768px)`);
           </Box>
         </Paper>
         <div
-          style={{
-            padding: "2rem",
-          }}
         >
           <TabPanel value="1">
             {isSmallWindow ? (

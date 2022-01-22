@@ -138,7 +138,7 @@ export default function Home(props) {
   return (
     <>
     {isSmallWindow ? (
-    <div style={{width:"170vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
+    <div style={{width:"200vw",  backgroundColor: "#051c2d",padding:"0.4rem"}}>
       <Carousel responsive={responsive} ssr={true} infinite={false}>
       <Card sx={{ width: 260,textAlign: "center",margin:" 0 0.5rem 0", borderRadius: "0.6rem",}}>
       <CardContent>

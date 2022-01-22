@@ -39,6 +39,7 @@
     "react-swipeable-views-utils": "^0.14.0",
     "react-window": "^1.8.6",
     "react-youtube": "^7.14.0",
+    "recharts": "^2.1.8",
     "remark-html": "^13.0.1",
     "styled-components": "^5.3.3"
   },

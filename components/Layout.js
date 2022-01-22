@@ -157,6 +157,7 @@ export default function Layout(props) {
                 </Box>
               </Link>
               <div style={{display:"grid",gridTemplateColumns: "repeat(4,auto)",gap:"0.4rem"}}>
+              <UnstyledButtonCustom item="News" urlPath="/" />
               <UnstyledButtonCustom item="Scores" urlPath="/scores" />
               <UnstyledButtonCustom item="Standings" urlPath="/standings" />
               <UnstyledButtonCustom item="Teams" urlPath="/team" />
