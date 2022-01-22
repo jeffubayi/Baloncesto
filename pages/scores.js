@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import styled from "styled-components";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
 const axios = require("axios");
 
 const ourGray = "#FFFF";
@@ -23,15 +23,13 @@ const StyledDiv = styled.div`
   gap: 1rem;
   grid-template-columns: repeat(1, auto);
   margin: 0.5rem;
-
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(3, auto);
-  }
 `;
+
 
 export default function Scores(props) {
   const [scores, setScores] = useState(props.yestScoresArray);
   const [value, setValue] = useState(null);
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -92,7 +90,7 @@ export default function Scores(props) {
             justifyContent: "center",
             color: "white",
             padding: "20px",
-            backgroundColor: "#051c2d"
+            backgroundColor: "#051c2d",
           }}
         >
           <TextField
@@ -122,15 +120,14 @@ export default function Scores(props) {
             }}
             type="date"
             defaultValue={today}
-            sx={{ width: 350 ,borderRadius: "1rem",
-            color:"white"}}
+            sx={{ width: 350, borderRadius: "1rem", color: "white" }}
             InputLabelProps={{
               shrink: true,
             }}
             focused
           />
         </div>
-
+        {isSmallWindow ? (
         <StyledDiv>
           {scores.map((game) => (
             // Here we use div instead of li tag
@@ -212,6 +209,94 @@ export default function Scores(props) {
             </Link>
           ))}
         </StyledDiv>
+        ):(
+          <div style={{  
+            display:"grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(3, auto)",
+            margin:" 0.5rem",
+           }}>
+             {scores.map((game) => (
+            // Here we use div instead of li tag
+            // because Carousel adds another li tag
+            // by itself. If we set this tag to li,
+            // it would cause the conflict.
+            <Link href={`/${game.gameId}`}>
+              <Card
+                style={{
+                  margin: "1rem",
+                  borderRadius: "0.5rem",
+                  cursor: "pointer",
+                }}
+                key={game.gameId}
+              >
+                <div
+                  style={{
+                    justifyContent: "space-evenly",
+                    display: "grid",
+                    gap: "0.4rem",
+                    gridTemplateColumns: "repeat(2,auto)",
+                  }}
+                >
+                  <Avatar
+                    src={`/${game.vTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "3.5rem", height: "3.5rem" }}
+                  />
+                  <Avatar
+                    src={`/${game.hTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "3.5rem", height: "3.5rem" }}
+                  />
+                </div>
+                <CardContent>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gap: "0.4rem",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography gutterBottom variant="h7" component="div">
+                      {game.vTeam.triCode}
+                    </Typography>
+                    <Typography gutterBottom variant="body2" component="div">
+                      vs
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      {game.hTeam.triCode}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gap: "0.4rem",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography variant="body2" color="text.secondary">
+                      {game.vTeam.score}
+                    </Typography>
+                    <Typography gutterBottom variant="caption" component="div">
+                      -
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {game.hTeam.score}
+                    </Typography>
+                  </div>
+                  {game.isRecapArticleAvail ? (
+                    <div style={{ textAlign: "center" }}>
+                      <Badge badgeContent={"FINAL"} />
+                    </div>
+                  ) : null}
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+          </div>
+        )}
       </main>
     </>
   );
