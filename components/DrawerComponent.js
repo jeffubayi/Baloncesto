@@ -110,7 +110,7 @@ export default function SwipeableTemporaryDrawer() {
                 </ListItemIcon>
                 <ListItemText primary="Standings" />
               </ListItem>
-              <ListItem button onClick={() => window.location.assign("/teams")}>
+              <ListItem button onClick={() => window.location.assign("/team")}>
                 <ListItemIcon>
                   <GroupsIcon />
                 </ListItemIcon>

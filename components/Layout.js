@@ -132,10 +132,7 @@ export default function Layout(props) {
     <div style={{ display:"grid",gridTemplateColumns:"repeat(1,auto)",width:"100%",height:"100%"}}>
       <div >
       {isSmallWindow ? (
-        <>
       <DrawerComponent/>
-      <Toolbar/>
-      </>
       ):(
         <>
         <Box sx={{ flexGrow: 1 }}>
@@ -180,6 +177,7 @@ export default function Layout(props) {
         <Toolbar/>
        </>
       )}
+      <Toolbar/>
       </div>
 
       <BodyStyles>
