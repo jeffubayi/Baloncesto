@@ -14,6 +14,10 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Footer from "./Footer";
 import UnstyledButtonCustom from "./UnstyledButtonCustom";
+import DrawerComponent from "./DrawerComponent";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 const ourGray = "#713C25";
 const lightGray = "#BE6C42";
@@ -123,12 +127,19 @@ const BodyStyles = styled.div`
 
 export default function Layout(props) {
   const userId = props.children.props.userId;
-
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
   return (
     <div style={{ display:"grid",gridTemplateColumns:"repeat(1,auto)",width:"100%",height:"100%"}}>
       <div >
+      {isSmallWindow ? (
+        <>
+      <DrawerComponent/>
+      <Toolbar/>
+      </>
+      ):(
+        <>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" style={{ backgroundColor: "#051c2d" }}>
+          <AppBar position="fixed" style={{ backgroundColor: "#051c2d" }}>
             <Toolbar>
               <Link href="/">
                 <Box sx={{ flexGrow: 1 }}>
@@ -166,6 +177,9 @@ export default function Layout(props) {
             </Toolbar>
           </AppBar>
         </Box>
+        <Toolbar/>
+       </>
+      )}
       </div>
 
       <BodyStyles>
