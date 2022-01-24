@@ -57,8 +57,8 @@ export default function TitlebarImageList() {
                   loading="lazy"
                 />
                 <ImageListItemBar
-                  title={item.fullName}
-                  subtitle={item.confName}
+                  title={item.tricode}
+                  subtitle={item.fullName}
                   actionIcon={
                     <IconButton
                       sx={{ color: "rgba(255, 255, 255, 0.54)" }}
