@@ -15,8 +15,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
-import Skeleton from '@mui/material/Skeleton';
-import Box from '@mui/material/Box';
+import Skeleton from "@mui/material/Skeleton";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const axios = require("axios");
 const paddBott = "20px";
@@ -177,7 +177,15 @@ export default function BoxScore(props) {
           }}
         >
           <p style={{ fontSize: "1.4rem" }}>vs</p>
-          <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
+          {boxscore.period.current > 3  ? (
+            <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
+          ) : (
+            <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
+              <p style={{ fontSize: "0.8rem", color: "grey" }}>Q{boxscore.period.current}</p>
+              <p style={{ fontSize: "0.7rem", color: "green" }}>{boxscore.gameDuration.hours}:{boxscore.gameDuration.minutes}</p>
+              <LinearProgress color="success" />
+            </Stack>
+          )}
         </div>
         <TeamsStyles>
           <Stack direction="row" spacing={2} style={{ marginRight: "2rem" }}>
