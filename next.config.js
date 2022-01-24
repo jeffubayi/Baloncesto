@@ -1,3 +1,5 @@
+const withPWA = require("next-pwa");
+
 module.exports = {
   images: {
     domains: [
@@ -19,7 +21,15 @@ module.exports = {
       'ak-static.cms.nba.com',
       'abc7ny.com',
       'cdn.dribbble.com',
-      'c.tenor.com'
+      'c.tenor.com',
     ],
   },
 };
+
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
+});
