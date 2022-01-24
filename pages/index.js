@@ -66,6 +66,7 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(1, auto);
   gap: 1rem;
+  margin:1rem;
 
   @media (min-width: 600px) {
     display: grid;
