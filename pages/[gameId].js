@@ -473,7 +473,7 @@ export default function BoxScore(props) {
         <>
         <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
           <h6 style={{ color: "grey",textAlign:"center",padding:"2rem" }}>
-            The stats will populate once the game  ends
+            The stats will populate once the game commences
             </h6>
             <div style={{ display:"flex",justifyContent: "center"}}>
             <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
