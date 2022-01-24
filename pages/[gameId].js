@@ -124,8 +124,8 @@ export default function BoxScore(props) {
   }
 
   const rows = [
-    createData(vTeamName, vTeam1st, vTeam2nd, vTeam3rd, vTeam4th, vTeamTotal),
-    createData(hTeamName, hTeam1st, hTeam2nd, hTeam3rd, hTeam4th, hTeamTotal),
+    createData(hTeamName, vTeam1st, vTeam2nd, vTeam3rd, vTeam4th, hTeamTotal),
+    createData(vTeamName, hTeam1st, hTeam2nd, hTeam3rd, hTeam4th, vTeamTotal),
   ];
 
   return (
@@ -225,7 +225,7 @@ export default function BoxScore(props) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.team}
+                    <b>{row.team}</b>
                   </TableCell>
                   <TableCell align="right">{row.first}</TableCell>
                   <TableCell align="right">{row.second}</TableCell>
@@ -296,7 +296,7 @@ export default function BoxScore(props) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.vTeam.triCode}
+                  <b>{row.vTeam.triCode}</b>
                   </TableCell>
                   <TableCell align="right">
                     {" "}
@@ -346,7 +346,7 @@ export default function BoxScore(props) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.hTeam.triCode}
+                    <b>{row.hTeam.triCode}</b>
                   </TableCell>
                   <TableCell align="center">
                     {" "}
@@ -409,7 +409,7 @@ export default function BoxScore(props) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.vTeam.triCode}
+                    <b>{row.vTeam.triCode}</b>
                   </TableCell>
                   <TableCell align="center">
                     {" "}
