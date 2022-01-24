@@ -15,6 +15,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 const axios = require("axios");
 const paddBott = "20px";
@@ -97,9 +99,10 @@ export default function BoxScore(props) {
   // eslint-disable-next-line
   if (!boxscore)
     return (
-      <div css={loaderStyles}>
-        <Image src="/Loader.gif" alt="Image" width={100} height={100} />
-        <p>Searching for the stats...</p>
+      <div style={{height:"100%",width:"100%",display:"grid",justifyContent:"center"}}>
+        <div style={{ display:"flex",justifyContent: "center"}}>
+            <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+            </div>
       </div>
     );
 
@@ -107,14 +110,14 @@ export default function BoxScore(props) {
   const hTeamName = boxscore.hTeam.triCode;
   const vTeamTotal = boxscore.vTeam.score;
   const hTeamTotal = boxscore.hTeam.score;
-  const vTeam1st = scoreline[0].score;
-  const vTeam2nd = scoreline[1].score;
-  const vTeam3rd = scoreline[2].score;
-  const vTeam4th = scoreline[3].score;
-  const hTeam1st = AwayScoreline[0].score;
-  const hTeam2nd = AwayScoreline[1].score;
-  const hTeam3rd = AwayScoreline[2].score;
-  const hTeam4th = AwayScoreline[3].score;
+  const vTeam1st = scoreline[0]?.score;
+  const vTeam2nd = scoreline[1]?.score;
+  const vTeam3rd = scoreline[2]?.score;
+  const vTeam4th = scoreline[3]?.score;
+  const hTeam1st = AwayScoreline[0]?.score;
+  const hTeam2nd = AwayScoreline[1]?.score;
+  const hTeam3rd = AwayScoreline[2]?.score;
+  const hTeam4th = AwayScoreline[3]?.score;
 
   function createData(team, first, second, third, fourth, total) {
     return { team, first, second, third, fourth, total };
@@ -199,6 +202,8 @@ export default function BoxScore(props) {
           </Typography>
         </TeamsStyles>
       </TeamsParentStyles>
+      {scoreline[0]?.score ? (
+        <>
       <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
         <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
           <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
@@ -463,6 +468,230 @@ export default function BoxScore(props) {
           </Table>
         </TableContainer>
       </Paper>
+      </>
+      ):(
+        <>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <h6 style={{ color: "grey",textAlign:"center",padding:"2rem" }}>
+            The stats will populate once the game  ends
+            </h6>
+            <div style={{ display:"flex",justifyContent: "center"}}>
+            <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+            </div>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+        <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+          <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Team</TableCell>
+                <TableCell align="right">1ST</TableCell>
+                <TableCell align="right">2ND</TableCell>
+                <TableCell align="right">3RD</TableCell>
+                <TableCell align="right">4TH</TableCell>
+                <TableCell align="right">TOTAL</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.hTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.hTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.vTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.vTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+        <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+          <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+              <TableCell>Team</TableCell>
+                <TableCell align="right">Blocks</TableCell>
+                <TableCell align="right">Rebounds</TableCell>
+                <TableCell align="right">Lead</TableCell>
+                <TableCell align="right">Turn Overs</TableCell>
+                <TableCell align="right">Field Goals</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.hTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.hTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.vTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.vTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+        <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+          <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Team</TableCell>
+                <TableCell align="center"> Most Points</TableCell>
+                <TableCell align="center"> Most Rebounds</TableCell>
+                <TableCell align="center">Most Assists</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.hTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.hTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableBody>
+              {[boxscore].map((row) => (
+                <TableRow
+                  key={row.vTeam}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.vTeam.triCode}
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                  <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </Paper>
+        </>
+        )}
     </>
   );
 }

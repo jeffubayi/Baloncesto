@@ -496,7 +496,7 @@ export default function Home(props) {
                   margin: " 0.5rem",
                 }}
               >
-                {newsArray.slice(0, 12).map((news) => (
+                {newsArray ? newsArray.slice(0, 12).map((news) => (
                   // It is better to use as key one of the
                   // object properties that has unique
                   // character. Hence we used _id prop,
@@ -523,7 +523,11 @@ export default function Home(props) {
                       </Collapse>
                     </Card>
                   </Link>
-                ))}
+                )):(
+                  <div style={{ display:"flex",justifyContent: "center"}}>
+                  <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+                  </div>
+                )}
               </div>
             )}
           </Grid>

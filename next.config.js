@@ -18,6 +18,8 @@ module.exports = {
       'images.daznservices.com',
       'ak-static.cms.nba.com',
       'abc7ny.com',
+      'cdn.dribbble.com',
+      'c.tenor.com'
     ],
   },
 };

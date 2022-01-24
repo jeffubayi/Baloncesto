@@ -108,6 +108,7 @@ const FooterStyles = styled.footer`
 
 const BodyStyles = styled.div`
   background: #e3e3e3;
+  
 
   h1 {
     font-family: "Crimson Text Regular", "PT Sans", "Helvetica", "Arial",

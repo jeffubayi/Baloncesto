@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItem from "@mui/material/ListItem";
+import Image from "next/image";
 
 export default function StandingList(props) {
   const [value, setValue] = React.useState("1");
@@ -92,7 +93,9 @@ export default function StandingList(props) {
                     </>
                   }/>
                 </ListItem>
-               )): <p>Not Available</p>}
+               )): <div style={{ display:"flex",justifyContent: "center"}}>
+               <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+               </div>}
             </TabPanel>
 
             <TabPanel value="2">
