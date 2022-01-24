@@ -493,7 +493,7 @@ export default function Home(props) {
                   display: "grid",
                   gap: "1rem",
                   gridTemplateColumns: "repeat(3, auto)",
-                  margin: " 0.5rem",
+                  margin: " 1.5rem",
                 }}
               >
                 {newsArray ? newsArray.slice(0, 12).map((news) => (

@@ -61,22 +61,9 @@ function TrendingSlider() {
   };
 
   return (
-    <Box style={{ flexGrow: 1,borderRadius:"0.5rem",margin:"0.6rem" }}>
+    <Box style={{ flexGrow: 1,borderRadius:"0.5rem",margin:"1rem" }}>
 <h6 style={{ color: "grey" }}>Headlines</h6>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {videos.map((step,index) => (
-          <div key={step.id}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <YouTube videoId={step.videoUrl} opts={opts}/>
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
+              <YouTube videoId="Hu146YAYAgo" opts={opts}/>
     </Box>
   );
 }
