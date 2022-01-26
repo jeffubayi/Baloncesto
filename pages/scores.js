@@ -127,6 +127,7 @@ export default function Scores(props) {
               shrink: true,
             }}
             focused
+            fullWidth
           />
         </div>
         {isSmallWindow ? (

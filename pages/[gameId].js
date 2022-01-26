@@ -17,13 +17,11 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Skeleton from "@mui/material/Skeleton";
 import LinearProgress from "@mui/material/LinearProgress";
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList } from 'react-window';
-
-
+import Box from "@mui/material/Box";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { FixedSizeList } from "react-window";
 
 const axios = require("axios");
 const paddBott = "20px";
@@ -75,7 +73,6 @@ export default function BoxScore(props) {
   const [AwayScoreline, setAscoreline] = useState([]);
   const gameDate = props.gameDate;
   function renderRow(stats) {
-
     return (
       <ListItem component="div" disablePadding>
         <ListItemButton>
@@ -104,8 +101,8 @@ export default function BoxScore(props) {
         setStats(statsObject);
         setScoreline(scoreObject);
         setAscoreline(aScoreObject);
-        setPlayerStats(players)
-        console.log(`players`,players)
+        setPlayerStats(players);
+        console.log(`players`, players);
         console.log(`scoreObject`, scoreObject);
         console.log(`statsObject`, statsObject);
         console.log(`boxscoreObject`, boxscoreObject);
@@ -120,11 +117,212 @@ export default function BoxScore(props) {
   // eslint-disable-next-line
   if (!boxscore)
     return (
-      <div style={{height:"100%",width:"100%",display:"grid",justifyContent:"center"}}>
-        <div style={{ display:"flex",justifyContent: "center"}}>
-            <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+      <>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <h6 style={{ color: "grey", textAlign: "center", padding: "2rem" }}>
+              The stats will populate once the game commences
+            </h6>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
             </div>
-      </div>
+          </Paper>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Team</TableCell>
+                    <TableCell align="right">Q1</TableCell>
+                    <TableCell align="right">Q2</TableCell>
+                    <TableCell align="right">Q3</TableCell>
+                    <TableCell align="right">Q4</TableCell>
+                    <TableCell align="right">TOTAL</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Team</TableCell>
+                    <TableCell align="right">Blocks</TableCell>
+                    <TableCell align="right">Rebounds</TableCell>
+                    <TableCell align="right">Lead</TableCell>
+                    <TableCell align="right">Turn Overs</TableCell>
+                    <TableCell align="right">Field Goals</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Team</TableCell>
+                    <TableCell align="center"> Most Points</TableCell>
+                    <TableCell align="center"> Most Rebounds</TableCell>
+                    <TableCell align="center">Most Assists</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </>
     );
 
   const vTeamName = boxscore.vTeam.triCode;
@@ -140,68 +338,95 @@ export default function BoxScore(props) {
   const hTeam3rd = AwayScoreline[2]?.score;
   const hTeam4th = AwayScoreline[3]?.score;
   const playJerseyOne = playerStats[0]?.pos;
-  const  playNamesOne = `${playerStats[0]?.firstName.charAt(
-    0
-  )}. ${playerStats[0]?.lastName}`;
+  const playNamesOne = `${playerStats[0]?.firstName.charAt(0)}. ${
+    playerStats[0]?.lastName
+  }`;
   const playMinsOne = playerStats[0]?.min;
-  const  playRebsOne = playerStats[0]?.totReb;
-  const  playAssistsOne = playerStats[0]?.assists;
+  const playRebsOne = playerStats[0]?.totReb;
+  const playAssistsOne = playerStats[0]?.assists;
   const playPointsOne = playerStats[0]?.points;
 
-
-
   const playJerseyTwo = playerStats[1]?.pos;
-  const  playNamesTwo = `${playerStats[1]?.firstName.charAt(
-    0
-  )}. ${playerStats[1]?.lastName}`;
+  const playNamesTwo = `${playerStats[1]?.firstName.charAt(0)}. ${
+    playerStats[1]?.lastName
+  }`;
   const playMinsTwo = playerStats[1]?.min;
-  const  playRebsTwo = playerStats[1]?.totReb;
-  const  playAssistsTwo = playerStats[1]?.assists;
+  const playRebsTwo = playerStats[1]?.totReb;
+  const playAssistsTwo = playerStats[1]?.assists;
   const playPointsTwo = playerStats[1]?.points;
 
-
-
   const playJerseyThree = playerStats[2]?.pos;
-  const  playNamesThree = `${playerStats[2]?.firstName.charAt(
-    0
-  )}. ${playerStats[2]?.lastName}`;
+  const playNamesThree = `${playerStats[2]?.firstName.charAt(0)}. ${
+    playerStats[2]?.lastName
+  }`;
   const playMinsThree = playerStats[2]?.min;
-  const  playRebsThree = playerStats[2]?.totReb;
-  const  playAssistsThree = playerStats[2]?.assists;
+  const playRebsThree = playerStats[2]?.totReb;
+  const playAssistsThree = playerStats[2]?.assists;
   const playPointsThree = playerStats[2]?.points;
 
-
   const playJerseyFour = playerStats[3]?.pos;
-  const  playNamesFour = `${playerStats[3]?.firstName.charAt(
-    0
-  )}. ${playerStats[3]?.lastName}`;
+  const playNamesFour = `${playerStats[3]?.firstName.charAt(0)}. ${
+    playerStats[3]?.lastName
+  }`;
   const playMinsFour = playerStats[3]?.min;
-  const  playRebsFour = playerStats[3]?.totReb;
-  const  playAssistsFour = playerStats[3]?.assists;
+  const playRebsFour = playerStats[3]?.totReb;
+  const playAssistsFour = playerStats[3]?.assists;
   const playPointsFour = playerStats[3]?.points;
 
   const playJerseyFive = playerStats[4]?.pos;
-  const  playNamesFive = `${playerStats[4]?.firstName.charAt(
-    0
-  )}. ${playerStats[4]?.lastName}`;
+  const playNamesFive = `${playerStats[4]?.firstName.charAt(0)}. ${
+    playerStats[4]?.lastName
+  }`;
   const playMinsFive = playerStats[4]?.min;
-  const  playRebsFive = playerStats[4]?.totReb;
-  const  playAssistsFive = playerStats[4]?.assists;
+  const playRebsFive = playerStats[4]?.totReb;
+  const playAssistsFive = playerStats[4]?.assists;
   const playPointsFive = playerStats[4]?.points;
 
-  
-
-  function createPlayer( names,jersey, mins, rebs, assists, points) {
-    return {  names, jersey, mins, rebs, assists, points };
+  function createPlayer(names, jersey, mins, rebs, assists, points) {
+    return { names, jersey, mins, rebs, assists, points };
   }
 
-  
   const rowPlayers = [
-    createPlayer(playNamesOne,playJerseyOne,  playMinsOne, playRebsOne, playAssistsOne, playPointsOne),
-    createPlayer(playNamesTwo,playJerseyTwo,  playMinsTwo, playRebsTwo, playAssistsTwo, playPointsTwo),
-    createPlayer(playNamesThree,playJerseyThree,  playMinsThree, playRebsThree, playAssistsThree, playPointsThree),
-    createPlayer(playNamesFour,playJerseyFour,  playMinsFour, playRebsFour, playAssistsFour, playPointsFour),
-    createPlayer(playNamesFive,playJerseyFive,  playMinsFive, playRebsFive, playAssistsFive, playPointsFive),
+    createPlayer(
+      playNamesOne,
+      playJerseyOne,
+      playMinsOne,
+      playRebsOne,
+      playAssistsOne,
+      playPointsOne
+    ),
+    createPlayer(
+      playNamesTwo,
+      playJerseyTwo,
+      playMinsTwo,
+      playRebsTwo,
+      playAssistsTwo,
+      playPointsTwo
+    ),
+    createPlayer(
+      playNamesThree,
+      playJerseyThree,
+      playMinsThree,
+      playRebsThree,
+      playAssistsThree,
+      playPointsThree
+    ),
+    createPlayer(
+      playNamesFour,
+      playJerseyFour,
+      playMinsFour,
+      playRebsFour,
+      playAssistsFour,
+      playPointsFour
+    ),
+    createPlayer(
+      playNamesFive,
+      playJerseyFive,
+      playMinsFive,
+      playRebsFive,
+      playAssistsFive,
+      playPointsFive
+    ),
   ];
 
   function createData(team, first, second, third, fourth, total) {
@@ -424,194 +649,225 @@ export default function BoxScore(props) {
             </TableContainer>
           </Paper>
 
-      <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-        <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
-          <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Team</TableCell>
-                <TableCell align="center"> Most Points</TableCell>
-                <TableCell align="center"> Most Rebounds</TableCell>
-                <TableCell align="center">Most Assists</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {[boxscore].map((row) => (
-                <TableRow
-                  key={row.hTeam}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    <b>{row.hTeam.triCode}</b>
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.hTeam.leaders.points.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.hTeam.leaders.points.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.hTeam.leaders.points.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.hTeam.leaders.points.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.hTeam.leaders.rebounds.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.hTeam.leaders.rebounds.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.hTeam.leaders.rebounds.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.hTeam.leaders.rebounds.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.hTeam.leaders.assists.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.hTeam.leaders.assists.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.hTeam.leaders.assists.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.hTeam.leaders.assists.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableBody>
-              {[boxscore].map((row) => (
-                <TableRow
-                  key={row.vTeam}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    <b>{row.vTeam.triCode}</b>
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.vTeam.leaders.points.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.vTeam.leaders.points.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.vTeam.leaders.points.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.vTeam.leaders.points.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.vTeam.leaders.rebounds.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.vTeam.leaders.rebounds.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.vTeam.leaders.rebounds.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.vTeam.leaders.rebounds.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    {stats.vTeam.leaders.assists.value}
-                    <br />{" "}
-                    <Chip
-                      avatar={
-                        <Avatar
-                          alt={stats.vTeam.leaders.assists.players[0].lastName}
-                          src=""
-                        />
-                      }
-                      label={`${stats.vTeam.leaders.assists.players[0].firstName.charAt(
-                        0
-                      )}. ${stats.vTeam.leaders.assists.players[0].lastName}`}
-                      variant="outlined"
-                    />{" "}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
               style={{ borderRadius: "0.7rem" }}
             >
-              <h5 style={{ marginLeft: "1rem" }}>Player stats</h5>
-              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-          <TableCell>STARTERS</TableCell>
-            <TableCell align="center">POS</TableCell>
-            <TableCell align="center">Minutes</TableCell>
-            <TableCell align="center">Rebounds</TableCell>
-            <TableCell align="center">Assists</TableCell>
-            <TableCell align="center">Points</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowPlayers.map((row) => (
-            <TableRow
-              key={row.jersey}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                <Chip
-                      avatar={
-                        <Avatar
-                          alt={row.jersey}
-                          src=""
-                        />
-                      }
-                      label={row.names}
-                      variant="outlined"
-                    />{" "}
-              </TableCell>
-              <TableCell align="center">{row.jersey}</TableCell>
-              <TableCell align="center">{row.mins}</TableCell>
-              <TableCell align="center">{row.rebs}</TableCell>
-              <TableCell align="center">{row.assists}</TableCell>
-              <TableCell align="center">{row.points}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-   </TableContainer>
+              <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Team</TableCell>
+                    <TableCell align="center"> Most Points</TableCell>
+                    <TableCell align="center"> Most Rebounds</TableCell>
+                    <TableCell align="center">Most Assists</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {[boxscore].map((row) => (
+                    <TableRow
+                      key={row.hTeam}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <b>{row.hTeam.triCode}</b>
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.hTeam.leaders.points.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.hTeam.leaders.points.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.hTeam.leaders.points.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.hTeam.leaders.points.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.hTeam.leaders.rebounds.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.hTeam.leaders.rebounds.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.hTeam.leaders.rebounds.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.hTeam.leaders.rebounds.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.hTeam.leaders.assists.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.hTeam.leaders.assists.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.hTeam.leaders.assists.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.hTeam.leaders.assists.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+                <TableBody>
+                  {[boxscore].map((row) => (
+                    <TableRow
+                      key={row.vTeam}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <b>{row.vTeam.triCode}</b>
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.vTeam.leaders.points.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.vTeam.leaders.points.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.vTeam.leaders.points.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.vTeam.leaders.points.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.vTeam.leaders.rebounds.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.vTeam.leaders.rebounds.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.vTeam.leaders.rebounds.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.vTeam.leaders.rebounds.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {stats.vTeam.leaders.assists.value}
+                        <br />{" "}
+                        <Chip
+                          avatar={
+                            <Avatar
+                              alt={
+                                stats.vTeam.leaders.assists.players[0].lastName
+                              }
+                              src=""
+                            />
+                          }
+                          label={`${stats.vTeam.leaders.assists.players[0].firstName.charAt(
+                            0
+                          )}. ${
+                            stats.vTeam.leaders.assists.players[0].lastName
+                          }`}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Paper>
-
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              {" "}
+              <div style={{ margin: "0.5rem" }}>
+                <Avatar
+                  alt={boxscore.vTeam.triCode}
+                  src={`/${boxscore.vTeam.triCode}.png`}
+                />
+              </div>
+              <Table
+                sx={{ minWidth: 650 }}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell>STARTERS</TableCell>
+                    <TableCell align="center">POS</TableCell>
+                    <TableCell align="center">Minutes</TableCell>
+                    <TableCell align="center">Rebounds</TableCell>
+                    <TableCell align="center">Assists</TableCell>
+                    <TableCell align="center">Points</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rowPlayers.map((row) => (
+                    <TableRow
+                      key={row.jersey}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <Chip
+                          avatar={<Avatar alt={row.jersey} src="" />}
+                          label={row.names}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">{row.jersey}</TableCell>
+                      <TableCell align="center">{row.mins}</TableCell>
+                      <TableCell align="center">{row.rebs}</TableCell>
+                      <TableCell align="center">{row.assists}</TableCell>
+                      <TableCell align="center">{row.points}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </>
       ) : (
         <>
