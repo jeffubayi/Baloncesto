@@ -79,8 +79,9 @@ export default function TitlebarImageList() {
                   loading="lazy"
                 />
                 <ImageListItemBar
+                noWrap
                   title={item.fullName}
-                  subtitle={item.confName}
+                  subtitle={item.divName}
                 />
               </ImageListItem>
             ))
