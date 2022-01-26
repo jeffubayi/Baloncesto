@@ -17,6 +17,8 @@ import UnstyledButtonCustom from "./UnstyledButtonCustom";
 import DrawerComponent from "./DrawerComponent";
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 const ourGray = "#713C25";
@@ -182,7 +184,11 @@ export default function Layout(props) {
       <BodyStyles>
       {props.children}
       </BodyStyles>
-
+      <div style={{margin:"0.5rem"}}>
+      <Fab color="primary" size="small" aria-label="scroll back to top" onClick={() => window.scrollTo(0, 0)}>
+          <KeyboardArrowUpIcon />
+        </Fab>
+        </div>
       <div>
       <Footer />
       </div>
