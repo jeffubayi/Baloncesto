@@ -13,6 +13,8 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import styled from "styled-components";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Chip from "@mui/material/Chip";
+
 const axios = require("axios");
 
 const ourGray = "#FFFF";
@@ -201,9 +203,11 @@ export default function Scores(props) {
                   </div>
                   {game.isRecapArticleAvail ? (
                     <div style={{ textAlign: "center" }}>
-                      <Badge badgeContent={"FINAL"} />
+                      <Chip label="FINAL" />
                     </div>
-                  ) : null}
+                  ) : <div style={{ textAlign: "center" }}>
+                  <Chip label={game.startTimeEastern} />
+                </div>}
                 </CardContent>
               </Card>
             </Link>
@@ -288,9 +292,13 @@ export default function Scores(props) {
                   </div>
                   {game.isRecapArticleAvail ? (
                     <div style={{ textAlign: "center" }}>
-                      <Badge badgeContent={"FINAL"} />
+                      <Chip label="FINAL" />
                     </div>
-                  ) : null}
+                  ) : (
+                    <div style={{ textAlign: "center" }}>
+                      <Chip label={game.startTimeEastern} />
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </Link>
