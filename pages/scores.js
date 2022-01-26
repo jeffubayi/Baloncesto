@@ -24,7 +24,7 @@ const StyledDiv = styled.div`
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(1, auto);
-  margin: 0.5rem;
+  margin: 0.1rem;
 `;
 
 
@@ -201,7 +201,7 @@ export default function Scores(props) {
                       {game.hTeam.score}
                     </Typography>
                   </div>
-                  {game.isRecapArticleAvail ? (
+                  {game.period.current === 4 ? (
                     <div style={{ textAlign: "center" }}>
                       <Chip label="FINAL" />
                     </div>
@@ -290,7 +290,7 @@ export default function Scores(props) {
                       {game.hTeam.score}
                     </Typography>
                   </div>
-                  {game.isRecapArticleAvail ? (
+                  {game.period.current === 4 ? (
                     <div style={{ textAlign: "center" }}>
                       <Chip label="FINAL" />
                     </div>
