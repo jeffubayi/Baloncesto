@@ -59,14 +59,6 @@ export default function TitlebarImageList() {
                 <ImageListItemBar
                   title={item.tricode}
                   subtitle={item.fullName}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                      aria-label={`info about ${item.fullName}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  }
                 />
               </ImageListItem>
             ))
@@ -89,14 +81,6 @@ export default function TitlebarImageList() {
                 <ImageListItemBar
                   title={item.fullName}
                   subtitle={item.confName}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                      aria-label={`info about ${item.fullName}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  }
                 />
               </ImageListItem>
             ))

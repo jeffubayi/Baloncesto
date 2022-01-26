@@ -174,7 +174,6 @@ export default function Layout(props) {
             </Toolbar>
           </AppBar>
         </Box>
-        <Toolbar/>
        </>
       )}
       <Toolbar/>
