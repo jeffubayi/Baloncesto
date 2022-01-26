@@ -123,7 +123,7 @@ export default function BoxScore(props) {
               The stats will populate once the game commences
             </h6>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+             <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} /> */}
             </div>
           </Paper>
           <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
@@ -309,6 +309,76 @@ export default function BoxScore(props) {
                       </TableCell>
                       <TableCell align="center">
                         {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                  <TableRow>
+                    <TableCell>STARTERS</TableCell>
+                    <TableCell align="center">POS</TableCell>
+                    <TableCell align="center">Minutes</TableCell>
+                    <TableCell align="center">Rebounds</TableCell>
+                    <TableCell align="center">Assists</TableCell>
+                    <TableCell align="center">Points</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                    </TableRow>
+                </TableBody>
+                <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                      <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Skeleton />
+                      </TableCell>
+                      <TableCell align="center">
                         <Skeleton />
                       </TableCell>
                       <TableCell align="center">
