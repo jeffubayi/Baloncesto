@@ -66,18 +66,12 @@ const loaderStyles = css`
 `;
 
 const StyledDiv = styled.div`
-  padding: 0.4rem;
-  width: "100%",
-  cursor: pointer;
   display: grid;
   grid-template-columns: repeat(1, auto);
-  gap: 1rem;
-  margin:1rem;
+  gap: 0.5rem;
 
   @media (min-width: 600px) {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 1rem;
+    grid-template-columns: repeat(2, auto);
   }
 `;
 
@@ -995,6 +989,8 @@ export default function BoxScore(props) {
               </Table>
             </TableContainer>
           </Paper>
+
+          <StyledDiv>
           <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
@@ -1046,6 +1042,7 @@ export default function BoxScore(props) {
               </Table>
             </TableContainer>
           </Paper>
+
           <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
@@ -1097,6 +1094,7 @@ export default function BoxScore(props) {
               </Table>
             </TableContainer>
           </Paper>
+        </StyledDiv>
         </>
       ) : (
         <>
