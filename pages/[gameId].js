@@ -938,6 +938,57 @@ export default function BoxScore(props) {
               </Table>
             </TableContainer>
           </Paper>
+          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+            <TableContainer
+              component={Paper}
+              style={{ borderRadius: "0.7rem" }}
+            >
+              {" "}
+              <div style={{ margin: "0.5rem" }}>
+                <Avatar
+                  alt={boxscore.hTeam.triCode}
+                  src={`/${boxscore.hTeam.triCode}.png`}
+                />
+              </div>
+              <Table
+                sx={{ minWidth: 650 }}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell>STARTERS</TableCell>
+                    <TableCell align="center">POS</TableCell>
+                    <TableCell align="center">MIN</TableCell>
+                    <TableCell align="center">RBS</TableCell>
+                    <TableCell align="center">ASTS</TableCell>
+                    <TableCell align="center">PTS</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rowPlayers.map((row) => (
+                    <TableRow
+                      key={row.jersey}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <Chip
+                          avatar={<Avatar alt={row.jersey} src="" />}
+                          label={row.names}
+                          variant="outlined"
+                        />{" "}
+                      </TableCell>
+                      <TableCell align="center">{row.jersey}</TableCell>
+                      <TableCell align="center">{row.mins}</TableCell>
+                      <TableCell align="center">{row.rebs}</TableCell>
+                      <TableCell align="center">{row.assists}</TableCell>
+                      <TableCell align="center">{row.points}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </>
       ) : (
         <>
