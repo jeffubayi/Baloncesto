@@ -65,6 +65,22 @@ const loaderStyles = css`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
 
+const StyledDiv = styled.div`
+  padding: 0.4rem;
+  width: "100%",
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 1rem;
+  margin:1rem;
+
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 1rem;
+  }
+`;
+
 export default function BoxScore(props) {
   const [boxscore, setBoxscore] = useState(null);
   const [stats, setStats] = useState(null);
@@ -452,6 +468,51 @@ export default function BoxScore(props) {
   const playAssistsFive = playerStats[4]?.assists;
   const playPointsFive = playerStats[4]?.points;
 
+  const hplayJerseyOne = playerStats[17]?.pos;
+  const hplayNamesOne = `${playerStats[17]?.firstName.charAt(0)}. ${
+    playerStats[17]?.lastName
+  }`;
+  const hplayMinsOne = playerStats[17]?.min;
+  const hplayRebsOne = playerStats[17]?.totReb;
+  const hplayAssistsOne = playerStats[17]?.assists;
+  const hplayPointsOne = playerStats[17]?.points;
+
+  const hplayJerseyTwo = playerStats[13]?.pos;
+  const hplayNamesTwo = `${playerStats[13]?.firstName.charAt(0)}. ${
+    playerStats[13]?.lastName
+  }`;
+  const hplayMinsTwo = playerStats[13]?.min;
+  const hplayRebsTwo = playerStats[13]?.totReb;
+  const hplayAssistsTwo = playerStats[13]?.assists;
+  const hplayPointsTwo = playerStats[13]?.points;
+
+  const hplayJerseyThree = playerStats[14]?.pos;
+  const hplayNamesThree = `${playerStats[14]?.firstName.charAt(0)}. ${
+    playerStats[14]?.lastName
+  }`;
+  const hplayMinsThree = playerStats[14]?.min;
+  const hplayRebsThree = playerStats[14]?.totReb;
+  const hplayAssistsThree = playerStats[14]?.assists;
+  const hplayPointsThree = playerStats[14]?.points;
+
+  const hplayJerseyFour = playerStats[15]?.pos;
+  const hplayNamesFour = `${playerStats[15]?.firstName.charAt(0)}. ${
+    playerStats[15]?.lastName
+  }`;
+  const hplayMinsFour = playerStats[15]?.min;
+  const hplayRebsFour = playerStats[15]?.totReb;
+  const hplayAssistsFour = playerStats[15]?.assists;
+  const hplayPointsFour = playerStats[15]?.points;
+
+  const hplayJerseyFive = playerStats[16]?.pos;
+  const hplayNamesFive = `${playerStats[16]?.firstName.charAt(0)}. ${
+    playerStats[16]?.lastName
+  }`;
+  const hplayMinsFive = playerStats[16]?.min;
+  const hplayRebsFive = playerStats[16]?.totReb;
+  const hplayAssistsFive = playerStats[16]?.assists;
+  const hplayPointsFive = playerStats[16]?.points;
+
   function createPlayer(names, jersey, mins, rebs, assists, points) {
     return { names, jersey, mins, rebs, assists, points };
   }
@@ -499,6 +560,53 @@ export default function BoxScore(props) {
     ),
   ];
 
+  function createPlayer(names, jersey, mins, rebs, assists, points) {
+    return { names, jersey, mins, rebs, assists, points };
+  }
+
+  const homePlayers = [
+    createPlayer(
+      hplayNamesOne,
+      hplayJerseyOne,
+      hplayMinsOne,
+      hplayRebsOne,
+      hplayAssistsOne,
+      hplayPointsOne
+    ),
+    createPlayer(
+      hplayNamesTwo,
+      hplayJerseyTwo,
+      hplayMinsTwo,
+      hplayRebsTwo,
+      hplayAssistsTwo,
+      hplayPointsTwo
+    ),
+    createPlayer(
+      hplayNamesThree,
+      hplayJerseyThree,
+      hplayMinsThree,
+      hplayRebsThree,
+      hplayAssistsThree,
+      hplayPointsThree
+    ),
+    createPlayer(
+      hplayNamesFour,
+      hplayJerseyFour,
+      hplayMinsFour,
+      hplayRebsFour,
+      hplayAssistsFour,
+      hplayPointsFour
+    ),
+    createPlayer(
+      hplayNamesFive,
+      hplayJerseyFive,
+      hplayMinsFive,
+      hplayRebsFive,
+      hplayAssistsFive,
+      hplayPointsFive
+    ),
+  ];
+
   function createData(team, first, second, third, fourth, total) {
     return { team, first, second, third, fourth, total };
   }
@@ -531,21 +639,21 @@ export default function BoxScore(props) {
           <Stack direction="row" spacing={2} style={{ marginLeft: "2rem" }}>
             <div style={{ marginTop: "0.5rem" }}>
               <Image
-                src={`/${boxscore.vTeam.triCode}.png`}
+                src={`/${boxscore.hTeam.triCode}.png`}
                 alt="Image"
                 width={100}
                 height={100}
               />
             </div>
             <div style={{ margin: "1.3rem 0.5rem 0" }}>
-              <h3 style={{ fontSize: "1.3rem" }}>{boxscore.vTeam.score}</h3>
+              <h3 style={{ fontSize: "1.3rem" }}>{boxscore.hTeam.score}</h3>
             </div>
           </Stack>
           <br />
-          <span style={{ fontSize: "1.1rem" }}>{boxscore.vTeam.triCode}</span>
+          <span style={{ fontSize: "1.1rem" }}>{boxscore.hTeam.triCode}</span>
           <br />
           <Typography variant="caption" display="block" gutterBottom>
-            ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
+            ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
           </Typography>
         </TeamsStyles>
 
@@ -570,12 +678,12 @@ export default function BoxScore(props) {
         <TeamsStyles>
           <Stack direction="row" spacing={2} style={{ marginRight: "2rem" }}>
             <div style={{ margin: "1.3rem 0.5rem 0" }}>
-              <h3 style={{ fontSize: "1.3rem" }}>{boxscore.hTeam.score}</h3>
+              <h3 style={{ fontSize: "1.3rem" }}>{boxscore.vTeam.score}</h3>
             </div>
 
             <div style={{ marginTop: "0.5rem" }}>
               <Image
-                src={`/${boxscore.hTeam.triCode}.png`}
+                src={`/${boxscore.vTeam.triCode}.png`}
                 alt="Image"
                 width={100}
                 height={100}
@@ -583,10 +691,10 @@ export default function BoxScore(props) {
             </div>
           </Stack>
           <br />
-          <span style={{ fontSize: "1.1rem" }}>{boxscore.hTeam.triCode}</span>
+          <span style={{ fontSize: "1.1rem" }}>{boxscore.vTeam.triCode}</span>
           <br />
           <Typography variant="caption" display="block" gutterBottom>
-            ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
+            ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
           </Typography>
         </TeamsStyles>
       </TeamsParentStyles>
@@ -895,8 +1003,8 @@ export default function BoxScore(props) {
               {" "}
               <div style={{ margin: "0.5rem" }}>
                 <Avatar
-                  alt={boxscore.vTeam.triCode}
-                  src={`/${boxscore.vTeam.triCode}.png`}
+                  alt={boxscore.hTeam.triCode}
+                  src={`/${boxscore.hTeam.triCode}.png`}
                 />
               </div>
               <Table
@@ -908,14 +1016,14 @@ export default function BoxScore(props) {
                   <TableRow>
                     <TableCell>STARTERS</TableCell>
                     <TableCell align="center">POS</TableCell>
-                    <TableCell align="center">Minutes</TableCell>
-                    <TableCell align="center">Rebounds</TableCell>
-                    <TableCell align="center">Assists</TableCell>
-                    <TableCell align="center">Points</TableCell>
+                    <TableCell align="center">MIN</TableCell>
+                    <TableCell align="center">RBS</TableCell>
+                    <TableCell align="center">ASTS</TableCell>
+                    <TableCell align="center">PTS</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rowPlayers.map((row) => (
+                  {homePlayers.map((row) => (
                     <TableRow
                       key={row.jersey}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -946,8 +1054,8 @@ export default function BoxScore(props) {
               {" "}
               <div style={{ margin: "0.5rem" }}>
                 <Avatar
-                  alt={boxscore.hTeam.triCode}
-                  src={`/${boxscore.hTeam.triCode}.png`}
+                  alt={boxscore.vTeam.triCode}
+                  src={`/${boxscore.vTeam.triCode}.png`}
                 />
               </div>
               <Table
