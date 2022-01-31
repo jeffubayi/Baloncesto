@@ -694,6 +694,7 @@ export default function BoxScore(props) {
       </TeamsParentStyles>
       {scoreline[0]?.score ? (
         <>
+         <StyledDiv>
           <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
@@ -820,6 +821,7 @@ export default function BoxScore(props) {
               </Table>
             </TableContainer>
           </Paper>
+          </StyledDiv>
 
           <StyledDiv>
           <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>

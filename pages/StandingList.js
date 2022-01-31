@@ -94,7 +94,7 @@ export default function StandingList(props) {
                   }/>
                 </ListItem>
                )): <div style={{ display:"flex",justifyContent: "center"}}>
-               <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />
+               {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} /> */}
                </div>}
             </TabPanel>
 
