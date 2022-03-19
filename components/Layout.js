@@ -309,7 +309,7 @@ export default function Layout(props) {
         </Drawer>
         <Box
           component="main"
-          sx={{ backgroundColor: "#f5f5f5", width: "100%" }}
+          sx={{ backgroundColor: "#f5f5f5", width: "100vw" }}
         >
           <DrawerHeader />
           {props.children}

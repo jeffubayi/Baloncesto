@@ -35,7 +35,7 @@ export default function ScoreBoard({
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 17,
+              fontSize: 16,
             }}
           >
             {hTeamName}
@@ -47,7 +47,7 @@ export default function ScoreBoard({
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 17,
+              fontSize: 16,
             }}
           >
             {hTeamScores}
@@ -66,7 +66,7 @@ export default function ScoreBoard({
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 17,
+              fontSize: 16,
             }}
           >
             {vTeamName}
@@ -80,7 +80,7 @@ export default function ScoreBoard({
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 17,
+              fontSize: 16,
             }}
           >
             {vTeamScores}
@@ -90,7 +90,7 @@ export default function ScoreBoard({
           sx={{
             color: "text.secondary",
             display: "block",
-            fontSize: 12,
+            fontSize: 11,
           }}
         >
           {gameTime ? "Final" : "Live"}

@@ -42,7 +42,7 @@ export default function StandingList(props) {
           margin: "0.6rem",
           position: "fixed",
           overflow: "auto",
-          height: 670,
+          height: 600,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}

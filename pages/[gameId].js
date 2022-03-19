@@ -21,80 +21,21 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { FixedSizeList } from "react-window";
-import React, { PureComponent } from 'react';
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ReferenceLine,
-  ResponsiveContainer,
-} from 'recharts';
-
-
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: -3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: -2000,
-    pv: -9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: -1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: -3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
 const axios = require("axios");
 const paddBott = "20px";
 const ourGray = "#051c2d";
 const lightGray = "#E9E4E4";
 
-const BoxscoreHeadingStyles = styled.div`
+const BoxscoreHeadingStyles = styled(Paper)`
   display: flex;
   align-items: center;
+  border: 2px solid ${ourGray};
+  borderradius: 2rem;
   justify-content: center;
+  margin: 3.5rem 3.5rem 0;
   padding: 0.5rem;
   font-size: 0.8rem;
-  background-color: ${ourGray};
-  color: ${lightGray};
 `;
 
 const TeamsParentStyles = styled(Paper)`
@@ -130,7 +71,7 @@ const StyledDiv = styled.div`
   gap: 0.5rem;
 
   @media (min-width: 600px) {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(1, auto);
   }
 `;
 
@@ -187,281 +128,269 @@ export default function BoxScore(props) {
   if (!boxscore)
     return (
       <>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <h6 style={{ color: "grey", textAlign: "center", padding: "2rem" }}>
-              The stats will populate once the game commences
-            </h6>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-             {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />  */}
-            </div>
-          </Paper>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell align="right">Q1</TableCell>
-                    <TableCell align="right">Q2</TableCell>
-                    <TableCell align="right">Q3</TableCell>
-                    <TableCell align="right">Q4</TableCell>
-                    <TableCell align="right">TOTAL</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell align="right">Blocks</TableCell>
-                    <TableCell align="right">Rebounds</TableCell>
-                    <TableCell align="right">Lead</TableCell>
-                    <TableCell align="right">Turn Overs</TableCell>
-                    <TableCell align="right">Field Goals</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell align="center"> Most Points</TableCell>
-                    <TableCell align="center"> Most Rebounds</TableCell>
-                    <TableCell align="center">Most Assists</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <h6 style={{ color: "grey", textAlign: "center", padding: "2rem" }}>
+            The stats will populate once the game commences
+          </h6>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} />  */}
+          </div>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+            <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
-                  <TableRow>
-                    <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">POS</TableCell>
-                    <TableCell align="center">Minutes</TableCell>
-                    <TableCell align="center">Rebounds</TableCell>
-                    <TableCell align="center">Assists</TableCell>
-                    <TableCell align="center">Points</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-                <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                      <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Skeleton />
-                      </TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </>
+                <TableRow>
+                  <TableCell>Team</TableCell>
+                  <TableCell align="right">Q1</TableCell>
+                  <TableCell align="right">Q2</TableCell>
+                  <TableCell align="right">Q3</TableCell>
+                  <TableCell align="right">Q4</TableCell>
+                  <TableCell align="right">TOTAL</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+            <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Team</TableCell>
+                  <TableCell align="right">Blocks</TableCell>
+                  <TableCell align="right">Rebounds</TableCell>
+                  <TableCell align="right">Lead</TableCell>
+                  <TableCell align="right">Turn Overs</TableCell>
+                  <TableCell align="right">Field Goals</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+            <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Team</TableCell>
+                  <TableCell align="center"> Most Points</TableCell>
+                  <TableCell align="center"> Most Rebounds</TableCell>
+                  <TableCell align="center">Most Assists</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <TableContainer component={Paper} style={{ borderRadius: "0.7rem" }}>
+            <h5 style={{ marginLeft: "1rem" }}>Game Leaders</h5>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>STARTERS</TableCell>
+                  <TableCell align="center">POS</TableCell>
+                  <TableCell align="center">Minutes</TableCell>
+                  <TableCell align="center">Rebounds</TableCell>
+                  <TableCell align="center">Assists</TableCell>
+                  <TableCell align="center">Points</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </>
     );
 
   const vTeamName = boxscore.vTeam.triCode;
@@ -687,7 +616,7 @@ export default function BoxScore(props) {
         {boxscore.homeStartDate.slice(0, 4)}
         <br />
       </BoxscoreHeadingStyles>
-      <TeamsParentStyles elevation={5} style={{ borderRadius: "0.7rem" }}>
+      <TeamsParentStyles elevation={0} style={{ borderRadius: "0.7rem" }}>
         <TeamsStyles>
           <Stack direction="row" spacing={2} style={{ marginLeft: "2rem" }}>
             <div style={{ marginTop: "0.5rem" }}>
@@ -718,12 +647,16 @@ export default function BoxScore(props) {
           }}
         >
           <p style={{ fontSize: "1.4rem" }}>vs</p>
-          {boxscore.period.current > 3  ? (
+          {boxscore.period.current > 3 ? (
             <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
           ) : (
             <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
-              <p style={{ fontSize: "0.8rem", color: "grey" }}>Q{boxscore.period.current}</p>
-              <p style={{ fontSize: "0.7rem", color: "green" }}>{boxscore.gameDuration.hours}:{boxscore.gameDuration.minutes}</p>
+              <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                Q{boxscore.period.current}
+              </p>
+              <p style={{ fontSize: "0.7rem", color: "green" }}>
+                {boxscore.gameDuration.hours}:{boxscore.gameDuration.minutes}
+              </p>
               <LinearProgress color="success" />
             </Stack>
           )}
@@ -753,140 +686,156 @@ export default function BoxScore(props) {
       </TeamsParentStyles>
       {scoreline[0]?.score ? (
         <>
-         <StyledDiv>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell align="right">Q1</TableCell>
-                    <TableCell align="right">Q2</TableCell>
-                    <TableCell align="right">Q3</TableCell>
-                    <TableCell align="right">Q4</TableCell>
-                    <TableCell align="right">TOTAL</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow
-                      key={row.team}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <b>{row.team}</b>
-                      </TableCell>
-                      <TableCell align="right">{row.first ? `${row.first}` : "-" }</TableCell>
-                      <TableCell align="right">{row.second ? `${row.second}` : "-" }</TableCell>
-                      <TableCell align="right">{row.third ? `${row.third}` : "-" }</TableCell>
-                      <TableCell align="right">{row.fourth ? `${row.fourth}` : "-" }</TableCell>
-                      <TableCell align="right">{row.total ? `${row.total}` : "-" }</TableCell>
+          <StyledDiv>
+            <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+              <TableContainer
+                component={Paper}
+                style={{ borderRadius: "0.7rem" }}
+              >
+                <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Team</TableCell>
+                      <TableCell align="right">Q1</TableCell>
+                      <TableCell align="right">Q2</TableCell>
+                      <TableCell align="right">Q3</TableCell>
+                      <TableCell align="right">Q4</TableCell>
+                      <TableCell align="right">TOTAL</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.team}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <b>{row.team}</b>
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.first ? `${row.first}` : "-"}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.second ? `${row.second}` : "-"}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.third ? `${row.third}` : "-"}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.fourth ? `${row.fourth}` : "-"}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.total ? `${row.total}` : "-"}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
 
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell align="right">Blocks</TableCell>
-                    <TableCell align="right">Rebounds</TableCell>
-                    <TableCell align="right">Lead</TableCell>
-                    <TableCell align="right">Turn Overs</TableCell>
-                    <TableCell align="right">Field Goals</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {[boxscore].map((row) => (
-                    <TableRow
-                      key={row.hTeam}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <b>{row.hTeam.triCode}</b>
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.hTeam.totals.blocks}{" "}
-                      </TableCell>
-
-                      <TableCell align="right">
-                        {" "}
-                        {stats.hTeam.totals.totReb}
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.hTeam.biggestLead}
-                      </TableCell>
-
-                      <TableCell align="right">
-                        {" "}
-                        {stats.hTeam.totals.turnovers}
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.hTeam.pointsInPaint}
-                      </TableCell>
+            <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+              <TableContainer
+                component={Paper}
+                style={{ borderRadius: "0.7rem" }}
+              >
+                <h5 style={{ marginLeft: "1rem" }}>Team stats</h5>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Team</TableCell>
+                      <TableCell align="right">Blocks</TableCell>
+                      <TableCell align="right">Rebounds</TableCell>
+                      <TableCell align="right">Lead</TableCell>
+                      <TableCell align="right">Turn Overs</TableCell>
+                      <TableCell align="right">Field Goals</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-                <TableBody>
-                  {[boxscore].map((row) => (
-                    <TableRow
-                      key={row.vTeam}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <b>{row.vTeam.triCode}</b>
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.vTeam.totals.blocks}{" "}
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.vTeam.totals.totReb}
-                      </TableCell>
+                  </TableHead>
+                  <TableBody>
+                    {[boxscore].map((row) => (
+                      <TableRow
+                        key={row.hTeam}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <b>{row.hTeam.triCode}</b>
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.hTeam.totals.blocks}{" "}
+                        </TableCell>
 
-                      <TableCell align="right">
-                        {" "}
-                        {stats.vTeam.biggestLead}
-                      </TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {stats.vTeam.totals.turnovers}
-                      </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.hTeam.totals.totReb}
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.hTeam.biggestLead}
+                        </TableCell>
 
-                      <TableCell align="right">
-                        {" "}
-                        {stats.vTeam.pointsInPaint}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.hTeam.totals.turnovers}
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.hTeam.pointsInPaint}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                  <TableBody>
+                    {[boxscore].map((row) => (
+                      <TableRow
+                        key={row.vTeam}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <b>{row.vTeam.triCode}</b>
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.vTeam.totals.blocks}{" "}
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.vTeam.totals.totReb}
+                        </TableCell>
+
+                        <TableCell align="right">
+                          {" "}
+                          {stats.vTeam.biggestLead}
+                        </TableCell>
+                        <TableCell align="right">
+                          {" "}
+                          {stats.vTeam.totals.turnovers}
+                        </TableCell>
+
+                        <TableCell align="right">
+                          {" "}
+                          {stats.vTeam.pointsInPaint}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
           </StyledDiv>
 
           <StyledDiv>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
-              style={{ borderRadius: "0.7rem" }}
+              style={{ borderRadius: "0.7rem", margin: "1rem" }}
+              elevation={0}
             >
               {" "}
               <div style={{ margin: "0.5rem" }}>
@@ -895,11 +844,7 @@ export default function BoxScore(props) {
                   src={`/${boxscore.hTeam.triCode}.png`}
                 />
               </div>
-              <Table
-                sx={{ minWidth: 650 }}
-                size="small"
-                aria-label="a dense table"
-              >
+              <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
                     <TableCell>STARTERS</TableCell>
@@ -933,60 +878,57 @@ export default function BoxScore(props) {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
 
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
-            <TableContainer
-              component={Paper}
-              style={{ borderRadius: "0.7rem" }}
-            >
-              {" "}
-              <div style={{ margin: "0.5rem" }}>
-                <Avatar
-                  alt={boxscore.vTeam.triCode}
-                  src={`/${boxscore.vTeam.triCode}.png`}
-                />
-              </div>
-              <Table
-                sx={{ minWidth: 650 }}
-                size="small"
-                aria-label="a dense table"
+            <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+              <TableContainer
+                component={Paper}
+                style={{ borderRadius: "0.7rem" }}
               >
-                <TableHead>
-                  <TableRow>
-                    <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">POS</TableCell>
-                    <TableCell align="center">MIN</TableCell>
-                    <TableCell align="center">RBS</TableCell>
-                    <TableCell align="center">ASTS</TableCell>
-                    <TableCell align="center">PTS</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rowPlayers.map((row) => (
-                    <TableRow
-                      key={row.jersey}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <Chip
-                          avatar={<Avatar alt={row.jersey} src="" />}
-                          label={row.names}
-                          variant="outlined"
-                        />{" "}
-                      </TableCell>
-                      <TableCell align="center">{row.jersey}</TableCell>
-                      <TableCell align="center">{row.mins}</TableCell>
-                      <TableCell align="center">{row.rebs}</TableCell>
-                      <TableCell align="center">{row.assists}</TableCell>
-                      <TableCell align="center">{row.points}</TableCell>
+                {" "}
+                <div style={{ margin: "0.5rem" }}>
+                  <Avatar
+                    alt={boxscore.vTeam.triCode}
+                    src={`/${boxscore.vTeam.triCode}.png`}
+                  />
+                </div>
+                <Table size="small" aria-label="a dense table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>STARTERS</TableCell>
+                      <TableCell align="center">POS</TableCell>
+                      <TableCell align="center">MIN</TableCell>
+                      <TableCell align="center">RBS</TableCell>
+                      <TableCell align="center">ASTS</TableCell>
+                      <TableCell align="center">PTS</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </StyledDiv>
+                  </TableHead>
+                  <TableBody>
+                    {rowPlayers.map((row) => (
+                      <TableRow
+                        key={row.jersey}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <Chip
+                            avatar={<Avatar alt={row.jersey} src="" />}
+                            label={row.names}
+                            variant="outlined"
+                          />{" "}
+                        </TableCell>
+                        <TableCell align="center">{row.jersey}</TableCell>
+                        <TableCell align="center">{row.mins}</TableCell>
+                        <TableCell align="center">{row.rebs}</TableCell>
+                        <TableCell align="center">{row.assists}</TableCell>
+                        <TableCell align="center">{row.points}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </StyledDiv>
         </>
       ) : (
         <>
@@ -998,13 +940,13 @@ export default function BoxScore(props) {
               {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} /> */}
             </div>
           </Paper>
-          <Paper style={{ margin: "1rem", borderRadius: "0.7rem" }}>
+          <Paper style={{ borderRadius: "0.7rem" }}>
             <TableContainer
               component={Paper}
               style={{ borderRadius: "0.7rem" }}
             >
               <h5 style={{ marginLeft: "1rem" }}>Recap</h5>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Team</TableCell>
