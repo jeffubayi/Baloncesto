@@ -60,7 +60,7 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
               fontSize: 17,
             }}
           >
-              {vTeamScores}
+              {vTeamName}
           </Box>
 
           <Box
@@ -82,7 +82,7 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
             fontSize: 12,
           }}
         >
-          Final
+           Final
         </Box>
       </Box>
     </div>
