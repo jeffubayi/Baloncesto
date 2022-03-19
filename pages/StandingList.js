@@ -11,6 +11,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItem from "@mui/material/ListItem";
 import Image from "next/image";
+import ListSubheader from "@mui/material/ListSubheader";
 
 export default function StandingList(props) {
   const [value, setValue] = React.useState("1");
@@ -34,24 +35,27 @@ export default function StandingList(props) {
   React.useEffect(() => getStandings(), []);
 
   return (
-    <div
-      style={{
-        margin: "1rem",
-      }}
-    >
-    <h6 style={{ color: "grey",marginLeft:"0.7rem" }}>Conference Standings</h6>
+    <div>
       <List
         sx={{
-          width: "100%",
+          width: 330,
           bgcolor: "background.paper",
-          margin:"0.6rem",
-          position: "relative",
+          margin: "0.6rem",
+          position: "fixed",
           overflow: "auto",
-          height: 500,
+          height: 670,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
-        subheader={<li />}
+        subheader={
+          <ListSubheader
+            component="div"
+            id="nested-list-subheader"
+            sx={{ textAlign: "center" }}
+          >
+            Conference Standings
+          </ListSubheader>
+        }
       >
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
@@ -62,12 +66,12 @@ export default function StandingList(props) {
                 style={{ textAlign: "center" }}
               >
                 <Tab
-                  label="Eastern Conference"
+                  label="Eastern "
                   value="1"
                   style={{ textTransform: "capitalize" }}
                 />
                 <Tab
-                  label="Western Conference"
+                  label="Western "
                   value="2"
                   style={{ textTransform: "capitalize" }}
                 />
@@ -75,49 +79,63 @@ export default function StandingList(props) {
             </Box>
 
             <TabPanel value="1">
-              {standings.east? standings.east.map((team) => (
-                <ListItem key={team.teamId} style={{color:"#3c4444"}}  secondaryAction={
-                  team.win
-                }>
-                  <ListItemAvatar>
-                    <Avatar
-                      src={`/${team.teamSitesOnly.teamTricode}.png`}
-                      alt="Image"
-                      style={{ width: "1.5rem", height: "1.5rem" }}
+              {standings.east ? (
+                standings.east.map((team) => (
+                  <ListItem
+                    key={team.teamId}
+                    style={{ color: "#3c4444" }}
+                    secondaryAction={team.win}
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        src={`/${team.teamSitesOnly.teamTricode}.png`}
+                        alt="Image"
+                        style={{ width: "1.5rem", height: "1.5rem" }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <>
+                          <p>{team.teamSitesOnly.teamNickname}</p>
+                        </>
+                      }
                     />
-                  </ListItemAvatar>
-                  <ListItemText primary={
-                    <>
-                    <p>
-                     {team.teamSitesOnly.teamNickname}</p> 
-                    </>
-                  }/>
-                </ListItem>
-               )): <div style={{ display:"flex",justifyContent: "center"}}>
-               {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} /> */}
-               </div>}
+                  </ListItem>
+                ))
+              ) : (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  {/* <Image src="https://c.tenor.com/IOxRkEFDAwMAAAAj/sports-sportsmanias.gif" alt="Image" width={150} height={150} /> */}
+                </div>
+              )}
             </TabPanel>
 
             <TabPanel value="2">
-              {standings.west? standings.west.map((team) => (
-                <ListItem key={team.teamId} style={{color:"#3c4444"}} secondaryAction={
-                  team.win
-                }>
-                  <ListItemAvatar>
-                    <Avatar
-                      src={`/${team.teamSitesOnly.teamTricode}.png`}
-                      alt="Image"
-                      style={{ width: "1.5rem", height: "1.5rem" }}
+              {standings.west ? (
+                standings.west.map((team) => (
+                  <ListItem
+                    key={team.teamId}
+                    style={{ color: "#3c4444" }}
+                    secondaryAction={team.win}
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        src={`/${team.teamSitesOnly.teamTricode}.png`}
+                        alt="Image"
+                        style={{ width: "1.5rem", height: "1.5rem" }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <>
+                          <p>{team.teamSitesOnly.teamNickname}</p>
+                        </>
+                      }
                     />
-                  </ListItemAvatar>
-                  <ListItemText  primary={
-                    <>
-                    <p>
-                     {team.teamSitesOnly.teamNickname}</p> 
-                    </>
-                  } />
-                </ListItem>
-              )): <p>Not Available</p>}
+                  </ListItem>
+                ))
+              ) : (
+                <p>Not Available</p>
+              )}
             </TabPanel>
           </TabContext>
         </Box>
