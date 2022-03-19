@@ -6,7 +6,6 @@ import getLastNightScores from "../components/yesterdayscores";
 import { setDateCookieClientSide } from "../util/cookies";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import { useState } from "react";
 import StandingList from "./StandingList";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -21,7 +20,7 @@ const StyledBox = styled(Box)`
   }
 
   @media (min-width: 1300px) {
-    margin: 3rem 2rem 1rem;
+    margin: 3rem 2rem 2rem;
   }
 `;
 

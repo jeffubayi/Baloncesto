@@ -1,6 +1,4 @@
-import { css } from "@emotion/react";
 import Head from "next/head";
-import Image from "next/image";
 import getStandings from "../components/standings";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
@@ -17,7 +15,6 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { StyledDiv } from "./scores";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

@@ -10,7 +10,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItem from "@mui/material/ListItem";
-import Image from "next/image";
 import ListSubheader from "@mui/material/ListSubheader";
 
 export default function StandingList(props) {
