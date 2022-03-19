@@ -1,10 +1,8 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
+
 import { Button, Card } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { StyledDiv } from "./index";
 import Link from "next/link";
@@ -29,8 +27,8 @@ export default function NewsCard({ newsArray: newsArray }) {
               </CardContent>
               <CardActions>
                 <Link href={news.link}>
-                  <Button size="small"  sx={{ textTransform: "capitalize",color: "#051c2d" }}>
-                    Read
+                  <Button size="small"  sx={{ textTransform: "lowerCase",color: "#051c2d" }}>
+                    Read more
                   </Button>
                 </Link>
               </CardActions>
