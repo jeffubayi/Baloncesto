@@ -28,7 +28,7 @@ export default function TitlebarImageList() {
     <Head>
         <title>NBA | Teams</title>
       </Head>
-      <div style={{marginTop: "1rem" }}>
+      <div style={{marginTop: "3rem" }}>
       {isSmallWindow ? (
         <ImageList sx={{ width: "100%", height: "auto" }}>
           {teams.sacramento ? (

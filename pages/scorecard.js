@@ -1,11 +1,18 @@
-
 import { Box } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import Link from "next/link";
 
-export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}) {
+export default function ScoreBoard({
+  hTeamName,
+  hTeamScores,
+  vTeamName,
+  vTeamScores,
+  gameId,
+  gameTime,
+}) {
   return (
-    <div>
+    <Link href={`/${gameId}`}>
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -13,6 +20,7 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
           borderRadius: 2,
           p: 2,
           minWidth: 170,
+          cursor: "pointer",
         }}
       >
         <Stack direction="row" spacing={2}>
@@ -30,11 +38,12 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
               fontSize: 17,
             }}
           >
-           {hTeamName}
+            {hTeamName}
           </Box>
           <Box
             sx={{
-              color: "text.secondary",
+              color:
+                hTeamScores >= vTeamScores ? "success.dark" : "text.secondary",
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
@@ -60,12 +69,14 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
               fontSize: 17,
             }}
           >
-              {vTeamName}
+            {vTeamName}
           </Box>
 
           <Box
             sx={{
-              color: "success.dark",
+              color:
+                vTeamScores >= hTeamScores ? "success.dark" : "text.secondary",
+
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
@@ -82,9 +93,9 @@ export default function ScoreBoard({hTeamName,hTeamScores,vTeamName,vTeamScores}
             fontSize: 12,
           }}
         >
-           Final
+          {gameTime ? "Final" : "Live"}
         </Box>
       </Box>
-    </div>
+    </Link>
   );
 }

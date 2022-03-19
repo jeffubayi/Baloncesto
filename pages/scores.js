@@ -59,13 +59,11 @@ export default function Scores(props) {
       <div style={{width: "100%"}}>
         <div
           style={{
-            backgroundColor: "#FFFF",
             display: "grid",
             justifyContent: "center",
             color: "white",
-            padding: "20px",
-            backgroundColor: "#051c2d",
-            marginTop: "5.5rem"
+            padding: "10px",
+            marginTop: "3rem"
           }}
         >
           <TextField
