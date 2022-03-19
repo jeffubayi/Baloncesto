@@ -31,20 +31,9 @@ export default function TitlebarImageList() {
   return (
     <>
     <Head>
-        <title>NBA Teams</title>
+        <title>NBA | Teams</title>
       </Head>
-      <Paper
-          elevation={4}
-          style={{
-            display: "grid",
-            width: "auto",
-            justifyContent: "center",
-            textAlign: "center",
-            backgroundColor: "#051c2d"
-          }}
-        >
-          <h4 style={{color:"#FFF"}}>NBA Franchise Teams</h4>
-        </Paper>
+      <div style={{marginTop: "1rem" }}>
       {isSmallWindow ? (
         <ImageList sx={{ width: "100%", height: "auto" }}>
           {teams.sacramento ? (
@@ -91,6 +80,7 @@ export default function TitlebarImageList() {
         </ImageList>
         </div>
       )}
+    </div>
     </>
   );
 }
