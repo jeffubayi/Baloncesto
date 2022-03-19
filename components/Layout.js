@@ -21,6 +21,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import Stack from "@mui/material/Stack";
 import LoginIcon from "@mui/icons-material/Login";
 import ScoreCard from "../pages/scorecard";
+import Tooltip from '@mui/material/Tooltip';
 import { ThemeProvider, createTheme } from "@mui/system";
 
 const axios = require("axios");
@@ -267,18 +268,23 @@ export default function Layout(props) {
               </ListItemIcon>
               <ListItemText primary="Login" />
             </ListItemButton>
+            <Tooltip title="News">
             <ListItemButton onClick={() => window.location.assign("/")}>
               <ListItemIcon>
                 <NewspaperIcon sx={{ color: "#051c2d" }} />
               </ListItemIcon>
               <ListItemText primary="News" />
             </ListItemButton>
+            </Tooltip >
+            <Tooltip title="Scores">
             <ListItemButton onClick={() => window.location.assign("/scores")}>
               <ListItemIcon>
                 <SportsBasketballIcon sx={{ color: "#051c2d" }} />
               </ListItemIcon>
               <ListItemText primary="Scores" />
             </ListItemButton>
+            </Tooltip >
+            <Tooltip title="Standings">
             <ListItemButton
               onClick={() => window.location.assign("/standings")}
             >
@@ -287,17 +293,20 @@ export default function Layout(props) {
               </ListItemIcon>
               <ListItemText primary="Standings" />
             </ListItemButton>
+            </Tooltip >
+            <Tooltip title="Teams">
             <ListItemButton onClick={() => window.location.assign("/team")}>
               <ListItemIcon>
                 <GroupsIcon sx={{ color: "#051c2d" }} />
               </ListItemIcon>
               <ListItemText primary="Teams" />
             </ListItemButton>
+            </Tooltip >
           </List>
         </Drawer>
         <Box
           component="main"
-          sx={{ backgroundColor: "#f5f5f5", width: "100vw" }}
+          sx={{ backgroundColor: "#f5f5f5", width: "100%" }}
         >
           <DrawerHeader />
           {props.children}
