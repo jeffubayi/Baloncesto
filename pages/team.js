@@ -52,7 +52,7 @@ export default function TitlebarImageList() {
         </ImageList>
       ) : (
         <div style={{margin:"1rem"}}>
-        <ImageList style={{ width: "100%", height:"auto" ,display:"grid",gridTemplateColumns:"repeat(5,1fr)",}}>
+        <ImageList style={{ width: "100%", height:"auto" ,display:"grid",gridTemplateColumns:"repeat(6,1fr)",}}>
           {teams.sacramento ? (
             teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
               <ImageListItem  key={item.teamId}>
