@@ -30,7 +30,7 @@ export default function NewsCard({ newsArray: newsArray }) {
   return (
     <>
       <StyledDiv>
-        {newsArray.map((news) => (
+        {newsArray?.map((news) => (
             <Card sx={{ borderRadius: "0.3rem" }} elevation={0}>
               <CardMedia
                 component="img"
