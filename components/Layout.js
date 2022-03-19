@@ -20,9 +20,10 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import GroupsIcon from "@mui/icons-material/Groups";
 import Stack from "@mui/material/Stack";
 import LoginIcon from "@mui/icons-material/Login";
-import ScoreCard from "./cards";
-
+import ScoreCard from "../pages/scorecard";
 import { ThemeProvider, createTheme } from "@mui/system";
+
+const axios = require("axios");
 
 const drawerWidth = 240;
 
@@ -123,7 +124,36 @@ export default function Layout(props) {
   const userId = props.children.props.userId;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const currentScores = props.scoresArray;
+  const [currentScores, setCurrentScores] = React.useState();
+
+  async function GetLastNightScores() {
+    const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
+      .toISOString()
+      .slice(0, 10);
+
+    const yesterdayWithoutDashes = yesterday.replace(/-/g, "");
+
+    const options = {
+      method: "GET",
+      url: `https://data.nba.net/10s/prod/v1/${yesterdayWithoutDashes}/scoreboard.json`,
+      params: {},
+      headers: {},
+    };
+    const scoresArray = await axios
+      .request(options)
+      .then(function (response) {
+        const scArray = response.data.games;
+        return scArray;
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+    setCurrentScores(scoresArray);
+  }
+
+  React.useEffect(() => {
+    GetLastNightScores();
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -184,19 +214,14 @@ export default function Layout(props) {
               sx={{ flexGrow: 1, alignSelf: "flex-end", overflow: "auto" }}
             >
               <Stack direction="row" spacing={1}>
-                {/* {currentScores.map((scores) => ( */}
-                <ScoreCard
-                  // hTeamName={scores.hTeam.triCode}
-                  // hTeamScores={scores.vTeam.score}
-                  // vTeamName={scores.vTeam.triCode}
-                  // vTeamScores={scores.vTeam.score}
-
-                  hTeamName="LAL"
-                  hTeamScores="100"
-                  vTeamName="GSW"
-                  vTeamScores="109"
-                />
-                {/* ))} */}
+                {currentScores?.map((scores) => (
+                    <ScoreCard
+                      hTeamName={scores.hTeam.triCode}
+                      hTeamScores={scores.hTeam.score}
+                      vTeamName={scores.vTeam.triCode}
+                      vTeamScores={scores.vTeam.score}
+                    />
+                  ))}
               </Stack>
             </Box>
           </StyledToolbar>
@@ -247,7 +272,10 @@ export default function Layout(props) {
             </ListItemButton>
           </List>
         </Drawer>
-        <Box component="main" sx={{ backgroundColor: "#f5f5f5" }}>
+        <Box
+          component="main"
+          sx={{ backgroundColor: "#f5f5f5", width: "100vw" }}
+        >
           <DrawerHeader />
           {props.children}
         </Box>
