@@ -160,7 +160,7 @@ export default function Layout(props) {
             </Box>
             <Box
               component="div"
-              sx={{ flexGrow: 1, alignSelf: "flex-end", overflow: "auto" }}
+              sx={{  overflow: "auto" }}
             >
               <Stack direction="row" spacing={1}>
                 {currentScores?.map((scores) => (
