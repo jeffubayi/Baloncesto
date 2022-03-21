@@ -39,10 +39,10 @@ export default function StandingList(props) {
         sx={{
           width: 330,
           bgcolor: "background.paper",
-          margin: "0.6rem",
+          margin: "0.4rem",
           position: "fixed",
           overflow: "auto",
-          height: 600,
+          height: 540,
           borderRadius: "0.5rem",
           "& ul": { padding: 0 },
         }}
