@@ -14,13 +14,13 @@ import Head from "next/head";
 
 const StyledBox = styled(Box)`
   width: auto;
-  margin: 3.5rem 0.5rem 1rem;
+  margin: 2rem 0.5rem 1rem;
   @media (min-width: 600px) {
-    margin: 3rem 2rem 1rem;
+    margin: 1.5rem 2rem 1rem;
   }
 
   @media (min-width: 1300px) {
-    margin: 3rem 2rem 2rem;
+    margin: 2rem 2rem 2rem;
   }
 `;
 
@@ -38,13 +38,13 @@ export const StyledDiv = styled.div`
   @media (min-width: 1300px) {
     grid-template-columns: repeat(2, auto);
     gap: 1.5rem;
-    margin: 1rem 0 0;
+    margin: 0.8rem 0 0;
   }
 `;
 
 export default function Home(props) {
   const isSmallWindow = useMediaQuery(`(max-width:768px)`);
-  const newsArray = props.newsArray;
+  const [news, setNews] = React.useState();
   React.useEffect((newsArray) => [newsArray]);
   const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
     .toISOString()
@@ -52,8 +52,12 @@ export default function Home(props) {
 
   const yesterdayWithoutDashes = yesterday.replace(/-/g, "");
 
-  setDateCookieClientSide(yesterdayWithoutDashes);
+  React.useEffect(() => {
+    const newsArray = props.newsArray;
+    setNews(newsArray);
+  }, [props]);
 
+  setDateCookieClientSide(yesterdayWithoutDashes);
 
   return (
     <>
@@ -61,11 +65,10 @@ export default function Home(props) {
         <title>NBA | News</title>
       </Head>
       <StyledBox>
-       
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           {/* news list */}
           <Grid item xs={12} md={8} lg={9}>
-            <NewsFeed newsArray={newsArray} />
+            <NewsFeed newsArray={news} />
           </Grid>
 
           {/* standing list */}

@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   width: "100%",
-  margin: 0.2rem 0 0;
+  margin: 1rem 0 2rem;
   cursor: pointer;
   display: grid;
   grid-template-columns: repeat(1, auto);
@@ -22,7 +22,7 @@ const StyledDiv = styled.div`
   @media (min-width: 1300px) {
     grid-template-columns: repeat(2, auto);
     gap: 1.5rem;
-    margin: 1rem 0 0;
+    margin: 0.2rem 0 0.5rem;
   }
 `;
 
