@@ -89,10 +89,19 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function Layout(props) {
   const router = useRouter();
-  const userId = props.children.props.userId;
   const theme = useTheme();
   const [currentScores, setCurrentScores] = React.useState();
   const [value, setValue] = React.useState("news");
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const redirect = (newValue) => {
     if (newValue === 0) {
@@ -141,6 +150,62 @@ export default function Layout(props) {
         <CssBaseline />
         <MuiAppBar sx={{ backgroundColor: "#051c2d" }} elevation={0}>
           <StyledToolbar>
+            {!isSmallWindow && (
+              <div>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Drawer
+                  anchor="left"
+                  open={open}
+                  onClose={handleDrawerClose}
+                >
+                  <List>
+                    <ListItem
+                      button
+                      onClick={() => window.location.assign("/")}
+                    >
+                      <ListItemIcon>
+                        <NewspaperIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="News" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      onClick={() => window.location.assign("/scores")}
+                    >
+                      <ListItemIcon>
+                        <SportsBasketballIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Scores" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      onClick={() => window.location.assign("/standings")}
+                    >
+                      <ListItemIcon>
+                        <FormatListNumberedIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Standings" />
+                    </ListItem>
+                    <ListItem
+                      button
+                      onClick={() => window.location.assign("/team")}
+                    >
+                      <ListItemIcon>
+                        <GroupsIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Teams" />
+                    </ListItem>
+                  </List>
+                </Drawer>
+              </div>
+            )}
             <Box>
               <a>
                 <svg
@@ -166,10 +231,7 @@ export default function Layout(props) {
                 </svg>
               </a>
             </Box>
-            <Box
-              component="div"
-              sx={{  overflow: "auto" }}
-            >
+            <Box component="div" sx={{ overflow: "auto" }}>
               <Stack direction="row" spacing={1}>
                 {currentScores?.map((scores) => (
                   <ScoreCard
@@ -203,38 +265,40 @@ export default function Layout(props) {
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
-        <Toolbar/>
-        <Paper
-          sx={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            px: "0.8rem",
-            py: "0.3rem",
-          }}
-          elevation={3}
-        >
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-              redirect(newValue);
+        <Toolbar />
+        {isSmallWindow && (
+          <Paper
+            sx={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              px: "0.8rem",
+              py: "0.3rem",
             }}
+            elevation={3}
           >
-            <BottomNavigationAction label="News" icon={<NewspaperIcon />} />
-            <BottomNavigationAction
-              label="Scores"
-              icon={<SportsBasketballIcon />}
-            />
-            <BottomNavigationAction
-              label="Standings"
-              icon={<FormatListNumberedIcon />}
-            />
-            <BottomNavigationAction label="Teams" icon={<GroupsIcon />} />
-          </BottomNavigation>
-        </Paper>
+            <BottomNavigation
+              showLabels
+              value={value}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+                redirect(newValue);
+              }}
+            >
+              <BottomNavigationAction label="News" icon={<NewspaperIcon />} />
+              <BottomNavigationAction
+                label="Scores"
+                icon={<SportsBasketballIcon />}
+              />
+              <BottomNavigationAction
+                label="Standings"
+                icon={<FormatListNumberedIcon />}
+              />
+              <BottomNavigationAction label="Teams" icon={<GroupsIcon />} />
+            </BottomNavigation>
+          </Paper>
+        )}
       </Box>
     </ThemeProvider>
   );
