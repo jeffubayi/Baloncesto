@@ -11,7 +11,7 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import GroupsIcon from "@mui/icons-material/Groups";
 import Stack from "@mui/material/Stack";
 import ScoreCard from "../pages/scorecard";
-import { ThemeProvider, createTheme } from "@mui/system";
+import { ThemeProvider } from "@mui/system";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
@@ -20,6 +20,14 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { useRouter } from "next/router";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const axios = require("axios");
 
@@ -72,7 +80,7 @@ ScrollTop.propTypes = {
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
   paddingTop: theme.spacing(1),
-  paddingBottom: theme.spacing(2),
+  paddingBottom: 4,
   // Override media queries injected by theme.mixins.toolbar
   "@media all": {
     minHeight: 128,
