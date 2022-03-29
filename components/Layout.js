@@ -80,6 +80,7 @@ ScrollTop.propTypes = {
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
   paddingTop: theme.spacing(1),
+  paddingBottom: theme.spacing(1)
 }));
 
 export default function Layout(props) {
