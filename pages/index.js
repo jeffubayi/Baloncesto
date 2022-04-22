@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NewsFeed from "./news";
 import Head from "next/head";
+import { CircularProgress } from "@mui/material";
 
 const StyledBox = styled(Box)`
   width: auto;
@@ -68,7 +69,25 @@ export default function Home(props) {
         <Grid container spacing={4}>
           {/* news list */}
           <Grid item xs={12} md={8} lg={9}>
-            <NewsFeed newsArray={news} />
+            {news ? (
+              <NewsFeed newsArray={news} />
+            ) : (
+              <Box sx={{ flexGrow: 1, mt: 20 }}>
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={3}
+                >
+                  <Grid item lg={12}></Grid>
+                  <Grid item lg={12}>
+                    <CircularProgress />
+                  </Grid>
+                  <Grid item lg={12}></Grid>
+                </Grid>
+              </Box>
+            )}
           </Grid>
 
           {/* standing list */}

@@ -15,12 +15,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
-import Skeleton from "@mui/material/Skeleton";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress,LinearProgress } from "@mui/material";
 import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
 import Tab from "@mui/material/Tab";
@@ -126,7 +122,7 @@ export default function BoxScore(props) {
   if (!boxscore)
     return (
       <Box sx={{ flexGrow: 1, mt: 20 }}>
-        <Grid container justifyContent="center" alignItems="center" spacing={3}>
+        <Grid container  direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid item lg={12}></Grid>
           <Grid item lg={12}>
             <CircularProgress />
