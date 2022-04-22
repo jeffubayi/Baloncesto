@@ -256,13 +256,14 @@ export default function Layout(props) {
           {props.children}
         </Box>
 
+        {isSmallWindow && (
+          <>
         <ScrollTop {...props}>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
         <Toolbar />
-        {isSmallWindow && (
           <Paper
             sx={{
               position: "fixed",
@@ -294,6 +295,7 @@ export default function Layout(props) {
               <BottomNavigationAction label="Teams" icon={<GroupsIcon />} />
             </BottomNavigation>
           </Paper>
+          </>
         )}
       </Box>
     </ThemeProvider>

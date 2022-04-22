@@ -21,6 +21,7 @@ export default async function getGeneralNewsFromLastTwoDays() {
     .request(options)
     .then(function (response) {
       const newsArray = response.data.articles;
+      console.log(newsArray);
 
       return newsArray;
     })

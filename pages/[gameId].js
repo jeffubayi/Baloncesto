@@ -16,7 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Skeleton from "@mui/material/Skeleton";
-import LinearProgress from "@mui/material/LinearProgress";
+import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -29,9 +29,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
 const axios = require("axios");
-const paddBott = "10px";
 const ourGray = "#051c2d";
-const lightGray = "#E9E4E4";
 
 const BoxscoreHeadingStyles = styled(Paper)`
   display: flex;
@@ -90,17 +88,8 @@ export default function BoxScore(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const gameDate = props.gameDate;
-  function renderRow(stats) {
-    return (
-      <ListItem component="div" disablePadding>
-        <ListItemButton>
-          <ListItemText primary={stats.activePlayers} />
-        </ListItemButton>
-      </ListItem>
-    );
-  }
 
+  const gameDate = props.gameDate;
   const gameId = props.gameId;
   useEffect(() => {
     const options = {
@@ -137,19 +126,12 @@ export default function BoxScore(props) {
   if (!boxscore)
     return (
       <Box sx={{ flexGrow: 1, mt: 20 }}>
-        <Grid container spacing={3}>
+        <Grid container justifyContent="center" alignItems="center" spacing={3}>
+          <Grid item lg={12}></Grid>
           <Grid item lg={12}>
-            <Paper sx={{ p: 10, borderRadius: 1 }}>No data</Paper>
+            <CircularProgress />
           </Grid>
-          <Grid item xs>
-            <Paper sx={{ p: 10, borderRadius: 1 }}>No data</Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper sx={{ p: 10, borderRadius: 1 }}>No data</Paper>
-          </Grid>
-          <Grid item xs>
-            <Paper sx={{ p: 10, borderRadius: 1 }}>No data</Paper>
-          </Grid>
+          <Grid item lg={12}></Grid>
         </Grid>
       </Box>
     );
@@ -401,37 +383,43 @@ export default function BoxScore(props) {
                 </Typography>
               </TeamsStyles>
 
-              <div
-                style={{
-                  display: "grid",
-                  justifyContent: "center",
-                  marginTop: "1rem",
-                }}
-              >
-                <p style={{ fontSize: "1.4rem" }}>vs</p>
-                {boxscore.period.current > 3 ? (
-                  <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
-                ) : (
-                  <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
-                    <p style={{ fontSize: "0.8rem", color: "grey" }}>
-                      Q{boxscore.period.current}
-                    </p>
-                    <p style={{ fontSize: "0.7rem", color: "green" }}>
-                      {boxscore.gameDuration.hours}:
-                      {boxscore.gameDuration.minutes}
-                    </p>
-                    <LinearProgress color="success" />
+              <TeamsStyles>
+                <Stack direction="row" spacing={2}>
+                  <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{
+                      color: "grey.500",
+                    }}
+                    spacing={2}
+                  >
+                    <p style={{ fontSize: "1.4rem" }}>vs</p>
+                    {boxscore.period.current > 3 ? (
+                      <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
+                    ) : (
+                      <div>
+                        <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                          Q{boxscore.period.current}
+                        </p>
+                        <p style={{ fontSize: "0.7rem", color: "green" }}>
+                          {boxscore.gameDuration.hours}:
+                          {boxscore.gameDuration.minutes}
+                        </p>
+                        <LinearProgress color="success" />
+                      </div>
+                    )}
+                    <div>
+                      <p style={{ fontSize: "0.7rem", color: "grey" }}>
+                        {boxscore.arena.name},{"    "}
+                        <br />
+                        {boxscore.arena.city}
+                        <br />
+                      </p>
+                    </div>
                   </Stack>
-                )}
-                <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
-                  <p style={{ fontSize: "0.7rem", color: "grey" }}>
-                    {boxscore.arena.name},{"    "}
-                    <br />
-                    {boxscore.arena.city}
-                    <br />
-                  </p>
                 </Stack>
-              </div>
+              </TeamsStyles>
               <TeamsStyles>
                 <Stack
                   direction="row"
@@ -481,8 +469,6 @@ export default function BoxScore(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">POS</TableCell>
-                    <TableCell align="center">MIN</TableCell>
                     <TableCell align="center">RBS</TableCell>
                     <TableCell align="center">ASTS</TableCell>
                     <TableCell align="center">PTS</TableCell>
@@ -501,8 +487,6 @@ export default function BoxScore(props) {
                           variant="outlined"
                         />{" "}
                       </TableCell>
-                      <TableCell align="center">{row.jersey}</TableCell>
-                      <TableCell align="center">{row.mins}</TableCell>
                       <TableCell align="center">{row.rebs}</TableCell>
                       <TableCell align="center">{row.assists}</TableCell>
                       <TableCell align="center">{row.points}</TableCell>
@@ -690,8 +674,6 @@ export default function BoxScore(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">POS</TableCell>
-                    <TableCell align="center">MIN</TableCell>
                     <TableCell align="center">RBS</TableCell>
                     <TableCell align="center">ASTS</TableCell>
                     <TableCell align="center">PTS</TableCell>
@@ -712,8 +694,6 @@ export default function BoxScore(props) {
                           variant="outlined"
                         />{" "}
                       </TableCell>
-                      <TableCell align="center">{row.jersey}</TableCell>
-                      <TableCell align="center">{row.mins}</TableCell>
                       <TableCell align="center">{row.rebs}</TableCell>
                       <TableCell align="center">{row.assists}</TableCell>
                       <TableCell align="center">{row.points}</TableCell>
