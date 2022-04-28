@@ -1,10 +1,18 @@
-
 import { Button, Card } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
+import {
+  Typography,
+  Box,
+  ListItemAvatar,
+  ListItemText,
+  List,
+  ListItem,
+} from "@mui/material";
 import Link from "next/link";
+
+import Avatar from "@mui/material/Avatar";
 
 import styled from "styled-components";
 
@@ -31,27 +39,49 @@ export default function NewsCard({ newsArray: newsArray }) {
     <>
       <StyledDiv>
         {newsArray?.map((news) => (
-            <Card sx={{ borderRadius: "0.3rem" }} elevation={0}>
+          <Link href={news.link}>
+            <Card
+              sx={{
+                display: "flex",
+                borderRadius: "0.5rem",
+                boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
+              }}
+            >
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <CardContent sx={{ flex: "1 0 auto" }}>
+                  <Typography
+                    component="div"
+                    variant="h5"
+                    sx={{ color: "#051c2d", fontSize: "0.75rem", pb: 1 }}
+                  >
+                    {news.title}
+                  </Typography>
+                  <Typography
+                    component="div"
+                    variant="body2"
+                    sx={{ color: "grey", fontSize: "0.4rem" }}
+                  >
+                    {news.summary.slice(0, 300)}...
+                  </Typography>
+                </CardContent>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "space-between",
+                    pl: 1,
+                    pb: 1,
+                  }}
+                ></Box>
+              </Box>
               <CardMedia
                 component="img"
-                height={350}
+                sx={{ width: 151 }}
                 image={news.media}
-                alt="nba"
+                alt="news media"
               />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {news.title}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link href={news.link}>
-                  <Button size="small"  sx={{ textTransform: "lowerCase",color: "#051c2d" }}>
-                    Read more
-                  </Button>
-                </Link>
-              </CardActions>
             </Card>
-          ))}
+          </Link>
+        ))}
       </StyledDiv>
     </>
   );

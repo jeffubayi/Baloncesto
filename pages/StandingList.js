@@ -50,7 +50,7 @@ export default function StandingList(props) {
           <ListSubheader
             component="div"
             id="nested-list-subheader"
-            sx={{ textAlign: "center" }}
+            sx={{ textAlign: "center", fontSize: "0.8rem" }}
           >
             Conference Standings
           </ListSubheader>
@@ -65,14 +65,14 @@ export default function StandingList(props) {
                 style={{ textAlign: "center" }}
               >
                 <Tab
-                  label="Eastern "
+                  label="Eastern Conference"
                   value="1"
-                  style={{ textTransform: "capitalize" }}
+                  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }}
                 />
                 <Tab
-                  label="Western "
+                  label="Western Conference"
                   value="2"
-                  style={{ textTransform: "capitalize" }}
+                  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }}
                 />
               </TabList>
             </Box>
@@ -82,7 +82,7 @@ export default function StandingList(props) {
                 standings.east.map((team) => (
                   <ListItem
                     key={team.teamId}
-                    style={{ color: "#3c4444" }}
+                    style={{ color: "#3c4444",fontSize: "0.7rem"  }}
                     secondaryAction={team.win}
                   >
                     <ListItemAvatar>
@@ -95,7 +95,7 @@ export default function StandingList(props) {
                     <ListItemText
                       primary={
                         <>
-                          <p>{team.teamSitesOnly.teamNickname}</p>
+                          <p style={{ fontSize: "0.7rem" }}>{team.teamSitesOnly.teamNickname}</p>
                         </>
                       }
                     />
@@ -113,7 +113,7 @@ export default function StandingList(props) {
                 standings.west.map((team) => (
                   <ListItem
                     key={team.teamId}
-                    style={{ color: "#3c4444" }}
+                    style={{ color: "#3c4444",fontSize: "0.7rem"  }}
                     secondaryAction={team.win}
                   >
                     <ListItemAvatar>
@@ -126,7 +126,7 @@ export default function StandingList(props) {
                     <ListItemText
                       primary={
                         <>
-                          <p>{team.teamSitesOnly.teamNickname}</p>
+                          <p style={{ fontSize: "0.7rem" }}>{team.teamSitesOnly.teamNickname}</p>
                         </>
                       }
                     />
