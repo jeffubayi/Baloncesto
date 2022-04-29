@@ -80,7 +80,7 @@ ScrollTop.propTypes = {
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
   paddingTop: theme.spacing(1),
-  paddingBottom: theme.spacing(1)
+  paddingBottom: theme.spacing(1),
 }));
 
 export default function Layout(props) {
@@ -156,11 +156,7 @@ export default function Layout(props) {
                 >
                   <MenuIcon />
                 </IconButton>
-                <Drawer
-                  anchor="left"
-                  open={open}
-                  onClose={handleDrawerClose}
-                >
+                <Drawer anchor="left" open={open} onClose={handleDrawerClose}>
                   <List>
                     <ListItem
                       button
@@ -169,7 +165,7 @@ export default function Layout(props) {
                       <ListItemIcon>
                         <NewspaperIcon />
                       </ListItemIcon>
-                      <ListItemText primary="News" />
+                      <ListItemText sx={{ fontSize: "0.2rem" }} primary="News" />
                     </ListItem>
                     <ListItem
                       button
@@ -255,46 +251,50 @@ export default function Layout(props) {
         >
           {props.children}
         </Box>
-
-        {isSmallWindow && (
-          <>
         <ScrollTop {...props}>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
         <Toolbar />
-          <Paper
-            sx={{
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              px: "0.8rem",
-              py: "0.3rem",
-            }}
-            elevation={3}
-          >
-            <BottomNavigation
-              showLabels
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-                redirect(newValue);
+
+        {isSmallWindow && (
+          <>
+            <Paper
+              sx={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                px: "0.8rem",
+                py: "0.3rem",
               }}
+              elevation={3}
             >
-              <BottomNavigationAction label="News" icon={<NewspaperIcon />} />
-              <BottomNavigationAction
-                label="Scores"
-                icon={<SportsBasketballIcon />}
-              />
-              <BottomNavigationAction
-                label="Standings"
-                icon={<FormatListNumberedIcon />}
-              />
-              <BottomNavigationAction label="Teams" icon={<GroupsIcon />} />
-            </BottomNavigation>
-          </Paper>
+              <BottomNavigation
+                showLabels
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                  redirect(newValue);
+                }}
+              >
+                <BottomNavigationAction label="News" icon={<NewspaperIcon />} />
+                <BottomNavigationAction
+                  label="Scores"
+                  icon={<SportsBasketballIcon />}
+                />
+                <BottomNavigationAction
+                  label="Standings"
+                  icon={<FormatListNumberedIcon />}
+                />
+                <BottomNavigationAction
+                  sx={{ fontSize: "0.2rem" }}
+                  label="Teams"
+                  icon={<GroupsIcon />}
+                />
+              </BottomNavigation>
+            </Paper>
           </>
         )}
       </Box>
