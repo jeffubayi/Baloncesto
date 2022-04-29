@@ -1,11 +1,12 @@
 //
 import * as React from "react";
-import Box from "@mui/material/Box";
+import { Box, CardMedia, IconButton } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Head from "next/head";
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function TitlebarImageList() {
   const [teams, setTeams] = React.useState([]);
@@ -25,57 +26,79 @@ export default function TitlebarImageList() {
 
   return (
     <>
-    <Head>
+      <Head>
         <title>NBA | Teams</title>
       </Head>
-      <div style={{marginTop: "3rem" }}>
       {isSmallWindow ? (
-        <ImageList sx={{ width: "100%", height: "auto" }}>
+        <ImageList sx={{ width: "auto", height: "auto" }}>
           {teams.sacramento ? (
-            teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
-              <ImageListItem key={item.teamId}>
-                <img
-                  src={`/${item.tricode}.png`}
-                  srcSet={`/${item.tricode}.png`}
-                  alt={item.fullName}
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                  title={item.tricode}
-                  subtitle={item.fullName}
-                />
-              </ImageListItem>
-            ))
+            teams.sacramento
+              .filter((sac) => !sac.urlName.startsWith("utah"))
+              .map((item) => (
+                <ImageListItem key={item.teamId}>
+                  <img
+                    src={`/${item.tricode}.png`}
+                    srcSet={`/${item.tricode}.png`}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                  <ImageListItemBar
+                    title={item.tricode}
+                    subtitle={item.fullName}
+                    position="below"
+                  />
+                </ImageListItem>
+              ))
           ) : (
             <p>Not Available</p>
           )}
         </ImageList>
       ) : (
-        <div style={{margin:"1rem"}}>
-        <ImageList style={{ width: "100%", height:"auto" ,display:"grid",gridTemplateColumns:"repeat(6,1fr)",}}>
-          {teams.sacramento ? (
-            teams.sacramento.filter(sac => !sac.urlName.startsWith("utah")).map((item) => (
-              <ImageListItem  key={item.teamId}>
-                <img
-                  src={`/${item.tricode}.png`}
-                  srcSet={`/${item.tricode}.png`}
-                  alt={item.fullName}
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                noWrap
-                  title={item.fullName}
-                  subtitle={item.divName}
-                />
-              </ImageListItem>
-            ))
-          ) : (
-            <p>Not Available</p>
-          )}
-        </ImageList>
+        <div style={{ margin: "1rem" }}>
+          <ImageList
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(5,1fr)",
+            }}
+          >
+            {teams.sacramento ? (
+              teams.sacramento
+                .filter((sac) => !sac.urlName.startsWith("utah"))
+                .map((item) => (
+                  <ImageListItem key={item.teamId}>
+                    <img
+                      src={`/${item.tricode}.png`}
+                      srcSet={`/${item.tricode}.png`}
+                      alt={item.fullName}
+                      loading="lazy"
+                    />
+                    <ImageListItemBar
+                      sx={{ fontSize: "0.2rem" }}
+                      position="below"
+                      title={item.fullName}
+                      subtitle={item.divName}
+                      // actionIcon={
+                      //   <IconButton
+                      //   sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                      //     aria-label="add to favorites"
+                      //     onClick={() => {
+                      //     }}
+                      //   >
+                      //      <InfoIcon />
+                      //   </IconButton>
+                      // }
+                      // actionPosition="right"
+                    />
+                  </ImageListItem>
+                ))
+            ) : (
+              <p>Not Available</p>
+            )}
+          </ImageList>{" "}
         </div>
       )}
-    </div>
     </>
   );
 }

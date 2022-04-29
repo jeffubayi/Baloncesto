@@ -12,7 +12,7 @@ export default async function handler(
       lang: "en",
       sources:
         "nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com, nbadraft.net, prosportsdaily.com",
-      page_size: 20,
+      page_size: 70,
     },
     headers: {
       "x-rapidapi-key": "1059d1e8fcmshfbea3f707e923ffp11cf21jsnf22363d410bc",
