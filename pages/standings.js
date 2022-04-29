@@ -21,6 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#051c2d",
     color: theme.palette.common.white,
+    fontSize: 15,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -50,7 +51,7 @@ export default function Standings(props) {
       <Head>
         <title>NBA | Standings</title>
       </Head>
-      <div style={{ marginTop: "4rem" }}>
+      <div>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
@@ -60,19 +61,19 @@ export default function Standings(props) {
               indicatorColor="primary"
             >
               <Tab
-                label="Eastern Conference"
+                label={isSmallWindow ? "East conference" : "Eastern Conference"}
                 value="1"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label="Western Conference"
+                label={isSmallWindow ? "West conference" : "Western Conference"}
                 value="2"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label="Divisions"
+                label={isSmallWindow ? "Divisions" : "Divisions"}
                 value="3"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
             </TabList>
           </Box>
@@ -92,13 +93,9 @@ export default function Standings(props) {
                             height={30}
                           />
                         </StyledTableCell>
-                        <StyledTableCell>East</StyledTableCell>
+                        <StyledTableCell>Eastern</StyledTableCell>
                         <StyledTableCell>Wins</StyledTableCell>
                         <StyledTableCell>Loses</StyledTableCell>
-                        <StyledTableCell align="right">GB</StyledTableCell>
-                        <StyledTableCell align="right">Pct(%)</StyledTableCell>
-                        <StyledTableCell align="right">L10</StyledTableCell>
-                        <StyledTableCell align="right">Streak</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -118,13 +115,13 @@ export default function Standings(props) {
                               <Avatar
                                 src={`/${team.teamSitesOnly.teamTricode}.png`}
                                 alt="Image"
-                                style={{ width: "1.5rem", height: "1.5rem" }}
+                                style={{ width: "1rem", height: "1rem" }}
                               />
                               {team.teamSitesOnly.teamNickname}
                             </StyledTableCell>
                             <StyledTableCell>{team.win}</StyledTableCell>
                             <StyledTableCell>{team.loss}</StyledTableCell>
-                            <StyledTableCell align="right">
+                            {/* <StyledTableCell align="right">
                               {team.gamesBehind}
                             </StyledTableCell>
                             <StyledTableCell align="right">
@@ -136,7 +133,7 @@ export default function Standings(props) {
                             <StyledTableCell align="right">
                               {" "}
                               {team.streak}{" "}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                           </StyledTableRow>
                         )
                       )}
@@ -157,7 +154,7 @@ export default function Standings(props) {
                             height={30}
                           />
                         </StyledTableCell>
-                        <StyledTableCell>Eastern</StyledTableCell>
+                        <StyledTableCell>Eastern Conference</StyledTableCell>
                         <StyledTableCell>Wins</StyledTableCell>
                         <StyledTableCell>Loses</StyledTableCell>
                         <StyledTableCell align="right">GB</StyledTableCell>
@@ -195,7 +192,7 @@ export default function Standings(props) {
                               <Avatar
                                 src={`/${team.teamSitesOnly.teamTricode}.png`}
                                 alt="Image"
-                                style={{ width: "1.5rem", height: "1.5rem" }}
+                                style={{ width: "1rem", height: "1rem" }}
                               />{" "}
                               {team.teamSitesOnly.teamKey.concat(
                                 " ",
@@ -257,13 +254,13 @@ export default function Standings(props) {
                             height={30}
                           />
                         </StyledTableCell>
-                        <StyledTableCell>West</StyledTableCell>
+                        <StyledTableCell>Western</StyledTableCell>
                         <StyledTableCell align="right">Wins</StyledTableCell>
                         <StyledTableCell align="right">Loses</StyledTableCell>
-                        <StyledTableCell align="right">GB</StyledTableCell>
+                        {/* <StyledTableCell align="right">GB</StyledTableCell>
                         <StyledTableCell align="right">Pct(%)</StyledTableCell>
                         <StyledTableCell align="right">L10</StyledTableCell>
-                        <StyledTableCell align="right">Streak</StyledTableCell>
+                        <StyledTableCell align="right">Streak</StyledTableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -277,14 +274,12 @@ export default function Standings(props) {
                               style={{
                                 display: "grid",
                                 gridTemplateColumns: "repeat(2,auto)",
-                                gap: "0.5rem",
                               }}
                             >
                               <Avatar
                                 src={`/${team.teamSitesOnly.teamTricode}.png`}
                                 alt="Image"
-                                width={30}
-                                height={30}
+                                style={{ width: "1rem", height: "1rem" }}
                               />
                               {team.teamSitesOnly.teamNickname}
                             </StyledTableCell>
@@ -294,7 +289,7 @@ export default function Standings(props) {
                             <StyledTableCell align="right">
                               {team.loss}
                             </StyledTableCell>
-                            <StyledTableCell align="right">
+                            {/* <StyledTableCell align="right">
                               {team.gamesBehind}
                             </StyledTableCell>
                             <StyledTableCell align="right">
@@ -306,7 +301,7 @@ export default function Standings(props) {
                             <StyledTableCell align="right">
                               {" "}
                               {team.streak}{" "}
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                           </StyledTableRow>
                         )
                       )}
@@ -327,7 +322,7 @@ export default function Standings(props) {
                             height={30}
                           />
                         </StyledTableCell>
-                        <StyledTableCell>Western </StyledTableCell>
+                        <StyledTableCell>Western Conference</StyledTableCell>
                         <StyledTableCell>Wins</StyledTableCell>
                         <StyledTableCell>Loses</StyledTableCell>
                         <StyledTableCell align="right">GB</StyledTableCell>
@@ -342,9 +337,7 @@ export default function Standings(props) {
                         <StyledTableCell align="right">
                           Away win
                         </StyledTableCell>
-                        <StyledTableCell align="right">
-                          Away loss
-                        </StyledTableCell>
+                        <StyledTableCell>Away loss</StyledTableCell>
                         <StyledTableCell align="right">Streak</StyledTableCell>
                       </TableRow>
                     </TableHead>
@@ -357,6 +350,7 @@ export default function Standings(props) {
                               {team.confRank}
                             </StyledTableCell>
                             <StyledTableCell
+                              align="left"
                               style={{
                                 display: "grid",
                                 gridTemplateColumns: "repeat(2,auto)",
@@ -365,7 +359,7 @@ export default function Standings(props) {
                               <Avatar
                                 src={`/${team.teamSitesOnly.teamTricode}.png`}
                                 alt="Image"
-                                style={{ width: "1.5rem", height: "1.5rem" }}
+                                style={{ width: "1rem", height: "1rem" }}
                               />{" "}
                               {team.teamSitesOnly.teamKey.concat(
                                 " ",

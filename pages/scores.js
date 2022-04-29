@@ -64,80 +64,85 @@ export default function Scores(props) {
             justifyContent: "center",
             color: "white",
             padding: "10px",
-            marginTop: "3rem",
+            marginTop: "0.8rem",
           }}
         >
-           {!isSmallWindow ? (
-          <DesktopDatePicker
-          variant="standard"
-            label="Select Game Day"
-            inputFormat="MM/DD/yyyy"
-            value=""
-            onChange={(newDate) => {
-              console.log(
-                "event == ",
-                new Date(newDate).toISOString().slice(0, 10).replace(/-/g, "")
-              );
-              const newDateWithoutDashes = newDate._d
-                .toISOString()
-                .slice(0, 10)
-                .replace(/-/g, "");
-              setDate(newDateWithoutDashes);
+          {!isSmallWindow ? (
+            <DesktopDatePicker
+              variant="standard"
+              label="Select Game Day"
+              inputFormat="MM/DD/yyyy"
+              value=""
+              onChange={(newDate) => {
+                console.log(
+                  "event == ",
+                  new Date(newDate).toISOString().slice(0, 10).replace(/-/g, "")
+                );
+                const newDateWithoutDashes = newDate._d
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace(/-/g, "");
+                setDate(newDateWithoutDashes);
 
-              const options = {
-                method: "GET",
-                url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
-                params: {},
-                headers: {},
-              };
-              axios
-                .request(options)
-                .then(function (response) {
-                  const scoresArray = response.data.games;
+                const options = {
+                  method: "GET",
+                  url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
+                  params: {},
+                  headers: {},
+                };
+                axios
+                  .request(options)
+                  .then(function (response) {
+                    const scoresArray = response.data.games;
 
-                  return setScores(scoresArray);
-                })
-                .catch(function (error) {
-                  console.error(error);
-                });
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-          ):(
-          <TextField
-            id="date"
-            label="Game scores on day:"
-            onChange={(e) => {
-              const newDate = e.target.value
-              const newDateWithoutDashes = newDate.replace(/-/g, "")
-              setDate(newDateWithoutDashes);
+                    return setScores(scoresArray);
+                  })
+                  .catch(function (error) {
+                    console.error(error);
+                  });
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          ) : (
+            <TextField
+              id="date"
+              label="Game scores on day:"
+              onChange={(e) => {
+                const newDate = e.target.value;
+                const newDateWithoutDashes = newDate.replace(/-/g, "");
+                setDate(newDateWithoutDashes);
 
-              const options = {
-                method: "GET",
-                url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
-                params: {},
-                headers: {},
-              };
-              axios
-                .request(options)
-                .then(function (response) {
-                  const scoresArray = response.data.games;
+                const options = {
+                  method: "GET",
+                  url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
+                  params: {},
+                  headers: {},
+                };
+                axios
+                  .request(options)
+                  .then(function (response) {
+                    const scoresArray = response.data.games;
 
-                  return setScores(scoresArray);
-                })
-                .catch(function (error) {
-                  console.error(error);
-                });
-            }}
-            type="date"
-            defaultValue={today}
-            sx={{ width: 350, borderRadius: "1rem", color: "white" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            focused
-            fullWidth
-          />
+                    return setScores(scoresArray);
+                  })
+                  .catch(function (error) {
+                    console.error(error);
+                  });
+              }}
+              type="date"
+              defaultValue={today}
+              sx={{
+                width: 350,
+                borderRadius: "1rem",
+                color: "white",
+                fontSize: "0.55rem",
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              focused
+              fullWidth
+            />
           )}
         </div>
 
@@ -150,9 +155,10 @@ export default function Scores(props) {
               // it would cause the conflict.
               <Link href={`/${game.gameId}`}>
                 <Card
-                  style={{
-                    margin: "1rem",
+                  sx={{
+                    margin: "0 0.5rem 0 0.5rem",
                     borderRadius: "0.5rem",
+                    boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
                     cursor: "pointer",
                   }}
                   key={game.gameId}
@@ -161,19 +167,19 @@ export default function Scores(props) {
                     style={{
                       justifyContent: "space-evenly",
                       display: "grid",
-                      gap: "0.4rem",
+                      marginTop: "0.2rem",
                       gridTemplateColumns: "repeat(2,auto)",
                     }}
                   >
                     <Avatar
                       src={`/${game.vTeam.triCode}.png`}
                       alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
+                      style={{ width: "2.8rem", height: "2.8rem" }}
                     />
                     <Avatar
                       src={`/${game.hTeam.triCode}.png`}
                       alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
+                      style={{ width: "2.8rem", height: "2.8rem" }}
                     />
                   </div>
                   <CardContent>
@@ -181,17 +187,31 @@ export default function Scores(props) {
                       style={{
                         justifyContent: "space-evenly",
                         display: "grid",
-                        gap: "0.4rem",
                         gridTemplateColumns: "repeat(3,auto)",
                       }}
                     >
-                      <Typography gutterBottom variant="h7" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                        sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                      >
                         {game.vTeam.triCode}
                       </Typography>
-                      <Typography gutterBottom variant="body2" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="div"
+                        sx={{ fontSize: "0.75rem" }}
+                      >
                         vs
                       </Typography>
-                      <Typography gutterBottom variant="h7" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                        sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                      >
                         {game.hTeam.triCode}
                       </Typography>
                     </div>
@@ -199,11 +219,14 @@ export default function Scores(props) {
                       style={{
                         justifyContent: "space-evenly",
                         display: "grid",
-                        gap: "0.4rem",
                         gridTemplateColumns: "repeat(3,auto)",
                       }}
                     >
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ fontSize: "0.75rem" }}
+                      >
                         {game.vTeam.score}
                       </Typography>
                       <Typography
@@ -213,17 +236,24 @@ export default function Scores(props) {
                       >
                         -
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ fontSize: "0.75rem" }}
+                      >
                         {game.hTeam.score}
                       </Typography>
                     </div>
                     {game.period.current === 4 ? (
                       <div style={{ textAlign: "center" }}>
-                        <Chip label="FINAL" />
+                        <Chip label="FINAL" sx={{ fontSize: "0.45rem" }} />
                       </div>
                     ) : (
                       <div style={{ textAlign: "center" }}>
-                        <Chip label={game.startTimeEastern} />
+                        <Chip
+                          label={game.startTimeEastern}
+                          sx={{ fontSize: "0.55rem" }}
+                        />
                       </div>
                     )}
                   </CardContent>
@@ -250,6 +280,7 @@ export default function Scores(props) {
                   style={{
                     margin: "1rem",
                     borderRadius: "0.5rem",
+                    boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
                     cursor: "pointer",
                   }}
                   key={game.gameId}
@@ -259,18 +290,19 @@ export default function Scores(props) {
                       justifyContent: "space-evenly",
                       display: "grid",
                       gap: "0.4rem",
+                      marginTop: "0.6rem",
                       gridTemplateColumns: "repeat(2,auto)",
                     }}
                   >
                     <Avatar
                       src={`/${game.vTeam.triCode}.png`}
                       alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
+                      style={{ width: "3rem", height: "3rem" }}
                     />
                     <Avatar
                       src={`/${game.hTeam.triCode}.png`}
                       alt="Image"
-                      style={{ width: "3.5rem", height: "3.5rem" }}
+                      style={{ width: "3rem", height: "3rem" }}
                     />
                   </div>
                   <CardContent>
@@ -282,13 +314,28 @@ export default function Scores(props) {
                         gridTemplateColumns: "repeat(3,auto)",
                       }}
                     >
-                      <Typography gutterBottom variant="h7" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                        sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                      >
                         {game.vTeam.triCode}
                       </Typography>
-                      <Typography gutterBottom variant="body2" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="div"
+                        sx={{ fontSize: "0.6rem" }}
+                      >
                         vs
                       </Typography>
-                      <Typography gutterBottom variant="h7" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                        sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                      >
                         {game.hTeam.triCode}
                       </Typography>
                     </div>
@@ -300,7 +347,11 @@ export default function Scores(props) {
                         gridTemplateColumns: "repeat(3,auto)",
                       }}
                     >
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ fontSize: "0.75rem" }}
+                      >
                         {game.vTeam.score}
                       </Typography>
                       <Typography
@@ -310,17 +361,24 @@ export default function Scores(props) {
                       >
                         -
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ fontSize: "0.75rem" }}
+                      >
                         {game.hTeam.score}
                       </Typography>
                     </div>
                     {game.period.current === 4 ? (
                       <div style={{ textAlign: "center" }}>
-                        <Chip label="FINAL" />
+                        <Chip label="FINAL" sx={{ fontSize: "0.45rem" }} />
                       </div>
                     ) : (
                       <div style={{ textAlign: "center" }}>
-                        <Chip label={game.startTimeEastern} />
+                        <Chip
+                          label={game.startTimeEastern}
+                          sx={{ fontSize: "0.55rem" }}
+                        />
                       </div>
                     )}
                   </CardContent>
