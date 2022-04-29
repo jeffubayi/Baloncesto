@@ -15,27 +15,26 @@ export default function ScoreBoard({
     <Link href={`/${gameId}`}>
       <Box
         sx={{
-          bgcolor: "background.paper",
-          boxShadow: 1,
-          borderRadius: 2,
-          p: 1,
-          minWidth: 170,
           cursor: "pointer",
+          borderRadius: "0.2rem",
+          boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
+          border:"1px solid #fff",
+          p:1
         }}
       >
         <Stack direction="row" spacing={2}>
           <Avatar
             src={`/${hTeamName}.png`}
             alt="Image"
-            style={{ width: "1rem", height: "1rem" }}
+            style={{ width: "0.7rem", height: "0.7rem" }}
           />
           <Box
             sx={{
-              color: "text.primary",
+              color: "#fff",
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 16,
+              fontSize: 13,
             }}
           >
             {hTeamName}
@@ -43,11 +42,12 @@ export default function ScoreBoard({
           <Box
             sx={{
               color:
-                hTeamScores >= vTeamScores ? "success.dark" : "text.secondary",
+                hTeamScores >= vTeamScores ? "#90EE90" : "#fff",
               display: "block",
               fontWeight: "bold",
+              
               mx: 0.5,
-              fontSize: 16,
+              fontSize: 13,
             }}
           >
             {hTeamScores}
@@ -58,15 +58,15 @@ export default function ScoreBoard({
           <Avatar
             src={`/${vTeamName}.png`}
             alt="Image"
-            style={{ width: "1rem", height: "1rem" }}
+            style={{ width: "0.7rem", height: "0.7rem" }}
           />
           <Box
             sx={{
-              color: "text.primary",
+              color: "#fff",
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 16,
+              fontSize: 13,
             }}
           >
             {vTeamName}
@@ -75,12 +75,12 @@ export default function ScoreBoard({
           <Box
             sx={{
               color:
-                vTeamScores >= hTeamScores ? "success.dark" : "text.secondary",
+                vTeamScores >= hTeamScores ? "#90EE90" : "#fff",
 
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 16,
+              fontSize: 13,
             }}
           >
             {vTeamScores}
@@ -88,7 +88,7 @@ export default function ScoreBoard({
         </Stack>
         <Box
           sx={{
-            color: "text.secondary",
+            color: "#fff",
             display: "block",
             fontSize: 11,
           }}
