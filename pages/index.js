@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NewsFeed from "./news";
 import Head from "next/head";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress ,Typography} from "@mui/material";
 
 const StyledBox = styled(Box)`
   width: auto;
@@ -84,7 +84,15 @@ export default function Home(props) {
                   <Grid item lg={12}>
                     <CircularProgress />
                   </Grid>
-                  <Grid item lg={12}></Grid>
+                  <Grid item lg={12}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: "0.75rem" }}
+                    >
+                      Fetching from NBA database
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Box>
             )}

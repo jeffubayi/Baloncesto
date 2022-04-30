@@ -15,14 +15,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
-import { CircularProgress,LinearProgress } from "@mui/material";
+import { CircularProgress, LinearProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { StyledTableCell } from "./standings";
 
 const axios = require("axios");
 const ourGray = "#051c2d";
@@ -122,15 +124,31 @@ export default function BoxScore(props) {
   if (!boxscore)
     return (
       <Box sx={{ flexGrow: 1, mt: 20 }}>
-        <Grid container  direction="column" justifyContent="center" alignItems="center" spacing={3}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
           <Grid item lg={12}></Grid>
           <Grid item lg={12}>
             <CircularProgress />
           </Grid>
-          <Grid item lg={12}></Grid>
+          <Grid item lg={12}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontSize: "0.75rem" }}
+            >
+              Fetching from NBA database
+            </Typography>
+          </Grid>
         </Grid>
       </Box>
     );
+
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
 
   const vTeamName = boxscore.vTeam.triCode;
   const hTeamName = boxscore.hTeam.triCode;
@@ -345,108 +363,211 @@ export default function BoxScore(props) {
       <Box sx={{ flexGrow: 1, m: 1 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <TeamsParentStyles
-              elevation={0}
-              style={{ borderRadius: "0.7rem", marginTop: "1rem" }}
-            >
-              <TeamsStyles>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  style={{ marginLeft: "2rem" }}
+            {isSmallWindow ? (
+              <Card
+                sx={{
+                  margin: "0 0.5rem 0 0.5rem",
+                  borderRadius: "0.5rem",
+                  boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    justifyContent: "space-evenly",
+                    display: "grid",
+                    marginTop: "0.2rem",
+                    gridTemplateColumns: "repeat(2,auto)",
+                  }}
                 >
-                  <div style={{ marginTop: "0.5rem" }}>
-                    <Image
-                      src={`/${boxscore.hTeam.triCode}.png`}
-                      alt="Image"
-                      width={100}
-                      height={100}
+                  <Avatar
+                    src={`/${boxscore.vTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "2.8rem", height: "2.8rem" }}
+                  />
+                  <Avatar
+                    src={`/${boxscore.hTeam.triCode}.png`}
+                    alt="Image"
+                    style={{ width: "2.8rem", height: "2.8rem" }}
+                  />
+                </div>
+                <CardContent>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="h7"
+                      component="div"
+                      sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                    >
+                      {boxscore.vTeam.triCode}
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                      component="div"
+                      sx={{ fontSize: "0.75rem" }}
+                    >
+                      vs
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="h7"
+                      component="div"
+                      sx={{ fontSize: "0.85rem", fontWeight: "500" }}
+                    >
+                      {boxscore.hTeam.triCode}
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      justifyContent: "space-evenly",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3,auto)",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: "0.75rem" }}
+                    >
+                      {boxscore.vTeam.score}
+                    </Typography>
+                    <Typography gutterBottom variant="caption" component="div">
+                      -
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: "0.75rem" }}
+                    >
+                      {boxscore.hTeam.score}
+                    </Typography>
+                  </div>
+                  {boxscore.period.current === 4 && (
+                    <div style={{ textAlign: "center" }}>
+                      <Chip label="FINAL" sx={{ fontSize: "0.45rem" }} />
+                    </div>
+                  )}
+                  <div style={{ textAlign: "center" }}>
+                    <Chip
+                      label={boxscore.arena.name}
+                      sx={{ fontSize: "0.55rem" }}
                     />
                   </div>
-                  <div style={{ margin: "1.3rem 0.5rem 0" }}>
-                    <h3 style={{ fontSize: "1.3rem" }}>
-                      {boxscore.hTeam.score}
-                    </h3>
-                  </div>
-                </Stack>
-                <br />
-                <span style={{ fontSize: "1.1rem" }}>
-                  {boxscore.hTeam.triCode}
-                </span>
-                <br />
-                <Typography variant="caption" display="block" gutterBottom>
-                  ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
-                </Typography>
-              </TeamsStyles>
-
-              <TeamsStyles>
-                <Stack direction="row" spacing={2}>
+                </CardContent>
+              </Card>
+            ) : (
+              <TeamsParentStyles
+                elevation={0}
+                style={{ borderRadius: "0.7rem", marginTop: "1rem" }}
+              >
+                <TeamsStyles>
                   <Stack
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    sx={{
-                      color: "grey.500",
-                    }}
+                    direction="row"
                     spacing={2}
+                    style={{ marginLeft: "2rem" }}
                   >
-                    <p style={{ fontSize: "1.4rem" }}>vs</p>
-                    {boxscore.period.current > 3 ? (
-                      <p style={{ fontSize: "0.8rem", color: "grey" }}>FINAL</p>
-                    ) : (
-                      <div>
-                        <p style={{ fontSize: "0.8rem", color: "grey" }}>
-                          Q{boxscore.period.current}
-                        </p>
-                        <p style={{ fontSize: "0.7rem", color: "green" }}>
-                          {boxscore.gameDuration.hours}:
-                          {boxscore.gameDuration.minutes}
-                        </p>
-                        <LinearProgress color="success" />
-                      </div>
-                    )}
-                    <div>
-                      <p style={{ fontSize: "0.7rem", color: "grey" }}>
-                        {boxscore.arena.name},{"    "}
-                        <br />
-                        {boxscore.arena.city}
-                        <br />
-                      </p>
+                    <div style={{ marginTop: "0.5rem" }}>
+                      <Image
+                        src={`/${boxscore.hTeam.triCode}.png`}
+                        alt="Image"
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                    <div style={{ margin: "1.3rem 0.5rem 0" }}>
+                      <h3 style={{ fontSize: "1.3rem" }}>
+                        {boxscore.hTeam.score}
+                      </h3>
                     </div>
                   </Stack>
-                </Stack>
-              </TeamsStyles>
-              <TeamsStyles>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  style={{ marginRight: "2rem" }}
-                >
-                  <div style={{ margin: "1.3rem 0.5rem 0" }}>
-                    <h3 style={{ fontSize: "1.3rem" }}>
-                      {boxscore.vTeam.score}
-                    </h3>
-                  </div>
+                  <br />
+                  <span style={{ fontSize: "1.1rem" }}>
+                    {boxscore.hTeam.triCode}
+                  </span>
+                  <br />
+                  <Typography variant="caption" display="block" gutterBottom>
+                    ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
+                  </Typography>
+                </TeamsStyles>
 
-                  <div style={{ marginTop: "0.5rem" }}>
-                    <Image
-                      src={`/${boxscore.vTeam.triCode}.png`}
-                      alt="Image"
-                      width={100}
-                      height={100}
-                    />
-                  </div>
-                </Stack>
-                <br />
-                <span style={{ fontSize: "1.1rem" }}>
-                  {boxscore.vTeam.triCode}
-                </span>
-                <br />
-                <Typography variant="caption" display="block" gutterBottom>
-                  ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
-                </Typography>
-              </TeamsStyles>
-            </TeamsParentStyles>
+                <TeamsStyles>
+                  <Stack direction="row" spacing={2}>
+                    <Stack
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{
+                        color: "grey.500",
+                      }}
+                      spacing={2}
+                    >
+                      <p style={{ fontSize: "1.4rem" }}>vs</p>
+                      {boxscore.period.current > 3 ? (
+                        <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                          FINAL
+                        </p>
+                      ) : (
+                        <div>
+                          <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                            Q{boxscore.period.current}
+                          </p>
+                          <p style={{ fontSize: "0.7rem", color: "green" }}>
+                            {boxscore.gameDuration.hours}:
+                            {boxscore.gameDuration.minutes}
+                          </p>
+                          <LinearProgress color="success" />
+                        </div>
+                      )}
+                      <div>
+                        <p style={{ fontSize: "0.7rem", color: "grey" }}>
+                          {boxscore.arena.name},{"    "}
+                          <br />
+                          {boxscore.arena.city}
+                          <br />
+                        </p>
+                      </div>
+                    </Stack>
+                  </Stack>
+                </TeamsStyles>
+                <TeamsStyles>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                    style={{ marginRight: "2rem" }}
+                  >
+                    <div style={{ margin: "1.3rem 0.5rem 0" }}>
+                      <h3 style={{ fontSize: "1.3rem" }}>
+                        {boxscore.vTeam.score}
+                      </h3>
+                    </div>
+
+                    <div style={{ marginTop: "0.5rem" }}>
+                      <Image
+                        src={`/${boxscore.vTeam.triCode}.png`}
+                        alt="Image"
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                  </Stack>
+                  <br />
+                  <span style={{ fontSize: "1.1rem" }}>
+                    {boxscore.vTeam.triCode}
+                  </span>
+                  <br />
+                  <Typography variant="caption" display="block" gutterBottom>
+                    ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
+                  </Typography>
+                </TeamsStyles>
+              </TeamsParentStyles>
+            )}
           </Grid>
           <Grid item xs={12} lg={4}>
             <TableContainer
@@ -464,10 +585,10 @@ export default function BoxScore(props) {
               <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">RBS</TableCell>
-                    <TableCell align="center">ASTS</TableCell>
-                    <TableCell align="center">PTS</TableCell>
+                    <StyledTableCell>STARTERS</StyledTableCell>
+                    <StyledTableCell align="center">RBS</StyledTableCell>
+                    <StyledTableCell align="center">ASTS</StyledTableCell>
+                    <StyledTableCell align="center">PTS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -476,16 +597,22 @@ export default function BoxScore(props) {
                       key={row.jersey}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
+                      <StyledTableCell component="th" scope="row">
                         <Chip
                           avatar={<Avatar alt={row.jersey} src="" />}
                           label={row.names}
                           variant="outlined"
                         />{" "}
-                      </TableCell>
-                      <TableCell align="center">{row.rebs}</TableCell>
-                      <TableCell align="center">{row.assists}</TableCell>
-                      <TableCell align="center">{row.points}</TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.rebs}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.assists}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.points}
+                      </StyledTableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -518,12 +645,12 @@ export default function BoxScore(props) {
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Team</TableCell>
-                          <TableCell align="right">Q1</TableCell>
-                          <TableCell align="right">Q2</TableCell>
-                          <TableCell align="right">Q3</TableCell>
-                          <TableCell align="right">Q4</TableCell>
-                          <TableCell align="right">TOTAL</TableCell>
+                          <StyledTableCell>Team</StyledTableCell>
+                          <StyledTableCell align="right">Q1</StyledTableCell>
+                          <StyledTableCell align="right">Q2</StyledTableCell>
+                          <StyledTableCell align="right">Q3</StyledTableCell>
+                          <StyledTableCell align="right">Q4</StyledTableCell>
+                          <StyledTableCell align="right">TOTAL</StyledTableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -534,24 +661,24 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <TableCell component="th" scope="row">
+                            <StyledTableCell component="th" scope="row">
                               <b>{row.team}</b>
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {row.first ? `${row.first}` : "-"}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {row.second ? `${row.second}` : "-"}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {row.third ? `${row.third}` : "-"}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {row.fourth ? `${row.fourth}` : "-"}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {row.total ? `${row.total}` : "-"}
-                            </TableCell>
+                            </StyledTableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -567,12 +694,20 @@ export default function BoxScore(props) {
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Team</TableCell>
-                          <TableCell align="right">Blocks</TableCell>
-                          <TableCell align="right">Rebounds</TableCell>
-                          <TableCell align="right">Lead</TableCell>
-                          <TableCell align="right">Turn Overs</TableCell>
-                          <TableCell align="right">Field Goals</TableCell>
+                          <StyledTableCell>Team</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Blocks
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            Rebounds
+                          </StyledTableCell>
+                          <StyledTableCell align="right">Lead</StyledTableCell>
+                          <StyledTableCell align="right">
+                            Turn Overs
+                          </StyledTableCell>
+                          <StyledTableCell align="right">
+                            Field Goals
+                          </StyledTableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -583,31 +718,31 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <TableCell component="th" scope="row">
+                            <StyledTableCell component="th" scope="row">
                               <b>{row.hTeam.triCode}</b>
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.hTeam.totals.blocks}{" "}
-                            </TableCell>
+                            </StyledTableCell>
 
-                            <TableCell align="right">
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.hTeam.totals.totReb}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.hTeam.biggestLead}
-                            </TableCell>
+                            </StyledTableCell>
 
-                            <TableCell align="right">
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.hTeam.totals.turnovers}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.hTeam.pointsInPaint}
-                            </TableCell>
+                            </StyledTableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -619,31 +754,31 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <TableCell component="th" scope="row">
+                            <StyledTableCell component="th" scope="row">
                               <b>{row.vTeam.triCode}</b>
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.vTeam.totals.blocks}{" "}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.vTeam.totals.totReb}
-                            </TableCell>
+                            </StyledTableCell>
 
-                            <TableCell align="right">
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.vTeam.biggestLead}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.vTeam.totals.turnovers}
-                            </TableCell>
+                            </StyledTableCell>
 
-                            <TableCell align="right">
+                            <StyledTableCell align="right">
                               {" "}
                               {stats.vTeam.pointsInPaint}
-                            </TableCell>
+                            </StyledTableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -669,10 +804,10 @@ export default function BoxScore(props) {
               <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>STARTERS</TableCell>
-                    <TableCell align="center">RBS</TableCell>
-                    <TableCell align="center">ASTS</TableCell>
-                    <TableCell align="center">PTS</TableCell>
+                    <StyledTableCell>STARTERS</StyledTableCell>
+                    <StyledTableCell align="center">RBS</StyledTableCell>
+                    <StyledTableCell align="center">ASTS</StyledTableCell>
+                    <StyledTableCell align="center">PTS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -683,16 +818,22 @@ export default function BoxScore(props) {
                         "&:last-child td, &:last-child th": { border: 0 },
                       }}
                     >
-                      <TableCell component="th" scope="row">
+                      <StyledTableCell component="th" scope="row">
                         <Chip
                           avatar={<Avatar alt={row.jersey} src="" />}
                           label={row.names}
                           variant="outlined"
                         />{" "}
-                      </TableCell>
-                      <TableCell align="center">{row.rebs}</TableCell>
-                      <TableCell align="center">{row.assists}</TableCell>
-                      <TableCell align="center">{row.points}</TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.rebs}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.assists}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.points}
+                      </StyledTableCell>
                     </TableRow>
                   ))}
                 </TableBody>

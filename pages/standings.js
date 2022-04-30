@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#051c2d",
     color: theme.palette.common.white,
@@ -59,6 +59,7 @@ export default function Standings(props) {
               aria-label="standings"
               style={{ textAlign: "center" }}
               indicatorColor="primary"
+              centered
             >
               <Tab
                 label={isSmallWindow ? "East conference" : "Eastern Conference"}
