@@ -24,7 +24,6 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { StyledTableCell } from "./standings";
 
 const axios = require("axios");
 const ourGray = "#051c2d";
@@ -363,7 +362,7 @@ export default function BoxScore(props) {
       <Box sx={{ flexGrow: 1, m: 1 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            {isSmallWindow ? (
+            {/* {isSmallWindow ? (
               <Card
                 sx={{
                   margin: "0 0.5rem 0 0.5rem",
@@ -462,7 +461,7 @@ export default function BoxScore(props) {
                   </div>
                 </CardContent>
               </Card>
-            ) : (
+            ) : ( */}
               <TeamsParentStyles
                 elevation={0}
                 style={{ borderRadius: "0.7rem", marginTop: "1rem" }}
@@ -567,7 +566,7 @@ export default function BoxScore(props) {
                   </Typography>
                 </TeamsStyles>
               </TeamsParentStyles>
-            )}
+            {/* )} */}
           </Grid>
           <Grid item xs={12} lg={4}>
             <TableContainer
@@ -585,10 +584,10 @@ export default function BoxScore(props) {
               <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>STARTERS</StyledTableCell>
-                    <StyledTableCell align="center">RBS</StyledTableCell>
-                    <StyledTableCell align="center">ASTS</StyledTableCell>
-                    <StyledTableCell align="center">PTS</StyledTableCell>
+                    <TableCell>STARTERS</TableCell>
+                    <TableCell align="center">RBS</TableCell>
+                    <TableCell align="center">ASTS</TableCell>
+                    <TableCell align="center">PTS</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -597,22 +596,22 @@ export default function BoxScore(props) {
                       key={row.jersey}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <StyledTableCell component="th" scope="row">
+                      <TableCell component="th" scope="row">
                         <Chip
                           avatar={<Avatar alt={row.jersey} src="" />}
                           label={row.names}
                           variant="outlined"
                         />{" "}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.rebs}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.assists}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.points}
-                      </StyledTableCell>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -645,12 +644,12 @@ export default function BoxScore(props) {
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell>Team</StyledTableCell>
-                          <StyledTableCell align="right">Q1</StyledTableCell>
-                          <StyledTableCell align="right">Q2</StyledTableCell>
-                          <StyledTableCell align="right">Q3</StyledTableCell>
-                          <StyledTableCell align="right">Q4</StyledTableCell>
-                          <StyledTableCell align="right">TOTAL</StyledTableCell>
+                          <TableCell>Team</TableCell>
+                          <TableCell align="right">Q1</TableCell>
+                          <TableCell align="right">Q2</TableCell>
+                          <TableCell align="right">Q3</TableCell>
+                          <TableCell align="right">Q4</TableCell>
+                          <TableCell align="right">TOTAL</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -661,24 +660,24 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <StyledTableCell component="th" scope="row">
+                            <TableCell component="th" scope="row">
                               <b>{row.team}</b>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {row.first ? `${row.first}` : "-"}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {row.second ? `${row.second}` : "-"}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {row.third ? `${row.third}` : "-"}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {row.fourth ? `${row.fourth}` : "-"}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {row.total ? `${row.total}` : "-"}
-                            </StyledTableCell>
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -694,20 +693,20 @@ export default function BoxScore(props) {
                     <Table aria-label="simple table">
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell>Team</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <TableCell>Team</TableCell>
+                          <TableCell align="right">
                             Blocks
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
+                          </TableCell>
+                          <TableCell align="right">
                             Rebounds
-                          </StyledTableCell>
-                          <StyledTableCell align="right">Lead</StyledTableCell>
-                          <StyledTableCell align="right">
+                          </TableCell>
+                          <TableCell align="right">Lead</TableCell>
+                          <TableCell align="right">
                             Turn Overs
-                          </StyledTableCell>
-                          <StyledTableCell align="right">
+                          </TableCell>
+                          <TableCell align="right">
                             Field Goals
-                          </StyledTableCell>
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -718,31 +717,31 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <StyledTableCell component="th" scope="row">
+                            <TableCell component="th" scope="row">
                               <b>{row.hTeam.triCode}</b>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.hTeam.totals.blocks}{" "}
-                            </StyledTableCell>
+                            </TableCell>
 
-                            <StyledTableCell align="right">
+                            <TableCell align="right">
                               {" "}
                               {stats.hTeam.totals.totReb}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.hTeam.biggestLead}
-                            </StyledTableCell>
+                            </TableCell>
 
-                            <StyledTableCell align="right">
+                            <TableCell align="right">
                               {" "}
                               {stats.hTeam.totals.turnovers}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.hTeam.pointsInPaint}
-                            </StyledTableCell>
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -754,31 +753,31 @@ export default function BoxScore(props) {
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            <StyledTableCell component="th" scope="row">
+                            <TableCell component="th" scope="row">
                               <b>{row.vTeam.triCode}</b>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.vTeam.totals.blocks}{" "}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.vTeam.totals.totReb}
-                            </StyledTableCell>
+                            </TableCell>
 
-                            <StyledTableCell align="right">
+                            <TableCell align="right">
                               {" "}
                               {stats.vTeam.biggestLead}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
+                            </TableCell>
+                            <TableCell align="right">
                               {" "}
                               {stats.vTeam.totals.turnovers}
-                            </StyledTableCell>
+                            </TableCell>
 
-                            <StyledTableCell align="right">
+                            <TableCell align="right">
                               {" "}
                               {stats.vTeam.pointsInPaint}
-                            </StyledTableCell>
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -804,10 +803,10 @@ export default function BoxScore(props) {
               <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>STARTERS</StyledTableCell>
-                    <StyledTableCell align="center">RBS</StyledTableCell>
-                    <StyledTableCell align="center">ASTS</StyledTableCell>
-                    <StyledTableCell align="center">PTS</StyledTableCell>
+                    <TableCell>STARTERS</TableCell>
+                    <TableCell align="center">RBS</TableCell>
+                    <TableCell align="center">ASTS</TableCell>
+                    <TableCell align="center">PTS</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -818,22 +817,22 @@ export default function BoxScore(props) {
                         "&:last-child td, &:last-child th": { border: 0 },
                       }}
                     >
-                      <StyledTableCell component="th" scope="row">
+                      <TableCell component="th" scope="row">
                         <Chip
                           avatar={<Avatar alt={row.jersey} src="" />}
                           label={row.names}
                           variant="outlined"
                         />{" "}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.rebs}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.assists}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
+                      </TableCell>
+                      <TableCell align="center">
                         {row.points}
-                      </StyledTableCell>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

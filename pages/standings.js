@@ -19,8 +19,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#051c2d",
-    color: theme.palette.common.white,
     fontSize: 15,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -62,17 +60,17 @@ export default function Standings(props) {
               centered
             >
               <Tab
-                label={isSmallWindow ? "East conference" : "Eastern Conference"}
+                label={isSmallWindow ? "East" : "Eastern Conference"}
                 value="1"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label={isSmallWindow ? "West conference" : "Western Conference"}
+                label={isSmallWindow ? "West " : "Western Conference"}
                 value="2"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label={isSmallWindow ? "Divisions" : "Divisions"}
+                label={isSmallWindow ? "" : "Divisions"}
                 value="3"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
