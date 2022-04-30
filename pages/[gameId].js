@@ -95,8 +95,10 @@ export default function BoxScore(props) {
     .toISOString()
     .slice(0, 10);
 
+  const gameYesterday = yesterday.replace(/-/g, "");
+
   const gameDate =
-    props.gameDate === "" ? yesterday.replace(/-/g, "") : props.gameDat;
+    props.gameDate === undefined ? gameYesterday : props.gameDate;
   const gameId = props.gameId;
   useEffect(() => {
     const options = {
@@ -126,7 +128,6 @@ export default function BoxScore(props) {
       })
       .catch(function (error) {
         console.error(error);
-        console.log(`players error`, error);
       });
   }, [gameDate, gameId]);
 
