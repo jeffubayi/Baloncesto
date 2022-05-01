@@ -60,17 +60,17 @@ export default function Standings(props) {
               centered
             >
               <Tab
-                label={isSmallWindow ? "East" : "Eastern Conference"}
+                label={isSmallWindow ? "Eastern" : "Eastern Conference"}
                 value="1"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label={isSmallWindow ? "West " : "Western Conference"}
+                label={isSmallWindow ? "Western " : "Western Conference"}
                 value="2"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label={isSmallWindow ? "" : "Divisions"}
+                label={isSmallWindow ? "Dvsn" : "Divisions"}
                 value="3"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />

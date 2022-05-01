@@ -448,9 +448,13 @@ export default function BoxScore(props) {
                     >
                       {boxscore.vTeam.score}
                     </Typography>
-                    {boxscore.period.current === 4 && (
+                    {boxscore.period.current === 4 ? (
                       <div style={{ textAlign: "center" }}>
                         <Chip label="FINAL" sx={{ fontSize: "0.45rem" }} />
+                      </div>
+                    ) : (
+                      <div style={{ textAlign: "center" }}>
+                        <Chip label="LIVE" sx={{ fontSize: "0.45rem" }} />
                       </div>
                     )}
                     <Typography
