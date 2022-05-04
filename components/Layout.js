@@ -69,7 +69,7 @@ function SimpleDialog(props) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open} sx={{borderRadius:"0.4rem" }}>
+    <Dialog onClose={handleClose} open={open} sx={{ borderRadius: "0.4rem" }}>
       <div
         style={{
           justifyContent: "center",
@@ -80,16 +80,23 @@ function SimpleDialog(props) {
           padding: "1rem",
         }}
       >
-        <DialogTitle sx={{ backgroundColor: "#051c2d",borderRadius:"0.4rem" }}>
+        <DialogTitle
+          sx={{ backgroundColor: "#051c2d", borderRadius: "0.4rem" }}
+        >
           <Typography
             variant="body2"
-            sx={{ fontSize: "0.8rem", fontWeight: "bold" ,color:"#fff"}}
+            sx={{ fontSize: "0.8rem", fontWeight: "bold", color: "#fff" }}
           >
             NBA TOP 75
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontSize: "0.6rem", fontWeight: "bold",color:"#fff", mb: 2 }}
+            sx={{
+              fontSize: "0.6rem",
+              fontWeight: "bold",
+              color: "#fff",
+              mb: 2,
+            }}
           >
             Ranking the greatest players of all time
           </Typography>
@@ -264,65 +271,12 @@ export default function Layout(props) {
           <StyledToolbar>
             {!isSmallWindow && (
               <>
-                <div>
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Drawer anchor="left" open={open} onClose={handleDrawerClose}>
-                    <List>
-                      <ListItem
-                        button
-                        onClick={() => window.location.assign("/")}
-                      >
-                        <ListItemIcon>
-                          <NewspaperIcon />
-                        </ListItemIcon>
-                        <ListItemText
-                          sx={{ fontSize: "0.2rem" }}
-                          primary="News"
-                        />
-                      </ListItem>
-                      <ListItem
-                        button
-                        onClick={() => window.location.assign("/scores")}
-                      >
-                        <ListItemIcon>
-                          <SportsBasketballIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Scores" />
-                      </ListItem>
-                      <ListItem
-                        button
-                        onClick={() => window.location.assign("/standings")}
-                      >
-                        <ListItemIcon>
-                          <FormatListNumberedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Standings" />
-                      </ListItem>
-                      <ListItem
-                        button
-                        onClick={() => window.location.assign("/team")}
-                      >
-                        <ListItemIcon>
-                          <GroupsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Teams" />
-                      </ListItem>
-                    </List>
-                  </Drawer>
-                </div>
                 <Box>
                   <a>
                     <svg
-                      height="40"
+                      height="32"
                       viewBox="0 0 51 30"
-                      width="102"
+                      width="80"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <g fill="none" fill-rule="evenodd">
@@ -344,9 +298,9 @@ export default function Layout(props) {
                 </Box>
               </>
             )}
-            <Box component="div" sx={{ overflow: "auto" }}>
+            <Box component="div" sx={{ overflow: "auto", flexGrow: 1 }}>
               <Stack direction="row" spacing={1}>
-                <TodayScores/>
+                <TodayScores />
                 {currentScores?.map((scores) => (
                   <ScoreCard
                     hTeamName={scores.hTeam.triCode}
@@ -359,6 +313,40 @@ export default function Layout(props) {
                 ))}
               </Stack>
             </Box>
+
+            {!isSmallWindow && (
+              <Box
+                sx={{
+                  flexGrow: 0,
+                  display: "flex",
+                }}
+              >
+                <Button
+                  onClick={() => window.location.assign("/")}
+                  sx={{ color: "white", display: "block", fontSize: 13.5 }}
+                >
+                  News
+                </Button>
+                <Button
+                  onClick={() => window.location.assign("/scores")}
+                  sx={{ color: "white", display: "block", fontSize: 13.5 }}
+                >
+                  Scores
+                </Button>
+                <Button
+                  onClick={() => window.location.assign("/standings")}
+                  sx={{ color: "white", display: "block", fontSize: 13.5 }}
+                >
+                  Standings
+                </Button>
+                <Button
+                  onClick={() => window.location.assign("/team")}
+                  sx={{ color: "white", display: "block", fontSize: 12 }}
+                >
+                  Teams
+                </Button>
+              </Box>
+            )}
           </StyledToolbar>
         </MuiAppBar>
         <Toolbar id="back-to-top-anchor" />
