@@ -10,6 +10,7 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import GroupsIcon from "@mui/icons-material/Groups";
 import Stack from "@mui/material/Stack";
 import ScoreCard from "../pages/scorecard";
+import TodayScores from "../pages/today";
 import { ThemeProvider } from "@mui/system";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -345,6 +346,7 @@ export default function Layout(props) {
             )}
             <Box component="div" sx={{ overflow: "auto" }}>
               <Stack direction="row" spacing={1}>
+                <TodayScores/>
                 {currentScores?.map((scores) => (
                   <ScoreCard
                     hTeamName={scores.hTeam.triCode}
