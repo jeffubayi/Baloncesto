@@ -25,7 +25,7 @@ export default function TodayBoard() {
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 12.5,
+              fontSize: 10.5,
             }}
           >
             Game Score
@@ -39,7 +39,7 @@ export default function TodayBoard() {
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 12.5,
+              fontSize: 10.5,
             }}
           >
             {yesterday}
