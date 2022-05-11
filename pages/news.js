@@ -11,7 +11,7 @@ import {
   ListItem,
 } from "@mui/material";
 import Link from "next/link";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Avatar from "@mui/material/Avatar";
 
 import styled from "styled-components";
@@ -35,6 +35,7 @@ const StyledDiv = styled.div`
 `;
 
 export default function NewsCard({ newsArray: newsArray }) {
+  const isSmallWindow = useMediaQuery(`(max-width:768px)`);
   return (
     <>
       <StyledDiv>
@@ -61,7 +62,10 @@ export default function NewsCard({ newsArray: newsArray }) {
                     variant="body2"
                     sx={{ color: "grey", fontSize: "0.4rem" }}
                   >
-                    {news.summary.slice(0, 300)}...
+                    {isSmallWindow
+                      ? news.summary.slice(0, 100)
+                      : news.summary.slice(0, 300)}
+                    ...
                   </Typography>
                 </CardContent>
                 <Box
