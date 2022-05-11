@@ -25,10 +25,10 @@ export default function TodayBoard() {
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 13,
+              fontSize: 12.5,
             }}
           >
-            Game Scores
+            Game Score
           </Box>
         </Stack>
 
@@ -39,7 +39,7 @@ export default function TodayBoard() {
               display: "block",
               fontWeight: "bold",
               mx: 0.5,
-              fontSize: 13,
+              fontSize: 12.5,
             }}
           >
             {yesterday}
