@@ -44,15 +44,15 @@ function SimpleDialog(props) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open} sx={{ borderRadius: "0.4rem" }}>
+    <Dialog onClose={handleListItemClick} open={open} sx={{ borderRadius: "0.4rem" }}>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }}>
-          NBA Players
+        <DialogTitle sx={{ m: 0, p: 2 ,fontSize: "0.8rem", fontWeight: "bold"  }}>
+          Current NBA Players
           {onClose ? (
             <IconButton
               aria-label="close"
