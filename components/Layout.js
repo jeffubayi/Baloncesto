@@ -20,12 +20,9 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { useRouter } from "next/router";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Typography, IconButton } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
@@ -35,34 +32,12 @@ import Avatar from "@mui/material/Avatar";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
-import { blue } from "@mui/material/colors";
+import CloseIcon from "@mui/icons-material/Close";
 
 import DialogContent from "@mui/material/DialogContent";
 
-const TopPlayers = [
-  "Lebron James",
-  "Stephen Curry",
-  "Micheal Jordan",
-  "Kareem Abdul-Jabbar",
-  "Bill Russell",
-  "Magic Johnson",
-  "Wilt Chamberlain",
-  "Shaquille O’Neal",
-  "Larry Bird",
-  "Tim Duncan",
-  "Kobe Bryant",
-  "Hakeem Olajuwon",
-  "Oscar Robertson",
-];
-
 function SimpleDialog(props) {
-  const { onClose, open } = props;
-
-  const handleClose = () => {
-    onClose();
-  };
+  const { onClose, open, players } = props;
 
   const handleListItemClick = () => {
     onClose();
@@ -72,61 +47,70 @@ function SimpleDialog(props) {
     <Dialog onClose={handleClose} open={open} sx={{ borderRadius: "0.4rem" }}>
       <div
         style={{
-          justifyContent: "center",
-          textAlign: "center",
-          alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          padding: "1rem",
         }}
       >
-        <DialogTitle
-          sx={{ backgroundColor: "#051c2d", borderRadius: "0.4rem" }}
-        >
-          <Typography
-            variant="body2"
-            sx={{ fontSize: "0.8rem", fontWeight: "bold", color: "#fff" }}
-          >
-            NBA TOP 75
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              fontSize: "0.6rem",
-              fontWeight: "bold",
-              color: "#fff",
-              mb: 2,
-            }}
-          >
-            Ranking the greatest players of all time
-          </Typography>
+        <DialogTitle sx={{ m: 0, p: 2 }}>
+          NBA Players
+          {onClose ? (
+            <IconButton
+              aria-label="close"
+              onClick={onClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
         </DialogTitle>
         <DialogContent dividers>
           <List sx={{ pt: 0 }}>
-            {TopPlayers.map((player) => (
-              <ListItem
-                button
-                onClick={() => handleListItemClick()}
-                key={player}
-              >
-                <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ fontSize: "0.65rem" }}
-                    >
-                      {player}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-            ))}
+            {players?.map(
+              ({ personId, temporaryDisplayName, jersey, teamSitesOnly }) => (
+                <ListItem
+                  alignItems="flex-start"
+                  onClick={() => handleListItemClick()}
+                  key={personId}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={temporaryDisplayName}
+                      src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${personId}.png`}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    sx={{ fontSize: "0.6rem" }}
+                    primary={
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                        sx={{ fontSize: "0.6rem", fontWeight: "bold" }}
+                      >
+                        {temporaryDisplayName}
+                      </Typography>
+                    }
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                          sx={{ display: "inline", fontSize: "0.5rem" }}
+                        >
+                          {jersey},{""} {teamSitesOnly?.posFull}
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+              )
+            )}
           </List>
         </DialogContent>
       </div>
@@ -137,6 +121,7 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  players: PropTypes.array.isRequired,
 };
 
 const axios = require("axios");
@@ -199,8 +184,8 @@ export default function Layout(props) {
   const [currentScores, setCurrentScores] = React.useState();
   const [value, setValue] = React.useState("news");
   const isSmallWindow = useMediaQuery(`(max-width:768px)`);
-  const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [nbaPlayer, setNbaPlayer] = React.useState();
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -208,14 +193,6 @@ export default function Layout(props) {
 
   const handleClose = () => {
     setOpenDialog(false);
-  };
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
   };
 
   const redirect = (newValue) => {
@@ -231,6 +208,25 @@ export default function Layout(props) {
       router.push(`/team`);
     }
   };
+
+  async function GetPlayers() {
+    const options = {
+      method: "GET",
+      url: `https://data.nba.net/data/10s/prod/v1/2021/players.json`,
+      params: {},
+      headers: {},
+    };
+    const players = await axios
+      .request(options)
+      .then(function (response) {
+        const playerArray = response.data.league.standard;
+        return playerArray;
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+    setNbaPlayer(players);
+  }
 
   async function GetLastNightScores() {
     const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
@@ -259,6 +255,7 @@ export default function Layout(props) {
 
   React.useEffect(() => {
     GetLastNightScores();
+    GetPlayers();
   }, []);
 
   return (
@@ -266,7 +263,11 @@ export default function Layout(props) {
       <Box>
         <CssBaseline />
         <MuiAppBar sx={{ backgroundColor: "#051c2d" }} elevation={0}>
-          <SimpleDialog open={openDialog} onClose={handleClose} />
+          <SimpleDialog
+            open={openDialog}
+            onClose={handleClose}
+            players={nbaPlayer}
+          />
 
           <StyledToolbar>
             {!isSmallWindow && (
