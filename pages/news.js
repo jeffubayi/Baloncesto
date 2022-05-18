@@ -52,8 +52,8 @@ export default function NewsCard({ newsArray: newsArray }) {
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography
                     component="div"
-                    variant="h5"
-                    sx={{ color: "#051c2d", fontSize: "0.75rem", pb: 1 }}
+                    variant={isSmallWindow ? "h5" : "subtitle2"}
+                    sx={{ color: "#051c2d", fontSize: "0.6rem",fontWeight:"bold", pb: 1 }}
                   >
                     {news.title}
                   </Typography>
@@ -64,7 +64,7 @@ export default function NewsCard({ newsArray: newsArray }) {
                   >
                     {isSmallWindow
                       ? news.summary.slice(0, 100)
-                      : news.summary.slice(0, 300)}
+                      : news.summary.slice(0, 350)}
                     ...
                   </Typography>
                 </CardContent>

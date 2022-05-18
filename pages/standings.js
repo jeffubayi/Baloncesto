@@ -70,7 +70,7 @@ export default function Standings(props) {
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />
               <Tab
-                label={isSmallWindow ? "Dvsn" : "Divisions"}
+                label={isSmallWindow ? "Division" : "Divisions"}
                 value="3"
                 style={{ textTransform: "capitalize", fontSize: "0.65rem" }}
               />

@@ -597,10 +597,10 @@ export default function BoxScore(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>STARTERS</StyledTableCell>
-                    <StyledTableCell align="center">POS</StyledTableCell>
                     <StyledTableCell align="center">RBS</StyledTableCell>
                     <StyledTableCell align="center">ASTS</StyledTableCell>
                     <StyledTableCell align="center">PTS</StyledTableCell>
+                    <StyledTableCell align="center">POS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -618,9 +618,7 @@ export default function BoxScore(props) {
                         />{" "}
                       </StyledTableCell>
 
-                      <StyledTableCell align="center">
-                        {row.jersey}
-                      </StyledTableCell>
+                      
                       <StyledTableCell align="center">
                         {row.rebs}
                       </StyledTableCell>
@@ -629,6 +627,9 @@ export default function BoxScore(props) {
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.points}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.jersey}
                       </StyledTableCell>
                     </TableRow>
                   ))}
@@ -648,8 +649,8 @@ export default function BoxScore(props) {
                     onChange={handleChange}
                     aria-label="lab API tabs example"
                   >
-                    <Tab label="Game Recap" value="1" />
-                    <Tab label="Team Stats" value="2" />
+                    <Tab label="Game Recap" value="1"  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }} />
+                    <Tab label="Team Stats" value="2"  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }} />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
@@ -822,10 +823,10 @@ export default function BoxScore(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>STARTERS</StyledTableCell>
-                    <StyledTableCell align="center">POS</StyledTableCell>
                     <StyledTableCell align="center">RBS</StyledTableCell>
                     <StyledTableCell align="center">ASTS</StyledTableCell>
                     <StyledTableCell align="center">PTS</StyledTableCell>
+                    <StyledTableCell align="center">POS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -844,9 +845,7 @@ export default function BoxScore(props) {
                           variant="outlined"
                         />{" "}
                       </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {row.jersey}
-                      </StyledTableCell>
+                    
                       <StyledTableCell align="center">
                         {row.rebs}
                       </StyledTableCell>
@@ -855,6 +854,9 @@ export default function BoxScore(props) {
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.points}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.jersey}
                       </StyledTableCell>
                     </TableRow>
                   ))}
