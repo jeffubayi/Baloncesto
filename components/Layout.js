@@ -201,7 +201,7 @@ export default function Layout(props) {
     } else if (newValue === 1) {
       router.push(`/scores`);
     } else if (newValue === 2) {
-      handleClickOpen();
+      router.push(`/player`);
     } else if (newValue === 3) {
       router.push(`/standings`);
     } else if (newValue === 4) {
@@ -346,6 +346,12 @@ export default function Layout(props) {
                 >
                   Teams
                 </Button>
+                <Button
+                  onClick={() => window.location.assign("/player")}
+                  sx={{ color: "white", display: "block", fontSize: 12 }}
+                >
+                  Players
+                </Button>
               </Box>
             )}
           </StyledToolbar>
@@ -457,6 +463,7 @@ export default function Layout(props) {
                   icon={<GroupsIcon sx={{ fontSize: "1.2rem" }} />}
                 />
               </BottomNavigation>
+             
             </Paper>
           </>
         )}
