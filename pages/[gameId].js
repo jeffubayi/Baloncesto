@@ -19,6 +19,8 @@ import {
   LinearProgress,
   Card,
   CardContent,
+  ListSubheader,
+  ImageListItemBar,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -28,6 +30,14 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { CardMedia, IconButton } from "@mui/material";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import InfoIcon from "@mui/icons-material/Info";
 
 const axios = require("axios");
 const ourGray = "#051c2d";
@@ -45,8 +55,8 @@ const BoxscoreHeadingStyles = styled(Paper)`
 
 const TeamsParentStyles = styled(Paper)`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  borderradius: 1rem;
+  grid-template-columns: 2fr 1fr 2fr;
+  border-radius: 1rem;
 `;
 
 const TeamsStyles = styled.div`
@@ -85,6 +95,7 @@ export default function BoxScore(props) {
   const [scoreline, setScoreline] = useState([]);
   const [AwayScoreline, setAscoreline] = useState([]);
   const [value, setValue] = useState("1");
+  const [teams, setTeams] = useState({ home: "", away: "" });
 
   const isSmallWindow = useMediaQuery(`(max-width:768px)`);
 
@@ -96,6 +107,25 @@ export default function BoxScore(props) {
     .slice(0, 10);
 
   const gameYesterday = yesterday.replace(/-/g, "");
+
+  const hteamId = boxscore?.hTeam?.teamId;
+  const vteamId = boxscore?.hTeam?.teamId;
+
+  async function getTeams() {
+    axios
+      .get("https://data.nba.net/prod/v1/2021/teams.json")
+      .then((response) => {
+        const teamArray = response.data.league;
+        console.log(`teams ==`, teamArray.sacramento[23].teamId);
+        teamArray.sacramento.forEach(function (item, index) {
+          console.log(`teamss ==`, item.teamId, item.fullName);
+          if(item.teamId === vteamId){
+            console.log(`teamssssss ==`, item.teamId, item.fullName);
+          setTeams({ home: item.fullName, away: item.fullName });
+        }
+        });
+      });
+  }
 
   const gameDate =
     props.gameDate === undefined ? gameYesterday : props.gameDate;
@@ -129,6 +159,7 @@ export default function BoxScore(props) {
       .catch(function (error) {
         console.error(error);
       });
+    getTeams();
   }, [gameDate, gameId]);
 
   // this is not error, bcs sometimes the answer from api comes late, and in meantime we show this conditional render
@@ -172,7 +203,7 @@ export default function BoxScore(props) {
   const hTeam2nd = AwayScoreline[1]?.score;
   const hTeam3rd = AwayScoreline[2]?.score;
   const hTeam4th = AwayScoreline[3]?.score;
-  const playJerseyOne = playerStats[0]?.pos;
+  const playJerseyOne = playerStats[0]?.personId;
   const playNamesOne = `${playerStats[0]?.firstName.charAt(0)}. ${
     playerStats[0]?.lastName
   }`;
@@ -181,7 +212,7 @@ export default function BoxScore(props) {
   const playAssistsOne = playerStats[0]?.assists;
   const playPointsOne = playerStats[0]?.points;
 
-  const playJerseyTwo = playerStats[1]?.pos;
+  const playJerseyTwo = playerStats[1]?.personId;
   const playNamesTwo = `${playerStats[1]?.firstName.charAt(0)}. ${
     playerStats[1]?.lastName
   }`;
@@ -190,7 +221,7 @@ export default function BoxScore(props) {
   const playAssistsTwo = playerStats[1]?.assists;
   const playPointsTwo = playerStats[1]?.points;
 
-  const playJerseyThree = playerStats[2]?.pos;
+  const playJerseyThree = playerStats[2]?.personId;
   const playNamesThree = `${playerStats[2]?.firstName.charAt(0)}. ${
     playerStats[2]?.lastName
   }`;
@@ -199,7 +230,7 @@ export default function BoxScore(props) {
   const playAssistsThree = playerStats[2]?.assists;
   const playPointsThree = playerStats[2]?.points;
 
-  const playJerseyFour = playerStats[3]?.pos;
+  const playJerseyFour = playerStats[3]?.personId;
   const playNamesFour = `${playerStats[3]?.firstName.charAt(0)}. ${
     playerStats[3]?.lastName
   }`;
@@ -208,7 +239,7 @@ export default function BoxScore(props) {
   const playAssistsFour = playerStats[3]?.assists;
   const playPointsFour = playerStats[3]?.points;
 
-  const playJerseyFive = playerStats[4]?.pos;
+  const playJerseyFive = playerStats[4]?.personId;
   const playNamesFive = `${playerStats[4]?.firstName.charAt(0)}. ${
     playerStats[4]?.lastName
   }`;
@@ -217,7 +248,7 @@ export default function BoxScore(props) {
   const playAssistsFive = playerStats[4]?.assists;
   const playPointsFive = playerStats[4]?.points;
 
-  const hplayJerseyOne = playerStats[17]?.pos;
+  const hplayJerseyOne = playerStats[17]?.personId;
   const hplayNamesOne = `${playerStats[17]?.firstName.charAt(0)}. ${
     playerStats[17]?.lastName
   }`;
@@ -226,7 +257,7 @@ export default function BoxScore(props) {
   const hplayAssistsOne = playerStats[17]?.assists;
   const hplayPointsOne = playerStats[17]?.points;
 
-  const hplayJerseyTwo = playerStats[13]?.pos;
+  const hplayJerseyTwo = playerStats[13]?.personId;
   const hplayNamesTwo = `${playerStats[13]?.firstName.charAt(0)}. ${
     playerStats[13]?.lastName
   }`;
@@ -235,7 +266,7 @@ export default function BoxScore(props) {
   const hplayAssistsTwo = playerStats[13]?.assists;
   const hplayPointsTwo = playerStats[13]?.points;
 
-  const hplayJerseyThree = playerStats[14]?.pos;
+  const hplayJerseyThree = playerStats[14]?.personId;
   const hplayNamesThree = `${playerStats[14]?.firstName.charAt(0)}. ${
     playerStats[14]?.lastName
   }`;
@@ -244,7 +275,7 @@ export default function BoxScore(props) {
   const hplayAssistsThree = playerStats[14]?.assists;
   const hplayPointsThree = playerStats[14]?.points;
 
-  const hplayJerseyFour = playerStats[15]?.pos;
+  const hplayJerseyFour = playerStats[15]?.personId;
   const hplayNamesFour = `${playerStats[15]?.firstName.charAt(0)}. ${
     playerStats[15]?.lastName
   }`;
@@ -253,7 +284,7 @@ export default function BoxScore(props) {
   const hplayAssistsFour = playerStats[15]?.assists;
   const hplayPointsFour = playerStats[15]?.points;
 
-  const hplayJerseyFive = playerStats[16]?.pos;
+  const hplayJerseyFive = playerStats[16]?.personId;
   const hplayNamesFive = `${playerStats[16]?.firstName.charAt(0)}. ${
     playerStats[16]?.lastName
   }`;
@@ -356,6 +387,22 @@ export default function BoxScore(props) {
     ),
   ];
 
+  const itemData = [
+    {
+      img: `https://cdn.nba.com/headshots/nba/latest/1040x760/${hplayJerseyFour}.png`,
+      title: boxscore.hTeam.score,
+      author: teams.home,
+      team: `/${boxscore.hTeam.triCode}.png`,
+    },
+
+    {
+      img: `https://cdn.nba.com/headshots/nba/latest/1040x760/${playJerseyOne}.png`,
+      title: boxscore.vTeam.score,
+      author:teams.away,
+      team: `/${boxscore.vTeam.triCode}.png`,
+    },
+  ];
+
   function createData(team, first, second, third, fourth, total) {
     return { team, first, second, third, fourth, total };
   }
@@ -374,142 +421,74 @@ export default function BoxScore(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             {isSmallWindow ? (
-              <Card
-                sx={{
-                  margin: " 0.5rem 0 0 0 ",
-                  borderRadius: "0.5rem",
-                  boxShadow: "rgb(157 168 189 / 10%) 0px 4px 8px",
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  style={{
-                    justifyContent: "space-evenly",
-                    display: "grid",
-                    marginTop: "0.2rem",
-                    gridTemplateColumns: "repeat(2,auto)",
-                  }}
-                >
-                  <Avatar
-                    src={`/${boxscore.vTeam.triCode}.png`}
-                    alt="Image"
-                    style={{ width: "2.8rem", height: "2.8rem" }}
-                  />
-                  <Avatar
-                    src={`/${boxscore.hTeam.triCode}.png`}
-                    alt="Image"
-                    style={{ width: "2.8rem", height: "2.8rem" }}
-                  />
-                </div>
-                <CardContent>
-                  <div
-                    style={{
-                      justifyContent: "space-evenly",
-                      display: "grid",
-                      gridTemplateColumns: "repeat(3,auto)",
-                    }}
-                  >
-                    <Typography
-                      gutterBottom
-                      variant="h7"
-                      component="div"
-                      sx={{ fontSize: "0.85rem", fontWeight: "500" }}
-                    >
-                      {boxscore.vTeam.triCode}
-                    </Typography>
-                    <Typography
-                      gutterBottom
-                      variant="body2"
-                      component="div"
-                      sx={{ fontSize: "0.75rem" }}
-                    >
-                      vs
-                    </Typography>
-                    <Typography
-                      gutterBottom
-                      variant="h7"
-                      component="div"
-                      sx={{ fontSize: "0.85rem", fontWeight: "500" }}
-                    >
-                      {boxscore.hTeam.triCode}
-                    </Typography>
-                  </div>
-                  <div
-                    style={{
-                      justifyContent: "space-evenly",
-                      display: "grid",
-                      gridTemplateColumns: "repeat(3,auto)",
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ fontSize: "0.75rem" }}
-                    >
-                      {boxscore.vTeam.score}
-                    </Typography>
-                    {boxscore.period.current === 4 ? (
-                      <div style={{ textAlign: "center" }}>
-                        <Chip label="FINAL" sx={{ fontSize: "0.45rem" }} />
-                      </div>
-                    ) : (
-                      <div style={{ textAlign: "center" }}>
-                        <Chip label="LIVE" sx={{ fontSize: "0.45rem" }} />
-                      </div>
-                    )}
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ fontSize: "0.75rem" }}
-                    >
-                      {boxscore.hTeam.score}
-                    </Typography>
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    <Chip
-                      label={boxscore.arena.name}
-                      sx={{ fontSize: "0.55rem" }}
+              <ImageList>
+                <ImageListItem key="Subheader" cols={2}>
+                  {boxscore.arena.name},{"    "}
+                  <br />
+                  {boxscore.arena.city}
+                </ImageListItem>
+                {itemData.map((item) => (
+                  <ImageListItem key={item.img}>
+                    <img
+                      src={`${item.img}?w=248&fit=crop&auto=format`}
+                      srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                      alt={item.title}
+                      loading="lazy"
                     />
-                  </div>
-                </CardContent>
-              </Card>
+                    <ImageListItemBar
+                      title={item.title}
+                      subtitle={item.author}
+                      actionIcon={
+                        <Avatar
+                          src={`${item.team}?w=248&fit=crop&auto=format`}
+                        />
+                      }
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
             ) : (
               <TeamsParentStyles
                 elevation={0}
                 style={{ borderRadius: "0.7rem", marginTop: "1rem" }}
               >
                 <TeamsStyles>
+                      
                   <Stack
                     direction="row"
                     spacing={2}
                     style={{ marginLeft: "2rem" }}
                   >
                     <div style={{ marginTop: "0.5rem" }}>
+                    <CardMedia
+                     component="img"
+                     image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${hplayJerseyFive}.png`}
+                    />
+                    
+                    </div>
+                    <div style={{ margin: "1.3rem 0.5rem 0" }}>
+                      <h3 style={{ fontSize: "1.35rem" }}>
+                        {boxscore.hTeam.score}
+                      </h3>
                       <Image
                         src={`/${boxscore.hTeam.triCode}.png`}
                         alt="Image"
-                        width={100}
-                        height={100}
+                        width={130}
+                        height={130}
                       />
-                    </div>
-                    <div style={{ margin: "1.3rem 0.5rem 0" }}>
-                      <h3 style={{ fontSize: "1.3rem" }}>
-                        {boxscore.hTeam.score}
-                      </h3>
-                    </div>
-                  </Stack>
-                  <br />
-                  <span style={{ fontSize: "1.1rem" }}>
-                    {boxscore.hTeam.triCode}
-                  </span>
-                  <br />
-                  <Typography variant="caption" display="block" gutterBottom>
+                         <Typography style={{ fontSize: "0.6rem" }} variant="caption" >
                     ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
                   </Typography>
+                    </div>
+                  </Stack>
+                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1" >
+                  {boxscore.hTeam.triCode}
+                  </Typography>
+               
                 </TeamsStyles>
 
                 <TeamsStyles>
-                  <Stack direction="row" spacing={2}>
+                  <>
                     <Stack
                       direction="column"
                       justifyContent="center"
@@ -539,13 +518,13 @@ export default function BoxScore(props) {
                       <div>
                         <p style={{ fontSize: "0.7rem", color: "grey" }}>
                           {boxscore.arena.name},{"    "}
-                          <br />
+                        </p>
+                        <p style={{ fontSize: "0.7rem", color: "grey" }}>
                           {boxscore.arena.city}
-                          <br />
                         </p>
                       </div>
                     </Stack>
-                  </Stack>
+                  </>
                 </TeamsStyles>
                 <TeamsStyles>
                   <Stack
@@ -554,30 +533,38 @@ export default function BoxScore(props) {
                     style={{ marginRight: "2rem" }}
                   >
                     <div style={{ margin: "1.3rem 0.5rem 0" }}>
-                      <h3 style={{ fontSize: "1.3rem" }}>
+                  <h3 style={{ fontSize: "1.35rem" }}>
                         {boxscore.vTeam.score}
                       </h3>
-                    </div>
-
-                    <div style={{ marginTop: "0.5rem" }}>
                       <Image
                         src={`/${boxscore.vTeam.triCode}.png`}
                         alt="Image"
-                        width={100}
-                        height={100}
+                        width={130}
+                        height={130}
                       />
+                  <Typography style={{ fontSize: "0.6rem" }} variant="caption" >
+                    ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
+                  </Typography>
+                    </div>
+
+                    <div style={{ marginTop: "0.5rem" }}>
+                    <CardMedia
+                    component="img"
+                     image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playJerseyFive}.png`}
+                    />
+                      
+                      
                     </div>
                   </Stack>
                   <br />
-                  <span style={{ fontSize: "1.1rem" }}>
-                    {boxscore.vTeam.triCode}
-                  </span>
-                  <br />
-                  <Typography variant="caption" display="block" gutterBottom>
-                    ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
+                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1" >
+                  {boxscore.vTeam.triCode}
                   </Typography>
+                 
+                     
                 </TeamsStyles>
               </TeamsParentStyles>
+              
             )}
           </Grid>
           <Grid item xs={12} lg={4}>
@@ -612,13 +599,17 @@ export default function BoxScore(props) {
                       <StyledTableCell component="th" scope="row">
                         <Chip
                           sx={{ fontSize: "0.6rem" }}
-                          avatar={<Avatar alt={row.jersey} src="" />}
+                          avatar={
+                            <Avatar
+                              alt={row.jersey}
+                              src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${row.jersey}.png`}
+                            />
+                          }
                           label={row.names}
                           variant="outlined"
                         />{" "}
                       </StyledTableCell>
 
-                      
                       <StyledTableCell align="center">
                         {row.rebs}
                       </StyledTableCell>
@@ -649,8 +640,16 @@ export default function BoxScore(props) {
                     onChange={handleChange}
                     aria-label="lab API tabs example"
                   >
-                    <Tab label="Game Recap" value="1"  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }} />
-                    <Tab label="Team Stats" value="2"  sx={{ textTransform: "capitalize", fontSize: "0.6rem" }} />
+                    <Tab
+                      label="Game Recap"
+                      value="1"
+                      sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+                    />
+                    <Tab
+                      label="Team Stats"
+                      value="2"
+                      sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
@@ -840,12 +839,17 @@ export default function BoxScore(props) {
                       <StyledTableCell component="th" scope="row">
                         <Chip
                           sx={{ fontSize: "0.6rem" }}
-                          avatar={<Avatar alt={row.jersey} src="" />}
+                          avatar={
+                            <Avatar
+                              alt={row.jersey}
+                              src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${row.jersey}.png`}
+                            />
+                          }
                           label={row.names}
                           variant="outlined"
                         />{" "}
                       </StyledTableCell>
-                    
+
                       <StyledTableCell align="center">
                         {row.rebs}
                       </StyledTableCell>
