@@ -161,6 +161,7 @@ export default function BoxScore(props) {
       .catch(function (error) {
         console.error(error);
       });
+      getTeams();
   }, [gameDate, gameId]);
 
   // this is not error, bcs sometimes the answer from api comes late, and in meantime we show this conditional render
