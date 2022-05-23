@@ -95,9 +95,9 @@ export default function BoxScore(props) {
   const [scoreline, setScoreline] = useState([]);
   const [AwayScoreline, setAscoreline] = useState([]);
   const [value, setValue] = useState("1");
-  const [teams, setTeams] = useState({ home: "", away: "" });
+  const [teams, setTeams] = useState();
   const [names, setNames] = useState({ home: "", away: "" });
-  console.log(`TEAM NAMES ==`, names.home,names.away);
+  console.log(`TEAM NAMES ==`, teams,names);
   const isSmallWindow = useMediaQuery(`(max-width:768px)`);
 
   const handleChange = (event, newValue) => {
@@ -114,12 +114,14 @@ export default function BoxScore(props) {
       .get("https://data.nba.net/prod/v1/2021/teams.json")
       .then((response) => {
         const teamArray = response.data.league;
-        console.log(`teams id ==`, teams.home,teams.away);
+        console.log(`teams id ==`, teams);
         teamArray.sacramento.forEach(function (item, index) {
           console.log(`teamss ==`, item.teamId, item.fullName);
-          if(item.teamId === teams.home || teams.away){
+          if(item.teamId === teams){
             console.log(`teamssssss ==`, item.teamId, item.fullName, );
-          setNames({ home: item.fullName, away: item.fullName });
+          setNames(item.fullName);
+        }else{
+          console.log(`teams ${teams.home} ==`, item.teamId);
         }
         });
       });
@@ -150,7 +152,7 @@ export default function BoxScore(props) {
         setScoreline(scoreObject);
         setAscoreline(aScoreObject);
         setPlayerStats(players);
-        setTeams({home: hteamId, away: vteamId})
+        setTeams(hteamId)
         console.log(`players`, players);
         console.log(`scoreObject`, scoreObject);
         console.log(`statsObject`, statsObject);
