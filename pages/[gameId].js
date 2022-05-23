@@ -96,7 +96,8 @@ export default function BoxScore(props) {
   const [AwayScoreline, setAscoreline] = useState([]);
   const [value, setValue] = useState("1");
   const [teams, setTeams] = useState({ home: "", away: "" });
-
+  const [names, setNames] = useState({ home: "", away: "" });
+  console.log(`TEAM NAMES ==`, names.home,names.away);
   const isSmallWindow = useMediaQuery(`(max-width:768px)`);
 
   const handleChange = (event, newValue) => {
@@ -108,20 +109,17 @@ export default function BoxScore(props) {
 
   const gameYesterday = yesterday.replace(/-/g, "");
 
-  const hteamId = boxscore?.hTeam?.teamId;
-  const vteamId = boxscore?.hTeam?.teamId;
-
   async function getTeams() {
     axios
       .get("https://data.nba.net/prod/v1/2021/teams.json")
       .then((response) => {
         const teamArray = response.data.league;
-        console.log(`teams ==`, teamArray.sacramento[23].teamId);
+        console.log(`teams id ==`, teams.home,teams.away);
         teamArray.sacramento.forEach(function (item, index) {
           console.log(`teamss ==`, item.teamId, item.fullName);
-          if(item.teamId === vteamId){
-            console.log(`teamssssss ==`, item.teamId, item.fullName);
-          setTeams({ home: item.fullName, away: item.fullName });
+          if(item.teamId === teams.home || teams.away){
+            console.log(`teamssssss ==`, item.teamId, item.fullName, );
+          setNames({ home: item.fullName, away: item.fullName });
         }
         });
       });
@@ -145,21 +143,24 @@ export default function BoxScore(props) {
         const statsObject = response.data.stats;
         const scoreObject = response.data.basicGameData.hTeam.linescore;
         const aScoreObject = response.data.basicGameData.vTeam.linescore;
+        const hteamId = response.data.basicGameData.hTeam.teamId;
+        const vteamId = response.data.basicGameData.vTeam.teamId;
         const players = response.data.stats.activePlayers;
         setStats(statsObject);
         setScoreline(scoreObject);
         setAscoreline(aScoreObject);
         setPlayerStats(players);
+        setTeams({home: hteamId, away: vteamId})
         console.log(`players`, players);
         console.log(`scoreObject`, scoreObject);
         console.log(`statsObject`, statsObject);
         console.log(`boxscoreObject`, boxscoreObject);
+        console.log(`teammmm`, vteamId, hteamId);
         return setBoxscore(boxscoreObject);
       })
       .catch(function (error) {
         console.error(error);
       });
-    getTeams();
   }, [gameDate, gameId]);
 
   // this is not error, bcs sometimes the answer from api comes late, and in meantime we show this conditional render
@@ -398,7 +399,7 @@ export default function BoxScore(props) {
     {
       img: `https://cdn.nba.com/headshots/nba/latest/1040x760/${playJerseyOne}.png`,
       title: boxscore.vTeam.score,
-      author:teams.away,
+      author: teams.away,
       team: `/${boxscore.vTeam.triCode}.png`,
     },
   ];
@@ -453,18 +454,16 @@ export default function BoxScore(props) {
                 style={{ borderRadius: "0.7rem", marginTop: "1rem" }}
               >
                 <TeamsStyles>
-                      
                   <Stack
                     direction="row"
                     spacing={2}
                     style={{ marginLeft: "2rem" }}
                   >
                     <div style={{ marginTop: "0.5rem" }}>
-                    <CardMedia
-                     component="img"
-                     image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${hplayJerseyFive}.png`}
-                    />
-                    
+                      <CardMedia
+                        component="img"
+                        image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${hplayJerseyFive}.png`}
+                      />
                     </div>
                     <div style={{ margin: "1.3rem 0.5rem 0" }}>
                       <h3 style={{ fontSize: "1.35rem" }}>
@@ -476,15 +475,17 @@ export default function BoxScore(props) {
                         width={130}
                         height={130}
                       />
-                         <Typography style={{ fontSize: "0.6rem" }} variant="caption" >
-                    ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
-                  </Typography>
+                      <Typography
+                        style={{ fontSize: "0.6rem" }}
+                        variant="caption"
+                      >
+                        ({boxscore.hTeam.win}-{boxscore.hTeam.loss})
+                      </Typography>
                     </div>
                   </Stack>
-                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1" >
-                  {boxscore.hTeam.triCode}
+                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1">
+                    {boxscore.hTeam.triCode}
                   </Typography>
-               
                 </TeamsStyles>
 
                 <TeamsStyles>
@@ -533,7 +534,7 @@ export default function BoxScore(props) {
                     style={{ marginRight: "2rem" }}
                   >
                     <div style={{ margin: "1.3rem 0.5rem 0" }}>
-                  <h3 style={{ fontSize: "1.35rem" }}>
+                      <h3 style={{ fontSize: "1.35rem" }}>
                         {boxscore.vTeam.score}
                       </h3>
                       <Image
@@ -542,29 +543,27 @@ export default function BoxScore(props) {
                         width={130}
                         height={130}
                       />
-                  <Typography style={{ fontSize: "0.6rem" }} variant="caption" >
-                    ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
-                  </Typography>
+                      <Typography
+                        style={{ fontSize: "0.6rem" }}
+                        variant="caption"
+                      >
+                        ({boxscore.vTeam.win}-{boxscore.vTeam.loss})
+                      </Typography>
                     </div>
 
                     <div style={{ marginTop: "0.5rem" }}>
-                    <CardMedia
-                    component="img"
-                     image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playJerseyFive}.png`}
-                    />
-                      
-                      
+                      <CardMedia
+                        component="img"
+                        image={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playJerseyFive}.png`}
+                      />
                     </div>
                   </Stack>
                   <br />
-                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1" >
-                  {boxscore.vTeam.triCode}
+                  <Typography style={{ fontSize: "1rem" }} variant="subtitle1">
+                    {boxscore.vTeam.triCode}
                   </Typography>
-                 
-                     
                 </TeamsStyles>
               </TeamsParentStyles>
-              
             )}
           </Grid>
           <Grid item xs={12} lg={4}>
@@ -587,7 +586,6 @@ export default function BoxScore(props) {
                     <StyledTableCell align="center">RBS</StyledTableCell>
                     <StyledTableCell align="center">ASTS</StyledTableCell>
                     <StyledTableCell align="center">PTS</StyledTableCell>
-                    <StyledTableCell align="center">POS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -618,9 +616,6 @@ export default function BoxScore(props) {
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.points}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {row.jersey}
                       </StyledTableCell>
                     </TableRow>
                   ))}
@@ -825,7 +820,6 @@ export default function BoxScore(props) {
                     <StyledTableCell align="center">RBS</StyledTableCell>
                     <StyledTableCell align="center">ASTS</StyledTableCell>
                     <StyledTableCell align="center">PTS</StyledTableCell>
-                    <StyledTableCell align="center">POS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -858,9 +852,6 @@ export default function BoxScore(props) {
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.points}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {row.jersey}
                       </StyledTableCell>
                     </TableRow>
                   ))}
