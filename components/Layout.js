@@ -301,7 +301,7 @@ export default function Layout(props) {
             )}
             <Box component="div" sx={{ overflow: "auto", flexGrow: 1 }}>
               <Stack direction="row" spacing={1}>
-                <TodayScores />
+                {/* <TodayScores /> */}
                 {currentScores?.map((scores) => (
                   <ScoreCard
                     hTeamName={scores.hTeam.triCode}
